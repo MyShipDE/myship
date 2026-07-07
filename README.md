@@ -1,5 +1,19 @@
 # MyShip 🚢
 
+## Main Sponsor
+
+<a href="https://dilog.page">
+  <img src="https://dilog.page/assets/images/icons/logo.webp" alt="DiLog" height="80">
+</a>
+
+**[DiLog](https://dilog.page)** — the digital logbook for maritime and land-based
+adventures. DiLog automatically tracks and archives your routes, lets you add
+diary entries by voice, organise photos and videos, and share your journeys with
+others. Combining dedicated software with a hardware data logger for seamless
+position and vehicle-parameter tracking, it's built for sailors, boat owners and
+camper travellers who want to preserve their travel memories and maintenance
+records.
+
 ## The All-in-One System for Your Boat
 
 MyShip is a comprehensive open-source boat management system that puts complete

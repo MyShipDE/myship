@@ -1,0 +1,37 @@
+export const Resource = {
+  CloudAuthUsernameEmpty: 'Das Eingabefeld für den Benutzernamen muss ausgefüllt werden.',
+  CloudAuthPasswordEmpty: 'Das Eingabefeld für das Passwort muss ausgefüllt werden.',
+  CloudAuthFailed: 'Die Anmeldung an der Cloud ist fehlgeschlagen, bitte überprüfe deine Zugangsdaten.',
+  CloudAuthReqPasswordFailed: 'Das zurücksetzen des Passworts ist fehlgeschlagen, bitte überprüfe deinen Benutzernamen.',
+  CloudAuthNewPasswordsNotMatched: 'Die neuen Passwörter stimmen nicht überein.',
+  CloudAuthSecurityCodeEmpty: 'Das Eingabefeld für den Sicherheitscode muss ausgefüllt werden.',
+  CloudAuthPassword1Empty: 'Das Eingabefeld für das neue Passwort muss ausgefüllt werden.',
+  CloudAuthPassword2Empty: 'Das Eingabefeld um das neue Passwort zu bestätigen muss ausgefüllt sein.',
+  CloudAuthSecurityCodeValidationFailed: 'Der Sicherheitscode darf nur aus Zahlen bestehen.',
+  NightModeActivateSecurityQuery: 'Möchtest du den Nachtmodus aktivieren?',
+  NightModeDeactivateSecurityQuery: 'Möchtest du den Nachtmodus deaktivieren?',
+  GatewayConnectionFailed: 'Die Verbindung konnte nicht aufgebaut werden.',
+  GatewayClientLoginFailed: 'Die Registrierung des Geräts am Bordcomputer ist fehlgeschlagen.',
+  GatewayAuthTokenCreationFailed: 'Es konnte kein Authentifizierungstoken erstellt werden.',
+  GatewayDataChanged: 'Die "Anderungen wurden übernommen.',
+  GatewayDataChangeFailed: 'Das Gateway konnte nicht gespeichert werden.',
+  CameraConnectionFailed: 'Die Verbindung zur Kamera konnte nicht aufgebaut werden.',
+  WelcomePageErrorThrown: 'Es ist ein Fehler aufgetreten!',
+  AppConfigurationRequired: 'Die App muss zuerst konfiguriert werden. Zum einrichten stehen dir folgende Optionen zur Verfügung.',
+  ConnectionFailed: 'Die Verbindung zum Bord-Computer konnte nicht aufgebaut werden.',
+  AuthenticationRequired: 'Um auf den Bord-Computer zugreifen zu können, ist eine Authentifizierung erforderlich.',
+  WelcomePageConfigurationTitle: 'Konfiguration',
+  WelcomePageConfigurationMessage: 'Um die App verwenden zu können, wird die IP-Adresse des Bord-Computers und ein Authentifizierungstoken benötigt.',
+  ChangeTrackNameModalText: 'An dieser Stelle kannst du dem Track einen Namen geben.',
+  ErrorWhileSaveTrackData: 'Beim Speichern der Track-Daten ist ein Fehler aufgetreten.',
+  CloudLogoutFailed: 'Die Abmeldung von der Cloud ist fehlgeschlagen.',
+  TrackDataKeySaveFailed: 'Der Schlüssel konnte nicht gespeichert werden.',
+  TrackDataNotFound: 'Die angeforderten Track-Daten konnten nicht gefunden werden.',
+  ShouldAudioRecordStored: 'Der Spracheintrag wurde erfasst, soll dieser gespeichert werden?',
+  CloudAuthPasswordChanged: 'Das Passwort wurde erfolgreich geändert.',
+  CloudAuthPasswordChangeFailed: 'Das Passwort konnte nicht geändert werden.',
+};
+
+export const LocalStorageKey = {
+  ZoomScale: 'MyShip.Navigationplotter.ZoomScale'
+};

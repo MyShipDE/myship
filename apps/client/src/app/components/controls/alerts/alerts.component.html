@@ -1,0 +1,13 @@
+<div *ngIf="service.visibility" class="wrapper">
+  <div class="container"
+       [ngClass]="service.type == AlertStates.Info ? 'info' : service.type == AlertStates.Success ? 'success' : service.type == AlertStates.Error ? 'error' : ''">
+    <div class="title">
+      <div class="height-auto">
+        {{ service.message }}
+      </div>
+      <div (click)="service.visibility = false" class="col" style="align-items: center">
+        <img src="assets/icons/white/cancel.svg">
+      </div>
+    </div>
+  </div>
+</div>

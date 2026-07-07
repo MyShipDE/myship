@@ -1,0 +1,41 @@
+<div *ngIf="service.visibility" class="modal-wrapper">
+  <div class="modal-container">
+    <div class="row" style="align-items: center">
+      <div class="modal-close"></div>
+      <div class="title">
+        Logbuch-Eintrage
+      </div>
+      <div class="modal-close">
+        <img (click)="service.visibility = false" src="assets/icons/white/close.svg">
+      </div>
+    </div>
+    <div class="col" style="gap: 0.5rem">
+      <div class="subTitle">
+        Manuelle Einträge
+      </div>
+      <div *ngIf="record == null || record?.manualEntries.length == 0" class="voice-text-empty">
+        Für diesen Eintrag existieren keine manuellen Aufzeichnungen.
+      </div>
+      <div *ngFor="let manualEntry of vdrService.setGroupOfManualEntries(record?.manualEntries)"
+           class="manualEntry">
+        <div class="entry-name">
+          {{ manualEntry.name }}
+        </div>
+        <div *ngFor="let manualEntryText of manualEntry.values" class="entry-text">
+          <div>{{ manualEntryText }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="gap: 0.5rem">
+      <div class="subTitle">
+        Sprachaufzeichnung
+      </div>
+      <div *ngIf="record == null || record.voiceEntry == null" class="voice-text-empty">
+        Für diesen Eintrag existiert keine Sprachaufzeichnung.
+      </div>
+      <div *ngIf="record?.voiceEntry != null" class="voice-text">
+        {{ record?.voiceEntry?.message }}
+      </div>
+    </div>
+  </div>
+</div>

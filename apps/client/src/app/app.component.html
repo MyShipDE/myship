@@ -1,0 +1,18 @@
+<div class="main-grid">
+  <div class="content">
+    <router-outlet></router-outlet>
+
+    <span *ngIf="connected">
+      <!-- <app-vdr-voice></app-vdr-voice> -->
+      <app-record-audio-screen></app-record-audio-screen>
+      <app-vdr-custom-record></app-vdr-custom-record>
+      <app-logbook-archive-filter-datepicker></app-logbook-archive-filter-datepicker>
+      <app-editor></app-editor>
+      <app-alarm-popup></app-alarm-popup>
+    </span>
+
+    <app-loader></app-loader>
+    <app-alerts></app-alerts>
+    <app-security-query></app-security-query>
+  </div>
+</div>

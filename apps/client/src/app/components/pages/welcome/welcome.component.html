@@ -1,0 +1,44 @@
+<div class="ws-container">
+  <div class="ws-card">
+
+    <div class="ws-logo">
+      <img src="assets/img/logo.png" alt="MyShip Logo">
+    </div>
+
+    <div class="group" *ngIf="!configurationPage">
+      <div class="ws-label">Dein Yacht-Controller</div>
+      <h1 class="ws-title">Willkommen an Bord</h1>
+      <div class="ws-divider"></div>
+      <p class="ws-text">
+        Um die App zu nutzen, verbinde sie mit dem Gateway-Server auf deinem Boot.
+      </p>
+      <button class="ws-btn-primary" (click)="configurationPage = true">
+        <img src="assets/icons/white/three-gears-of-configuration-tools.svg">
+        Gateway konfigurieren
+      </button>
+    </div>
+
+    <div class="group" *ngIf="configurationPage">
+      <div class="ws-label">Gateway-Verbindung</div>
+      <h1 class="ws-title">Einrichtung</h1>
+      <div class="ws-config-form">
+        <label class="ws-field-label">IP-Adresse</label>
+        <input type="text" class="ws-input" placeholder="192.168.1.100" [(ngModel)]="server">
+        <label class="ws-field-label">Authentifizierungstoken</label>
+        <input type="password" class="ws-input" placeholder="••••••••••••" [(ngModel)]="inputKey">
+        <div class="ws-btn-row">
+          <button class="ws-btn-back" (click)="configurationPage = false">Zurück</button>
+          <button class="ws-btn-submit" (click)="submit()">Verbinden</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="gap: 1rem;" *ngIf="!configured && configured !== undefined">
+      <button class="ws-btn-back" (click)="testConnection()">
+        <img src="assets/icons/white/reload.svg"> Erneut verbinden
+      </button>
+      <button class="ws-btn-back" (click)="reset()">Zurücksetzen</button>
+    </div>
+
+  </div>
+</div>

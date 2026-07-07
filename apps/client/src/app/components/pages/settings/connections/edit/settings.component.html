@@ -1,0 +1,17 @@
+<div class="card p-4" style="background: #202020; border-radius: 6px; border: 0;" *ngIf="isValuesExists()">
+  <div class="row">
+    <div class="col-12">
+      <div class="row">
+        <div class="col text-uppercase" style="font-size: 10pt; color: #606060;">
+          {{ title }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 text-lowercase mt-2">
+          <input type="text" class="form-control" [(ngModel)]="storageValue"
+                 style="background: #303030; border: 0; color: #DDD;" (focusout)="saveValue()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

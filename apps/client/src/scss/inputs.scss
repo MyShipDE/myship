@@ -1,0 +1,94 @@
+.textField {
+  width: 75%;
+  min-height: 40px;
+  padding-left: 0.5rem;
+  text-align: left;
+  border-radius: 0.5rem;
+  color: WHITE !important;
+  font-weight: bold;
+  background-color: #303030 !important;
+  transition: 0.3s;
+  border: 2px solid #404040;
+  box-shadow: 0 0 10px #404040;
+
+  &:focus {
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px $primary;
+  }
+}
+
+.custom-btn {
+  border: 2px solid $primary;
+  background: transparent;
+  width: auto;
+  border-radius: 0.5rem;
+  text-align: center;
+  color: WHITE;
+  font-weight: bold;
+  min-height: 40px;
+
+  &.danger {
+    border: 2px solid #C32626;
+  }
+
+  &.success {
+    border: 2px solid #71b946;
+  }
+
+  &.secondary {
+    background-color: #555;
+  }
+
+  &.lg {
+    width: 100%;
+  }
+
+  &.pad {
+    padding: 0 1rem;
+  }
+
+  &.outline {
+    background: transparent;
+    border: 2px solid $primary;
+
+    &.danger {
+      border: 2px solid #f42828;
+    }
+
+    &.secondary {
+      border: 2px solid #555;
+    }
+  }
+
+  &.disabled {
+    background-color: #202020 !important;
+    border-color: #555 !important;
+    color: #555 !important;
+  }
+}
+
+.selectField {
+  width: 75%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  color: WHITE !important;
+  font-weight: bold;
+  background-color: #303030 !important;
+  transition: 0.3s;
+  border: 2px solid #404040;
+  box-shadow: 0 0 10px #404040;
+
+  &:focus {
+    outline: none !important;
+    border-color: #719ECE;
+    box-shadow: 0 0 10px $primary;
+  }
+}
+
+label {
+  margin-bottom: 0.5rem;
+  margin-left: 0.25rem;
+  color: #808080;
+  font-size: 0.8rem;
+}

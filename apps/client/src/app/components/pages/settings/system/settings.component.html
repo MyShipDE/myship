@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="header">
+    <app-header title="System" icon="settings" backUrl="/settings" [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="col" style="gap: 1rem">
+
+      <div class="qrCodeButton">
+        <div class="title">
+          Komponenten
+        </div>
+        <div routerLink="/scanner" class="qr">
+          <div class="qr-icon">
+            <img src="assets/icons/white/qr.png" style="width: 28px; height: auto">
+          </div>
+          <div class="qr-text">
+            QR-Scanner
+          </div>
+        </div>
+      </div>
+
+      <div class="sys-card" style="flex-direction: row">
+        <div class="title">
+          UTC <span style="letter-spacing: 0.5rem"><span *ngIf="utc > 0">+</span>{{ utc }}</span>
+        </div>
+        <div class="utc-buttons">
+          <div>
+            <button class="custom-btn pad" (click)="removeUTC()" style="background: #b62929; border: 0">
+              -
+            </button>
+          </div>
+          <div>
+            <button class="custom-btn pad" (click)="addUTC()" style="background: #69b04c; border: 0">
+              +
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="developerService.getState()" class="sys-card">
+        <div class="col" style="font-weight: bolder; font-size: 1.5rem; justify-content: center">
+          <div class="height-auto">
+            Internen-Speicher Zurücksetzen
+          </div>
+        </div>
+        <div class="col" style="justify-content: center">
+          <div class="height-auto">
+            Mit dieser Funktion werden alle lokalen Daten der App gelöscht und die App somit auf
+            Werkseinstellungen
+            zurückgesetzt!
+          </div>
+        </div>
+        <div class="row" style="max-height: 25%; justify-content: flex-end">
+          <div class="row width-auto" style="gap: 1rem">
+            <button (click)="confirmReset = !confirmReset" class="custom-btn pad">
+              App-Speicher Löschen
+            </button>
+            <button *ngIf="confirmReset" (click)="reset()" class="custom-btn pad danger">
+              Bestätigen
+            </button>
+            <button *ngIf="!confirmReset" class="custom-btn pad" style="background: #101010; color: #404040">
+              Bestätigen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sys-card" style="flex-direction: row">
+        <div class="title-sys-actions width-auto height-auto">
+          Frontend / App
+        </div>
+        <div class="sys-action-buttons">
+          <div>
+            <button (click)="reload()" class="custom-btn pad">
+              Neustart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sys-card" style="flex-direction: row">
+        <div class="title-sys-actions width-auto height-auto">
+          Bildschirmsperre
+        </div>
+        <div class="sys-action-buttons">
+          <div *ngIf="pinSet">
+            <button (click)="deletePinOfLockService()" class="custom-btn pad">
+              Pin Zurücksetzen
+            </button>
+          </div>
+          <div>
+            <button (click)="lock()" class="custom-btn pad">
+              Jetzt Sperren
+            </button>
+          </div>
+          <div>
+            <button *ngIf="!autoLock" (click)="autoLock = true; setAutoLock()" class="custom-btn pad">
+              Aktivieren
+            </button>
+            <button *ngIf="autoLock" (click)="autoLock = false; setAutoLock()" class="custom-btn pad">
+              Deaktivieren
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

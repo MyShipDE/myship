@@ -1,0 +1,36 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-container {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  height: 80%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  text-align: justify;
+}
+
+.title {
+  font-weight: bolder;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+
+.data-headline {
+  color: #5a5a5a;
+}

@@ -1,0 +1,29 @@
+@import "../../../../scss/variables";
+
+* {
+  width: 100%;
+  height: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  @media (max-width: 700px) {
+    padding: 1rem;
+  }
+}
+
+.container {
+  display: grid;
+  color: WHITE;
+  padding: 1rem;
+  height: 100%;
+  grid-auto-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "header"
+      "content";
+}
+
+.header {
+  grid-area: header;
+}

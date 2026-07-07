@@ -1,0 +1,116 @@
+<!-- <radial-gauge
+
+  [attr.value]="13"
+
+  color-minor-ticks="#FFF"
+  width="256"
+  height="256"
+  title="RPM"
+  units="x1000"
+  min-value="0"
+  start-angle="60"
+  ticks-angle="240"
+  value-box="false"
+  max-value="30"
+  major-ticks="0, 5, 10, 15, 20, 25, 30"
+  numbers-margin="4"
+  highlights='[
+                {"from": 500, "to": 22.2, "color": "rgba(66, 191, 69, 0.4)"},
+                {"from": 22.2, "to": 30, "color": "rgba(217, 48, 48, 0.4)"}
+              ]'
+  color-plate="#222"
+  needle-type="arrow"
+  needle-width="4"
+  needle-circle-outer="true"
+  needle-circle-inner="false"
+  animation-duration="1500"
+  animation-rule="linear"
+  animate-on-init="true"
+
+  font-numbers-size="24"
+
+  color-numbers="#FFF"
+  color-units="#FFF"
+  color-title="#FFF"
+  color-major-ticks="#FFF"
+  stroke-ticks="false"
+
+  color-needle-circle-outer="#333"
+  color-needle-circle-outer-end="#333"
+  needle-circle-size="12"
+
+  needle-width="5"
+  needle-shadow="false"
+  color-needle="#fff"
+  color-needle-end="#fff"
+
+  borders="true"
+  border-outer-width="0"
+  border-middle-width="6"
+  color-border-middle="#333"
+  color-border-middle-end="#333"
+  border-inner-width="0"
+  border-shadow-width="0"
+
+  minor-ticks="5"
+>
+</radial-gauge> -->
+
+<div class="info-container color" [ngClass]="nightModeService.status ? 'night' : 'light'">
+
+  <div class="title">
+    Maschine
+  </div>
+
+  <hr>
+
+  <div class="row" style="justify-content: space-between; align-items: center">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Drehzahl
+      </div>
+      <div>
+        {{ motorSpeed }} RPM
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Tankfüllstand
+      </div>
+      <div>
+        {{ tank }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content: space-between; align-items: center;">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Motorstunden
+      </div>
+      <div>
+        {{ engineMeter }}
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Kühlwasser
+      </div>
+      <div>
+        {{ motorWater }} °C
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content: space-between; align-items: center;">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Motorstunden (Tageszähler)
+      </div>
+      <div>
+        {{ engineMeterByDay }}
+      </div>
+    </div>
+  </div>
+
+</div>

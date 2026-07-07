@@ -1,0 +1,21 @@
+<div *ngIf="!selected" class="card bg-secondary category mainMenuItem {{ padding }}" style="{{ additionalCSS }}">
+  <div class="row">
+    <div class="col-auto" *ngIf="icon != null">
+      <img src="assets/icons/white/{{ icon }}" width="32px">
+    </div>
+    <div class="col-auto my-auto">
+      {{ title }}
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selected" class="card bg-primary category mainMenuItem {{ padding }}" style="{{ additionalCSS }}">
+  <div class="row">
+    <div class="col-auto" *ngIf="icon != null">
+      <img src="assets/icons/white/{{ icon }}" width="32px">
+    </div>
+    <div class="col-auto my-auto">
+      {{ title }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="card p-4" style="background: #202020; border: 0;">
+  <div class="row mb-3">
+    <div class="col my-auto text-uppercase" style="font-size: 12pt; color: #8d8d8d">
+      {{ title }}
+    </div>
+    <div class="col-auto ml-auto my-auto" *ngIf="iconName != null">
+      <img src="assets/icons/{{ iconName }}.svg" width="28px" alt="">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col mt-auto">
+      <img src="../../../../../../assets/icons/white/server.svg" width="64px">
+    </div>
+    <div class="col-auto mb-0 ml-auto mt-auto font-weight-bolder" style="font-size: 14pt;">
+      {{ value }}
+    </div>
+  </div>
+</div>

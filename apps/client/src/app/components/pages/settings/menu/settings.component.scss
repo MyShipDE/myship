@@ -1,0 +1,71 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  padding: 1rem;
+  grid-auto-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "h"
+      "content";
+}
+
+.header {
+  grid-area: h;
+}
+
+.settings-nav {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.width {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  width: 30%;
+  @media (max-width: 700px) {
+    width: 98%;
+  }
+  @media (min-width: 1920px) {
+    width: 25%;
+  }
+}
+
+.item {
+  height: auto;
+  display: flex;
+  color: WHITE;
+  background: #202020;
+  padding-left: 1.4rem;
+  padding-right: 0.25rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-radius: 0.5rem;
+  border: 2px solid $primary;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.25rem;
+  @media (min-width: 1920px) {
+    font-size: 1.6rem;
+  }
+}
+
+.icon {
+  width: 45px;
+  height: 45px;
+  @media screen and (max-width: 1024px) and (max-height: 600px) {
+    width: 24px;
+    height: 24px;
+  }
+}

@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Personalisierung - Menü" backUrl="/settings" [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="item" *ngFor="let item of nav; let i = index">
+      <div class="col">
+        <input class="textField height-auto" type="text" [(ngModel)]="item.name" (ngModelChange)="saveChanges()">
+      </div>
+      <div class="icon" (click)="swap(i, i + 1)" *ngIf="nav[nav.length - 1].link != item.link">
+        <img class="image" src="../../../../../assets/icons/white/arrow.svg">
+      </div>
+      <div class="icon" (click)="swap(i, i - 1)" *ngIf="nav[0].link != item.link">
+        <img class="image" src="../../../../../assets/icons/white/arrow.svg" style="transform: rotate(180deg);">
+      </div>
+      <div class="icon">
+        <div class="col">
+          <img class="image" *ngIf="!item.favorite" (click)="item.favorite = !item.favorite; saveChanges()"
+               src="../../../../../assets/icons/white/visibility.svg">
+          <img class="image" *ngIf="item.favorite" (click)="item.favorite = !item.favorite; saveChanges()"
+               src="../../../../../assets/icons/white/invisible.svg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

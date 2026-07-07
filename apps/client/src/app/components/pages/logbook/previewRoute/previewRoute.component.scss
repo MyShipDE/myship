@@ -1,0 +1,247 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.custom-grid-main {
+  background: #101010;
+  position: fixed;
+  top: 0;
+  display: grid;
+}
+
+@media (min-width: 700px) {
+  .custom-grid-main {
+    padding: 1rem;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header"
+      "content";
+  }
+}
+
+@media (max-width: 700px) {
+  .custom-grid-main {
+    padding: 1rem;
+    grid-template-columns: 100%;
+    grid-template-rows: 4% 96%;
+    grid-template-areas:
+      "."
+      "content";
+  }
+}
+
+.header {
+  grid-area: header;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.content-container {
+  grid-area: content;
+  display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+  gap: 1rem;
+}
+
+.map-container {
+  border: 2px solid $primary;
+  border-radius: 6px;
+}
+
+.buttons {
+  display: flex;
+  max-height: 10%;
+  gap: 1rem;
+}
+
+.track-details {
+  display: flex;
+  flex-direction: column;
+  width: 18%;
+  gap: 1rem;
+  @media screen and (max-width: 1024px) and (max-height: 600px) {
+    width: 40%;
+  }
+  @media (max-width: 700px) {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.waypoint-details {
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  background: #202020;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 30%;
+  gap: 1rem;
+  @media screen and (max-width: 1024px) and (max-height: 600px) {
+    width: 50%;
+  }
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+}
+
+.waypoint-details-heading {
+  color: WHITE;
+  font-weight: bolder;
+}
+
+.waypoint-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  color: WHITE;
+  font-size: 10pt;
+  background: #202020;
+  border-radius: 0.25rem;
+  @media (max-width: 700px) {
+    height: auto;
+    flex: 0 0 48.5%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  &.active {
+    background: $primary;
+  }
+
+  &.border {
+    border: 2px solid $primary;
+  }
+}
+
+.card-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.state-vdr {
+  height: 1rem;
+}
+
+.state-circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 100%;
+  margin: auto;
+
+  &.success {
+    background: #6dec22;
+  }
+
+  &.danger {
+    background: #d81c1c;
+  }
+}
+
+.input-form {
+  background: #404040;
+  padding: 0.25rem;
+  border: 0.1rem solid #606060;
+  border-radius: 0.25rem;
+  color: WHITE;
+  outline: none;
+}
+
+.view-switch {
+  @media (min-width: 700px) {
+    display: none;
+  }
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  grid-area: view-switch;
+}
+
+.datepicker-container {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  color: WHITE;
+}
+
+.record-selection {
+  display: flex;
+  align-items: center;
+  height: auto;
+}
+
+.record-selection > select {
+  width: auto;
+  padding: 0 0.5rem;
+}
+
+.record-selection > div {
+  color: WHITE;
+  height: auto;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+hr {
+  border: 0;
+  border-bottom: 2px solid WHITE;
+  height: auto;
+}
+
+.card-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: auto;
+  color: WHITE;
+  background: #333;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+
+  &.border {
+    border: 2px solid $primary;
+  }
+}
+
+.card-text {
+  height: auto;
+}
+
+.card-img {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+
+.card-img > img {
+  width: 32px;
+  height: 32px;
+}
+
+.card-value {
+  font-weight: bolder;
+  font-size: 1.1rem;
+  height: auto;
+  color: $primary;
+}

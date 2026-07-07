@@ -1,0 +1,90 @@
+<div *ngIf="service.getVisibility()" class="vdr-custom-container">
+  <div class="vdr-custom-grid">
+
+    <div class="row height-auto">
+      <div class="col title height-auto">
+        Zeit für einen neuen Logbuch Eintrag
+      </div>
+    </div>
+
+    <div class="keywords height-auto" style="gap: 0.5rem; padding: 2.5rem 1rem 1rem 1rem;">
+      <div *ngFor="let typ of types" class="col height-auto" style="gap: 0.5rem">
+        <div class="col type-title height-auto">
+          <div class="height-auto">{{ typ.name }}</div>
+        </div>
+        <div *ngFor="let value of typ.values" class="col type-value height-auto"
+             (click)="value.IsSelected = !value.IsSelected">
+          <div class="row" style="justify-content: space-between">
+            <div class="height-auto width-auto">{{ value.name }}</div>
+            <div *ngIf="value.IsSelected" class="height-auto width-auto" style="color: #88d758">✔</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions"
+         style="padding: 1rem; gap: 1rem; justify-content: center; height: 100%">
+      <div *ngIf="OpenChangesExists()" class="col">
+        <button (click)="service.createManualRecord(types)" type="button" class="custom-btn secondary outline">
+          <div class="row" style="align-items: center; justify-content: center; gap: 1rem">
+            <div class="width-auto height-auto">
+              <div class="height-auto width-auto" style="color: #88d758">✔</div>
+            </div>
+            <div class="width-auto height-auto button-text">
+              Übernehmen
+            </div>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="!audioService.microphoneActive && !OpenChangesExists()" class="col">
+        <button (click)="Dispose()" type="button" class="custom-btn secondary outline">
+          <div class="row" style="align-items: center; justify-content: center; gap: 1rem">
+            <div style="width: 32px; height: 32px">
+              <img src="assets/icons/white/close.svg" style="width: 100%; height: auto">
+            </div>
+            <div class="width-auto height-auto button-text">
+              Später Erinnern
+            </div>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="!audioService.microphoneActive" (click)="audioService.startRecording()" class="col">
+        <button type="button" class="custom-btn outline">
+          <div class="row" style="align-items: center; justify-content: center; gap: 1rem">
+            <div style="width: 32px; height: 32px">
+              <img src="assets/icons/white/mikrofon.svg" style="width: 100%; height: auto">
+            </div>
+            <div class="width-auto height-auto">
+              Sprachaufzeichnung
+            </div>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="audioService.microphoneActive" (click)="audioService.stopRecording()" class="col">
+        <button type="button" class="custom-btn danger">
+          <div class="row" style="align-items: center; justify-content: center; gap: 1rem">
+            <div style="width: 32px; height: 32px">
+              <img src="assets/icons/white/mikrofon.svg" style="width: 100%; height: auto">
+            </div>
+            <div class="width-auto height-auto">
+              Aufname beenden
+            </div>
+          </div>
+        </button>
+      </div>
+      <div *ngIf="audioService.microphoneActive" (click)="audioService.stopRecording(false)" class="col">
+        <button type="button" class="custom-btn secondary">
+          <div class="row" style="align-items: center; justify-content: center; gap: 1rem">
+            <div style="width: 32px; height: 32px">
+              <img src="assets/icons/white/trash.svg" style="width: 100%; height: auto">
+            </div>
+            <div class="width-auto height-auto">
+              Abbrechen
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

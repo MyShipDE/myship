@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-element title" [ngClass]="name.length < 2 ? 'large': ''">
+    <div class="title-text">
+      {{ name }}
+    </div>
+    <div *ngIf="edit" class="title-edit-icon">
+      <img src="assets/icons/white/pencil.svg">
+    </div>
+  </div>
+  <div class="card-element col">
+    <div class="value">
+      {{ value }}
+    </div>
+    <div class="unit">
+      {{ unit }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="left">
+      <div class="home" *ngIf="welcome" (click)="NavigateHome('/welcome')">
+        <img [ngClass]="nightModeService.status ? 'img-red' : ''" class="icon" src="assets/icons/white/home.svg">
+      </div>
+      <div class="home" *ngIf="homeButton" (click)="NavigateHome('/home')">
+        <img [ngClass]="nightModeService.status ? 'img-red' : ''" class="icon" src="assets/icons/white/home.svg">
+      </div>
+      <div *ngIf="backUrl != null || BackAction.observers.length > 0" class="back" (click)="NavigateBack()">
+        <img [ngClass]="nightModeService.status ? 'img-red' : ''" class="icon" src="assets/icons/white/back.svg">
+      </div>
+    </div>
+    <div class="title">
+      <div [ngClass]="nightModeService.status ? 'night' : 'light'" class="text color">
+        {{ title }}
+      </div>
+    </div>
+    <div class="right">
+      <div *ngIf="CreationButton" (click)="CreationActionPerform.emit()" class="createButton">
+        <img class="icon" src="assets/icons/white/add.svg">
+      </div>
+    </div>
+  </div>
+</div>
+

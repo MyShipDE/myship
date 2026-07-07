@@ -1,0 +1,84 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.outline-container {
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #252525;
+  border-radius: 1rem;
+  width: 94%;
+  height: 90%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bolder;
+}
+
+.description {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  color: WHITE;
+}
+
+.textArea {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 50%;
+  padding: 2rem;
+}
+
+.value {
+  font-size: 2rem;
+  font-weight: bolder;
+  width: 25%;
+  background: #151515;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.desc {
+  font-size: 1.25rem;
+  font-weight: normal;
+  color: #5a5a5a;
+}
+
+.current {
+  display: flex;
+  gap: 1rem;
+}
+
+.close-wrapper {
+  width: auto;
+}
+
+.close-button {
+  width: auto;
+  background: WHITE;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 2rem;
+  color: #252525;
+}

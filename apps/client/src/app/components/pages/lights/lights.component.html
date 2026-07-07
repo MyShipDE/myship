@@ -1,0 +1,56 @@
+<div [ngClass]="nightModeService.status ? 'night' : 'light'" id="content-container" class="container color">
+
+  <div class="header">
+    <app-header title="Beleuchtung"></app-header>
+  </div>
+  <div class="lights">
+    <div class="item border {{ nightModeService.status ? 'night' : 'default' }}"
+         *ngFor="let group of lightGroupService.list"
+         (click)="lightGroupService.control(group, null)"
+         [ngClass]="getSelectedGroup() != null && getSelectedGroup().id == group.id ? 'selected' : ''">
+      <div class="text">
+        {{ group.name }}
+      </div>
+      <div class="icon">
+        <div class="power-switch">
+          <input [ngModel]="group.isActive"
+                 type="checkbox">
+          <div class="button">
+            <svg class="power-off">
+              <use xlink:href="#line" class="line"/>
+              <use xlink:href="#circle" class="circle"/>
+            </svg>
+            <svg class="power-on">
+              <use xlink:href="#line" class="line"/>
+              <use xlink:href="#circle" class="circle"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item border {{ nightModeService.status ? 'night' : 'default' }}"
+         *ngFor="let dev of devices"
+         (click)="deviceService.control(dev)">
+      <div class="text">
+        {{ dev.name }}
+      </div>
+      <div class="icon" *ngIf="dev.bridgePort != null">
+        <div class="power-switch">
+          <input *ngIf="dev.bridgePort != null" [(ngModel)]="dev.isActive" [ngModelOptions]="{standalone: true}"
+                 type="checkbox">
+          <div class="button">
+            <svg class="power-off">
+              <use xlink:href="#line" class="line"/>
+              <use xlink:href="#circle" class="circle"/>
+            </svg>
+            <svg class="power-on">
+              <use xlink:href="#line" class="line"/>
+              <use xlink:href="#circle" class="circle"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

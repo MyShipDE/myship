@@ -1,0 +1,84 @@
+<div *ngIf="Visible" class="keyboard-container">
+  <div class="col">
+    <div class="row height-auto">
+      <div class="value">{{ value }}</div>
+    </div>
+    <div class="row">
+      <div class="key action">^</div>
+      <div class="key action">1</div>
+      <div class="key action">2</div>
+      <div class="key action">3</div>
+      <div class="key action">4</div>
+      <div class="key action">5</div>
+      <div class="key action">6</div>
+      <div class="key action">7</div>
+      <div class="key action">8</div>
+      <div class="key action">9</div>
+      <div class="key action">0</div>
+      <div class="key action">ß</div>
+      <div class="key action">´</div>
+      <div class="key large back"><-</div>
+    </div>
+    <div class="row">
+      <div class="key action">Q</div>
+      <div class="key action">W</div>
+      <div class="key action">E</div>
+      <div class="key action">R</div>
+      <div class="key action">T</div>
+      <div class="key action">Z</div>
+      <div class="key action">U</div>
+      <div class="key action">I</div>
+      <div class="key action">O</div>
+      <div class="key action">P</div>
+      <div class="key action">Ü</div>
+      <div class="key action">+</div>
+      <div (click)="done()" class="key large">Enter</div>
+    </div>
+    <div class="row">
+      <div class="key action">A</div>
+      <div class="key action">S</div>
+      <div class="key action">D</div>
+      <div class="key action">F</div>
+      <div class="key action">G</div>
+      <div class="key action">H</div>
+      <div class="key action">J</div>
+      <div class="key action">K</div>
+      <div class="key action">L</div>
+      <div class="key action">Ö</div>
+      <div class="key action">Ä</div>
+      <div class="key action">#</div>
+      <div (click)="done()" class="key large">Fertig</div>
+    </div>
+    <div class="row">
+      <div class="key action">Y</div>
+      <div class="key action">X</div>
+      <div class="key action">C</div>
+      <div class="key action">V</div>
+      <div class="key action">B</div>
+      <div class="key action">N</div>
+      <div class="key action">M</div>
+      <div class="key action">,</div>
+      <div class="key action">.</div>
+      <div class="key action">-</div>
+    </div>
+    <div class="row">
+      <div style="width: 20%" (click)="shift = !shift" class="key large shift" [ngClass]="shift ? 'selected' : ''">
+        Shift
+      </div>
+      <div class="key space xxl">Leerzeichen</div>
+      <div style="width: 20%" (click)="shift = !shift" class="key large shift" [ngClass]="shift ? 'selected' : ''">
+        Shift
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="Visible = !Visible" *ngIf="!Visible" class="keyboard-container-icon">
+  <div class="col">
+    <div class="row height-auto">
+      <img src="assets/icons/white/keyboard.svg">
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,25 @@
+<div *ngIf="service.visibility" class="security-query-wrapper">
+  <div class="security-query-container">
+    <div class="title">
+      Bearbeitungsmodus
+    </div>
+    <div class="text">
+      {{ service.text }}
+    </div>
+    <div class="form">
+      <input [(ngModel)]="service.value" type="text" class="textField">
+    </div>
+    <div class="row height-auto" style="gap: 1rem">
+      <div>
+        <button (click)="service.applyChanges.next(true)" type="button"
+                class="security-query-btn security-query-btn-success">Übernehmen
+        </button>
+      </div>
+      <div>
+        <button (click)="service.applyChanges.next(false)" type="button"
+                class="security-query-btn security-query-btn-secondary">Abbrechen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

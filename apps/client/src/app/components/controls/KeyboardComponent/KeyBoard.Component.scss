@@ -1,0 +1,80 @@
+@import "../../../../scss/variables";
+
+* {
+  width: 100%;
+  height: 100%;
+}
+
+.keyboard-container {
+  background: #202020;
+  width: 100%;
+  height: 75%;
+  position: fixed;
+  bottom: 0;
+  padding: 1rem;
+  color: WHITE;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.row {
+  gap: 1rem;
+  display: flex;
+}
+
+.col {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.value {
+  border: 2px solid #404040;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 50px;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  height: auto;
+  background: #303030;
+  border-radius: 0.5rem;
+
+  &.large {
+    padding: 0 2rem;
+  }
+
+  &.xxl {
+    padding: 0 6rem;
+  }
+
+  &.selected {
+    background: $primary;
+  }
+
+  &.action {
+    text-transform: lowercase;
+  }
+}
+
+.keyboard-container-icon {
+  background: $primary;
+  border-radius: 100%;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  padding: 1rem;
+  color: WHITE;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}

@@ -1,0 +1,38 @@
+<div class="wrapper">
+  <div class="container">
+
+    <div class="header">
+      <app-header [homeButton]="connected" [backUrl]="'/cloud/menu'"
+                  title="Dein Account"></app-header>
+    </div>
+
+    <div class="content">
+
+      <div *ngIf="user != null" class="card">
+        <div>
+          Hallo <b>{{ displayName }}</b>
+        </div>
+        <div class="info" *ngIf="gateways.length <= 0">
+          Mit deinem Account sind keine Geräte verbunden.
+        </div>
+        <div class="info" *ngIf="gateways.length > 0">
+          Mit welchem Gerät möchtest du dich verbinden?
+        </div>
+        <div *ngIf="gateways.length > 0" class="gateways">
+          <div *ngFor="let item of gateways" (click)="connect(item)" class="gateway">
+            <img src="assets/icons/white/server.svg">
+            <label [innerText]="getGatewayName(item)"></label>
+          </div>
+        </div>
+        <div>
+          <button (click)="logout()" class="logout">
+            Abmelden
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

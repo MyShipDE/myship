@@ -1,0 +1,56 @@
+<div class="info-container color" [ngClass]="nightModeService.status ? 'night' : 'light'">
+  <div class="title">
+    <div>
+      Batterie
+    </div>
+    <div class="details">
+      <div>
+        {{ voltage }} V
+      </div>
+      <div>
+        /
+      </div>
+      <div>
+        {{ current }} A
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row" style="justify-content: space-between; align-items: center">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Kapazität
+      </div>
+      <div class="height-auto">
+        {{ state }}%
+      </div>
+    </div>
+    <div class="height-auto">
+      <app-element-battery value="100"></app-element-battery>
+    </div>
+    <div class="col" style="gap: 0.25rem">
+      <div class="consumption-title">
+        Verbrauch
+      </div>
+      <div class="consumption">
+        <div>
+          <span *ngIf="power >= 0">{{ power }} W</span>
+          <span *ngIf="power < 0">{{ power * (-1) }} W</span>
+        </div>
+        <div>
+          <img *ngIf="power > 0" src="assets/icons/dreieck_gruen.png" style="width: 20px; height: auto">
+          <img *ngIf="power < 0" src="assets/icons/dreieck_red.png"
+               style="width: 20px; height: auto; transform: rotate(180deg)">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="timeRemaining">
+    <div class="timeRemaining-title">
+      Verbleibene Zeit
+    </div>
+    <div class="timeRemaining-value">
+      {{ timeRemaining }}
+    </div>
+  </div>
+</div>

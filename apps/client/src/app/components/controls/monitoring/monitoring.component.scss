@@ -1,0 +1,144 @@
+@import "../../../../scss/variables";
+
+* {
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-inner {
+  position: relative;
+  background: #151515;
+  border: 2px solid $primary;
+  border-radius: 0.5rem;
+  height: auto;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  color: WHITE;
+  padding: 1rem;
+  gap: 1.25rem;
+  @media (min-width: 1000px) {
+    width: 80%;
+    padding: 2rem;
+  }
+}
+
+.loader-wrapper {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-title {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  gap: 0.5rem;
+}
+
+.section-title-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: auto;
+}
+
+.section-title-desc {
+  display: flex;
+  align-items: center;
+  width: auto;
+  gap: 0.75rem;
+}
+
+.section-title-desc > div {
+  display: flex;
+  align-items: center;
+  height: 20px;
+  width: auto;
+}
+
+.section-title-desc > div > img {
+  height: 20px;
+  width: auto;
+}
+
+.section-title-desc > div {
+  font-size: 0.8rem;
+  font-style: italic;
+  width: auto;
+}
+
+.section-items {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.section-item {
+  transition: 0.25s;
+  background: #252525;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  width: auto;
+
+  &.selected {
+    background: $primary;
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.buttons > button {
+  background: #222;
+  border-radius: 0.5rem;
+  width: auto;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  border: 2px solid $primary;
+  font-weight: bold;
+  color: WHITE;
+  font-size: 1.1rem;
+
+  &.sec {
+    border: 2px solid #888;
+  }
+}
+
+.alert {
+  background: #333b51;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}

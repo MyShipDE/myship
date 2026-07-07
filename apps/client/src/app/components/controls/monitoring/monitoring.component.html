@@ -1,0 +1,81 @@
+<div *ngIf="Visibility" class="container">
+  <div class="container-inner">
+
+    <div *ngIf="loader" class="loader-wrapper">
+      <div class="lds-dual-ring"></div>
+    </div>
+
+    <div class="title">
+      Check-Out
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="section-title-text">
+          Beleuchtung
+        </div>
+      </div>
+      <div *ngIf="lightGroups.length == 0" class="alert">
+        Es sind keine <b>Lichter</b> eingeschaltet.
+      </div>
+      <div class="section-items">
+        <div *ngFor="let lightGroup of lightGroups" (click)="selectLightGroup(lightGroup.id)"
+             [ngClass]="isLightGroupSelected(lightGroup.id) ? 'selected' : ''" class="section-item">
+          {{ lightGroup.name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="section-title-text">
+          Spots
+        </div>
+      </div>
+      <div *ngIf="spots.length == 0" class="alert">
+        Es sind keine <b>Spots</b> eingeschaltet.
+      </div>
+      <div class="section-items">
+        <div *ngFor="let spot of spots" (click)="selectDevice(spot.id)"
+             [ngClass]="isDeviceSelected(spot.id) ? 'selected' : ''" class="section-item">
+          {{ spot.name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">
+        <div class="section-title-text">
+          Verbraucher
+        </div>
+      </div>
+      <div *ngIf="devices.length == 0" class="alert">
+        Es sind keine <b>Verbraucher</b> eingeschaltet.
+      </div>
+      <div class="section-items">
+        <div *ngFor="let device of devices" (click)="selectDevice(device.id)"
+             [ngClass]="isDeviceSelected(device.id) ? 'selected' : ''" class="section-item">
+          {{ device.name }}
+        </div>
+      </div>
+
+      <div class="section-title">
+        <div class="section-title-desc">
+          <div>
+            <img src="assets/icons/white/information.svg">
+          </div>
+          <div>
+            Die hier angezeigten Verbraucher sind aktuell eingeschaltet, wähle die Verbraucher aus, die ausgeschaltet
+            werden sollen.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button (click)="Close()" type="button" class="sec">Abbrechen</button>
+      <button *ngIf="CanCheckOut()" (click)="CheckOut()" type="button">Check-Out</button>
+    </div>
+
+  </div>
+</div>

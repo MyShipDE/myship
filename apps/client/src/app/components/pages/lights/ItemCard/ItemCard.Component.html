@@ -1,0 +1,41 @@
+<div class="row-fluid" *ngIf="getEditMode() || obj != null">
+  <div class="col-12 controlItem mainMenuItem" style="background: #101010;">
+    <div class="row">
+      <div class="col my-auto pt-2 pb-2" (click)="select()">
+        <span *ngIf="!getEditMode() || !changeable" class="fontNunito textColorWhite"
+              style="font-size: 14pt;">{{ obj.name }}</span>
+        <input *ngIf="getEditMode() && changeable && obj != undefined" type="text" class="form-control mt-2 mb-2"
+               [(ngModel)]="obj.name">
+        <input *ngIf="getEditMode() && changeable && obj == undefined" type="text" class="form-control mt-2 mb-2"
+               [(ngModel)]="name">
+      </div>
+      <div *ngIf="getEditMode() && deletionEnabled" class="col-auto my-auto">
+        <img src="../../../../../assets/icons/white/remove.svg" width="32px">
+      </div>
+      <div *ngIf="getEditMode() && !deletionEnabled && creationEnabled" class="col-auto my-auto">
+        <img src="../../../../../assets/icons/white/add.svg" width="32px">
+      </div>
+      <div *ngIf="!getEditMode() && controlEnabled" class="col-auto ml-auto my-auto">
+        <div class="row">
+          <div class="col-auto pr-0">
+            <div class="power-switch">
+              <input [(ngModel)]="obj.isActive" [ngModelOptions]="{standalone: true}"
+                     (click)="obj.control()"
+                     type="checkbox">
+              <div class="button">
+                <svg class="power-off">
+                  <use xlink:href="#line" class="line"/>
+                  <use xlink:href="#circle" class="circle"/>
+                </svg>
+                <svg class="power-on">
+                  <use xlink:href="#line" class="line"/>
+                  <use xlink:href="#circle" class="circle"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

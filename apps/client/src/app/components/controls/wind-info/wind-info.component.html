@@ -1,0 +1,47 @@
+<div class="info-container color" [ngClass]="nightModeService.status ? 'night' : 'light'">
+
+  <div class="title">
+    Wind
+  </div>
+
+  <hr>
+
+  <div class="row" style="justify-content: space-between; align-items: center">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Windrichtung
+      </div>
+      <div class="width-auto">
+        {{ awa }}°
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Windgeschwindigkeit
+      </div>
+      <div class="width-auto">
+        {{ aws }} KN
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content: space-between; align-items: center;">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Himmelsrichtung
+      </div>
+      <div class="width-auto">
+        {{ direction }}
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Windstärken
+      </div>
+      <div class="width-auto">
+        {{ bft }} bft
+      </div>
+    </div>
+  </div>
+
+</div>

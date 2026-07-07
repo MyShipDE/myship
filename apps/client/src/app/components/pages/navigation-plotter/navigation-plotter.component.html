@@ -1,0 +1,159 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col" id="menu" style="width: auto; padding: 2rem; gap: 1rem; white-space: nowrap">
+        <div *ngIf="datetime != ''" class="card">
+          <div class="card-value">
+            {{ converter.convert2Date(datetime) }}
+          </div>
+          <div class="card-title">
+            Datum
+          </div>
+        </div>
+        <div *ngIf="datetime != ''" class="card">
+          <div class="card-value">
+            {{ converter.convert2Time(datetime) }}
+          </div>
+          <div class="card-title">
+            Uhrzeit
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-value">
+            {{ converter.convertToDegreeMinutes(decimalLat, true) }}
+          </div>
+          <div class="card-title">
+            Breitengrad
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-value">
+            {{ converter.convertToDegreeMinutes(decimalLon, false) }}
+          </div>
+          <div class="card-title">
+            Längengrad
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-value">
+            {{ satellite }}
+          </div>
+          <div class="card-title">
+            Satelliten
+          </div>
+        </div>
+      </div>
+      <div class="map">
+        <div id="map"></div>
+        <div (click)="toggleDistanceUnit()" class="sog" [ngClass]="inArchiveMode ? 'no-border' : ''" id="sog-control">
+          <div *ngIf="!inArchiveMode" class="sog-section">
+            <div class="sog-value">
+              <span class="sog-value-1">{{ getSpeed()[0] }}</span>.{{ getSpeed()[1] }}
+              {{ distanceUnit == DistanceUnit.Miles ? 'kts' : 'km/h' }}
+            </div>
+            <div class="sog-title">
+              SOG
+            </div>
+          </div>
+          <div *ngIf="!inArchiveMode" class="cog-section">
+            <div class="cog-value">
+              {{ course.toFixed(0) }}°
+            </div>
+          </div>
+        </div>
+        <div class="archive-mode" id="archive-mode">
+          <div *ngIf="inArchiveMode" class="archive-mode-inner">
+            Der Plotter befindet sich im Archivmodus, bitte wechseln Sie in den <b (click)="leaveArchiveMode()">Live-Modus</b> um die aktuelle Position zu
+            sehen.
+          </div>
+        </div>
+        <div id="custom-zoom-control" class="custom-zoom-control">
+          <button class="zoom-btn" routerLink="/home">
+            <img src="assets/icons/white/close.svg">
+          </button>
+          <!-- <button id="menu-button" class="zoom-btn">
+            <img src="assets/icons/white/information.svg">
+          </button> -->
+          <button class="zoom-btn" (click)="zoom(1)">
+            <img src="assets/icons/white/zoom-in.svg">
+          </button>
+          <button class="zoom-btn" (click)="zoom(-1)">
+            <img src="assets/icons/white/zoom-out.svg">
+          </button>
+          <button class="zoom-btn" (click)="vdrOverlay.open()">
+            <img src="assets/icons/white/logbook.svg">
+          </button>
+          <div class="row" style="gap: 1rem">
+            <button class="zoom-btn" [ngClass]="routeEditing ? 'active' : ''" (click)="routeEditing = !routeEditing">
+              <img src="assets/icons/white/distance.svg">
+            </button>
+            <button class="zoom-btn"
+                    *ngIf="routeEditing && markedWaypointLayers.length > 0"
+                    (click)="undoWaypoint()">
+              <img src="assets/icons/white/undo.svg">
+            </button>
+            <button class="zoom-btn"
+                    *ngIf="routeEditing && markedWaypointLayers.length > 0"
+                    (click)="deleteWaypoints()">
+              <img src="assets/icons/white/trash.svg">
+            </button>
+          </div>
+        </div>
+        <div id="position-icon-control" class="position-icon-control">
+          <button *ngIf="mapRotationType == MapRotationTypeClass.VehicleOriented"
+                  class="zoom-btn active"
+                  (click)="switchMapRotationType(MapRotationTypeClass.NorthOrientedWithVehicleDirection)">
+            <img src="assets/icons/white/position-icon.svg" style="transform: rotate(-45deg)">
+          </button>
+          <button *ngIf="mapRotationType == MapRotationTypeClass.NorthOriented && isMoving" class="zoom-btn active"
+                  (click)="switchMapRotationType(MapRotationTypeClass.VehicleOriented)">
+            <img src="assets/icons/white/position-icon.svg">
+          </button>
+          <button *ngIf="mapRotationType == MapRotationTypeClass.NorthOriented && !isMoving" class="zoom-btn active"
+                  (click)="switchMapRotationType(MapRotationTypeClass.NorthOrientedWithVehicleDirection)">
+            <img src="assets/icons/white/position-icon.svg">
+          </button>
+          <button *ngIf="mapRotationType == MapRotationTypeClass.NorthOrientedWithVehicleDirection" class="zoom-btn"
+                  (click)="switchMapRotationType(MapRotationTypeClass.NorthOriented)">
+            <img src="assets/icons/white/position-icon.svg">
+          </button>
+        </div>
+        <div id="wind-gauge-control" class="wind-gauge-control">
+          <app-widget-wind (click)="dataWidget = DataWidget.WindInfo"
+                           *ngIf="dataWidget == DataWidget.WindGauge" class="height-auto"></app-widget-wind>
+          <app-motor-info (click)="dataWidget = DataWidget.ShipInfo"
+                          *ngIf="dataWidget == DataWidget.MotorInfo" class="motor-info"></app-motor-info>
+          <app-wind-info (click)="dataWidget = DataWidget.MotorInfo"
+                         *ngIf="dataWidget == DataWidget.WindInfo" class="height-auto"></app-wind-info>
+          <app-ship-info (click)="dataWidget = DataWidget.WindGauge"
+                         *ngIf="dataWidget == DataWidget.ShipInfo" class="height-auto"></app-ship-info>
+        </div>
+        <div class="waypoint-popUp" id="waypoint-popUp">
+
+        </div>
+        <div id="vdr-info" class="vdr-info">
+          <div *ngIf="distance > -1" (click)="toggleDistanceUnit()" class="vdr-info-el">
+            <div class="vdr-info-el-title">
+              Distanz
+            </div>
+            <div class="space"></div>
+            <div class="vdr-info-el-value">
+              {{ distance }} {{ distanceUnit == DistanceUnit.Miles ? 'nm' : 'km' }}
+            </div>
+          </div>
+          <div *ngIf="duration != null" class="vdr-info-el">
+            <div class="vdr-info-el-title">
+              Dauer
+            </div>
+            <div class="space"></div>
+            <div class="vdr-info-el-value">
+              {{ duration }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-vdr-overlay (selectedTrack)="selectTrack($event)" (selectCoords)="selectCoords($event)"></app-vdr-overlay>

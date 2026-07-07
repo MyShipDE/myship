@@ -1,0 +1,27 @@
+<div *ngIf="service.visibility" class="security-query-wrapper">
+  <div class="security-query-container">
+    <div class="title">
+      Sicherheitsabfrage
+    </div>
+    <div class="text">
+      {{ service.text }}
+    </div>
+    <div class="row height-auto" style="gap: 1rem">
+      <div *ngIf="service.yesButton">
+        <button (click)="service.setResult(result.Yes)" type="button"
+                class="security-query-btn security-query-btn-success">Ja
+        </button>
+      </div>
+      <div *ngIf="service.noButton">
+        <button (click)="service.setResult(result.No)" type="button"
+                class="security-query-btn security-query-btn-danger">Nein
+        </button>
+      </div>
+      <div *ngIf="service.cancelButton">
+        <button (click)="service.setResult(result.Cancel)" type="button"
+                class="security-query-btn security-query-btn-secondary">Abbrechen
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

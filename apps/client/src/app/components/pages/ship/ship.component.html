@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Schiffsdaten" icon="information" [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="row height-auto width" style="gap: 1rem">
+      <div class="col height-auto" style="gap: 1rem;">
+        <app-info-card title="Schiffsname" value="PlanB"
+                       valueRight="(PAPA - LIMA - ALFA - NOVEMBER - BRAVO)"></app-info-card>
+        <app-info-card title="Rufzeichen" value="DB5038"
+                       valueRight="DELTA - BRAVO - FIVE - ZERO - THREE - EIGHT"></app-info-card>
+
+        <div class="row" style="gap: 1rem">
+          <div>
+            <app-info-card title="MMSI" value="211302940"></app-info-card>
+          </div>
+          <div>
+            <app-info-card title="ATIS Kennung" value="9211025038"></app-info-card>
+          </div>
+        </div>
+
+        <app-info-card title="Amtliches Kennzeichen" value="169922 S"></app-info-card>
+      </div>
+      <div class="col height-auto" style="gap: 1rem">
+        <div class="row" style="gap: 1rem">
+          <div>
+            <app-info-card title="Position - Breitengrad" value="{{ lon }}"></app-info-card>
+          </div>
+          <div>
+            <app-info-card title="Position - Längengrad" value="{{ lat }}"></app-info-card>
+          </div>
+        </div>
+
+        <div class="row" style="gap: 1rem">
+          <div>
+            <app-info-card title="Kurs" value="{{ cog }}°"></app-info-card>
+          </div>
+          <div>
+            <app-info-card title="Geschwindigkeit" value="{{ sog }} KN"></app-info-card>
+          </div>
+        </div>
+
+        <div class="row" style="gap: 1rem">
+          <div>
+            <app-info-card title="Länge über alles" value="10,10 M"></app-info-card>
+          </div>
+          <div>
+            <app-info-card title="Breite" value="3,20 M"></app-info-card>
+          </div>
+        </div>
+
+        <div class="row" style="gap: 1rem">
+          <div>
+            <app-info-card title="Tiefgang" value="1,30 M"></app-info-card>
+          </div>
+          <div>
+            <app-info-card title="Masthöhe" value="12 M"></app-info-card>
+          </div>
+        </div>
+
+        <!--<app-info-card title="Gewicht" value="8 T"></app-info-card>-->
+      </div>
+    </div>
+
+  </div>
+</div>

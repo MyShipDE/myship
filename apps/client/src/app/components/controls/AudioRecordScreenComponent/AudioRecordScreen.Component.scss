@@ -1,0 +1,16 @@
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.outer {
+  position: fixed;
+  background: #cc2727;
+  top: 0;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

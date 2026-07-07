@@ -1,0 +1,156 @@
+<div *ngIf="!creationModal" class="container">
+
+  <div class="header">
+    <app-header title="Verbraucher" [editable]="false"
+                [CreationButton]="false" (CreationActionPerform)="openCreationForm()"></app-header>
+  </div>
+
+  <div class="content-container">
+    <div *ngIf="filterCheckBoxVisibility" class="row height-auto viewSwitch" style="gap: 1rem">
+      <div class="col height-auto">
+        <label class="height-auto">Ansicht</label>
+        <select [(ngModel)]="selectedListIndex" (ngModelChange)="setDeviceList()" class="textField"
+                style="height: 40px">
+          <option value="1">Standard</option>
+          <option value="2">Navigations-Instrumente</option>
+          <option value="3">Lichter</option>
+          <option value="4">Alle</option>
+        </select>
+      </div>
+    </div>
+    <div class="items">
+
+      <div class="item" *ngFor="let device of devices" (click)="service.control(device)">
+        <div class="text">
+          {{ device.name }}
+        </div>
+        <div *ngIf="device.bridgePort != null" class="icon">
+          <div class="power-switch">
+            <input [(ngModel)]="device.isActive" [ngModelOptions]="{standalone: true}"
+                   type="checkbox">
+            <div class="button">
+              <svg class="power-off">
+                <use xlink:href="#line" class="line"/>
+                <use xlink:href="#circle" class="circle"/>
+              </svg>
+              <svg class="power-on">
+                <use xlink:href="#line" class="line"/>
+                <use xlink:href="#circle" class="circle"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- PopUp CreationForm -->
+<div *ngIf="selectedDevice != null && creationModal" class="creation-form-modal textColorWhite">
+  <div class="creation-form-modal-card">
+    <div class="row height-auto" style="align-items: center">
+      <div style="width: 45px"></div>
+      <div class="height-auto" style="font-weight: bolder; font-size: 16pt; text-align: center">
+        {{ selectedDevice.name != null && selectedDevice.name != '' ? selectedDevice.name : 'Neuer Verbraucher' }}
+      </div>
+      <div (click)="creationModal = false" style="width: 45px">
+        <img src="../../../../assets/icons/white/close.svg" style="width: 100%; height: auto">
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem">
+      <div class="col">
+        <label>Name</label>
+        <input [(ngModel)]="selectedDevice.name" placeholder="Name" type="text" class="textField">
+      </div>
+      <div class="col">
+        <label>Type</label>
+        <select [(ngModel)]="selectedDevice.type" type="text" class="textField">
+          <option *ngIf="selectedDevice.type == null" selected disabled>Type</option>
+          <option value="ver">Verbraucher</option>
+          <option value="light">Licht</option>
+          <option value="nav">Navigation</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem">
+      <div class="col">
+        <label>Relay</label>
+        <select [(ngModel)]="selectedDevice.bridgeId" type="text" class="textField">
+          <option *ngFor="let bridge of bridges" value="{{ bridge.id }}">{{ bridge.name }}</option>
+        </select>
+      </div>
+      <div class="col">
+        <label>Relay-Port</label>
+        <input [(ngModel)]="selectedDevice.bridgePort" placeholder="Port" type="text" class="textField">
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem">
+      <div class="col">
+        <label>Sicherungsblock</label>
+        <input [(ngModel)]="selectedDevice.SecurityBlock" type="text" class="textField">
+      </div>
+      <div class="col">
+        <label>Port am Sicherungsblock</label>
+        <input [(ngModel)]="selectedDevice.SecurityBlockPort" type="text" class="textField">
+      </div>
+      <div class="col">
+        <label>Absicherung in A</label>
+        <input [(ngModel)]="selectedDevice.SecurityBlockAmpere" type="text" class="textField">
+      </div>
+      <div class="col">
+        <label>Betriebsspannung in V</label>
+        <input [(ngModel)]="selectedDevice.Voltage" type="text" class="textField">
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem">
+      <div class="col">
+        <label>Installationsdatum</label>
+        <input [(ngModel)]="selectedDevice.InstallationDate" type="date" class="textField">
+      </div>
+      <div class="col">
+        <label>Notizen</label>
+        <input [(ngModel)]="selectedDevice.notes" type="text" class="textField">
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem">
+      <div class="toggle-pill-color height-auto width-auto">
+        <input type="checkbox" id="popup_toggle_check" [(ngModel)]="selectedDevice.isHidden">
+        <label for="popup_toggle_check"></label>
+      </div>
+      <div>
+        Ausblenden
+      </div>
+    </div>
+
+    <div *ngIf="selectedDevice.identifier != null" (click)="copyMessage(service.getQRCodeContent(selectedDevice))"
+         class="row height-auto" style="gap: 1rem; align-items: center">
+      <div style="width: 32px; height: auto">
+        <img src="../../../../assets/icons/white/qr.png" style="width: 100%; height: auto">
+      </div>
+      <div class="height-auto">
+        QR-Code (Content)
+      </div>
+    </div>
+
+    <div class="row height-auto" style="gap: 1rem;">
+      <div style="width: 25%">
+        <button (click)="saveDevice()" type="button" class="custom-btn">
+          Speichern
+        </button>
+      </div>
+      <div *ngIf="selectedDevice.id != null" style="width: 25%">
+        <button (click)="deleteDevice(selectedDevice)" type="button" class="custom-btn danger">
+          Löschen
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,193 @@
+<div class="dashboard row row-mobile color" [ngClass]="nightModeService.status ? 'night' : 'light'"
+     style="padding: 1rem;">
+
+  <div class="cards">
+
+    <div class="card-container" style="padding-bottom: 0.25rem;">
+      <div class="card col" style="text-transform: uppercase; text-align: center;" routerLink="/temperature">
+
+        <div class="row">
+          <div class="col" style="justify-content: center">
+            <span class="height-auto width-auto info-value" *ngIf="outsideTemperature != null">
+              {{ round(outsideTemperature) }} °C
+            </span>
+            <span class="height-auto width-auto" *ngIf="outsideTemperature == null">
+              -,--
+            </span>
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="height-auto">
+              <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/thermometer.svg"
+                   style="width: 25%">
+            </div>
+          </div>
+          <div class="col" style="justify-content: center">
+            <span class="height-auto width-auto info-value" *ngIf="insideTemperatur != null">
+              {{ round(insideTemperatur) }} °C
+            </span>
+            <span class="height-auto width-auto" *ngIf="insideTemperatur == null">
+              -,--
+            </span>
+          </div>
+        </div>
+
+        <div class="row" style="height: 50%; align-items: center">
+          <div class="col height-auto info-sub-title">
+            Deck
+          </div>
+          <div class="col height-auto info-title" [ngClass]="nightModeService.status ? 'night' : 'default'">
+            Temperatur
+          </div>
+          <div class="col height-auto info-sub-title">
+            Salon
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-container" style="padding-top: 0.25rem;">
+      <div class="card col" style="text-transform: uppercase; text-align: center;">
+
+        <div class="row">
+          <div class="col info-value" style="justify-content: center">
+            -,-- %
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="height-auto">
+              <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/tank.svg"
+                   style="width: 25%">
+            </div>
+          </div>
+          <div class="col info-value" style="justify-content: center">
+            -,-- %
+          </div>
+        </div>
+        <div class="row" style="height: 50%; align-items: center">
+          <div class="col info-sub-title">
+            Vorne
+          </div>
+          <div class="col height-auto info-title" [ngClass]="nightModeService.status ? 'night' : 'default'">
+            Wasser
+          </div>
+          <div class="col info-sub-title">
+            Hinten
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="cards">
+
+    <div class="card-container" style="padding-bottom: 0.25rem;">
+      <div class="card col" style="text-transform: uppercase; text-align: center;">
+
+        <div class="row">
+          <div class="col info-value" style="justify-content: center">
+            -,-- %
+          </div>
+          <div class="col" style="justify-content: center;">
+            <div class="height-auto">
+              <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/tank.svg"
+                   style="width: 25%">
+            </div>
+          </div>
+          <div class="col info-value" style="justify-content: center">
+            {{ tank != null ? tank : '-,-- %' }}
+          </div>
+        </div>
+        <div class="row" style="height: 50%; align-items: center">
+          <div class="col info-sub-title">
+            Backbord
+          </div>
+          <div class="col height-auto info-title" [ngClass]="nightModeService.status ? 'night' : 'default'">
+            Diesel
+          </div>
+          <div class="col info-sub-title">
+            Steuerbord
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card-container" style="padding-top: 0.25rem;">
+      <div routerLink="/battery" class="card col" style="padding: 0.5rem;">
+
+        <div class="row">
+
+          <div class="col height-auto" style="justify-content: center; text-align: center">
+          <span class="height-auto width-auto info-value" *ngIf="state != null">
+            {{ round(state) }} %
+          </span>
+            <span class="height-auto width-auto" *ngIf="state == null">-,--</span>
+          </div>
+          <div class="row">
+            <div class="col" style="align-items: center; justify-content: center">
+              <div class="height-auto" style="width: 50%">
+                <img [ngClass]="nightModeService.status ? 'img-red' : ''" *ngIf="powerVoltage > 0"
+                     src="../../../../../assets/icons/white/thunder.png">
+              </div>
+            </div>
+            <div class="col width-auto height-auto" style="align-items: center; justify-content: center">
+              <div class="col height-auto" style="align-items: center; width: 40%">
+                <img *ngIf="current != null && current >= 0" src="assets/icons/dreieck_gruen.png">
+                <img *ngIf="current != null && current < 0" src="assets/icons/dreieck_red.png"
+                     style="transform: rotate(180deg);">
+              </div>
+            </div>
+            <div class="col" style="align-items: center; justify-content: center">
+              <div class="height-auto" style="width: 50%">
+                <img [ngClass]="nightModeService.status ? 'img-red' : ''" *ngIf="powerStatus"
+                     src="assets/icons/white/plug-silhouette.svg">
+              </div>
+            </div>
+          </div>
+          <div class="col height-auto"
+               style="justify-content: center; text-align: center">
+            <div class="height-auto">
+              <span class="height-auto width-auto info-value" *ngIf="voltage != null">
+                {{ round(voltage) }} V
+              </span>
+              <span class="height-auto width-auto" *ngIf="voltage == null">-,--</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row" style="text-align: center; text-transform: uppercase; align-items: center">
+          <div class="col info-sub-title">
+            Ladezustand
+          </div>
+          <div class="col height-auto info-title" [ngClass]="nightModeService.status ? 'night' : 'default'">
+            Batterie
+          </div>
+          <div class="col info-sub-title">
+            Spannung
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <app-system-state class="m-hide"></app-system-state>
+
+</div>
+
+<div *ngIf="ShowStateModal" class="state-modal">
+  <div class="col" style="height: 35%; padding: 2rem; background: #101010; gap: 1rem">
+    <div (click)="CloseStateModal()" class="height-auto width-auto"
+         style="align-self: flex-end;">
+      <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/close.svg"
+           style="width: 40px; height: auto">
+    </div>
+    <div>
+      <app-system-state></app-system-state>
+    </div>
+  </div>
+</div>

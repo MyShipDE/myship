@@ -1,0 +1,24 @@
+.battery {
+  transition: 0.4s;
+  background: #303030;
+  border-radius: 6px;
+  min-width: 220px;
+  height: 80px;
+  border: 1px solid WHITE;
+}
+
+.battery-inner {
+  transition: 0.4s;
+  border-radius: 6px;
+  width: 220px;
+  height: 78px;
+}
+
+.battery-pin {
+  background: #303030;
+  width: 12px;
+  height: 45px;
+  margin-top: 18px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}

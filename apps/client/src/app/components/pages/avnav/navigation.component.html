@@ -1,0 +1,81 @@
+<div class="avNav-wrapper color border"
+     *ngIf="service.getVisibility()">
+  <div class="main-grid">
+    <div class="sidebar m-hide">
+      <div class="home">
+        <div [ngClass]="nightModeService.status ? 'night' : 'light'" class="home-icon-wrapper">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''"
+               (click)="Dispose()" class="home-icon" src="../../../../assets/icons/white/home.svg">
+          <div>
+            Home
+          </div>
+        </div>
+        <div [ngClass]="nightModeService.status ? 'night' : 'light'" (click)="setNightMode()" class="home-icon-wrapper">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''"
+               class="home-icon" src="../../../../assets/icons/white/moon.svg">
+          <div>
+            Nachtmodus
+          </div>
+        </div>
+        <div [ngClass]="nightModeService.status ? 'night' : 'light'" class="home-icon-wrapper">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''"
+               (click)="OpenLogbookReminder()" class="home-icon" src="../../../../assets/icons/white/pen-filled-writing-tool.png">
+          <div>
+            Logbuch
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="switch-wrapper">
+        <div class="switch {{ nightModeService.status ? 'night' : '' }}"
+             (click)="switchMotorWidget()" [ngClass]="showMotorWidget ? 'active' : ''">
+          <div class="switch-icon">
+            <img [ngClass]="nightModeService.status && !showMotorWidget ? 'img-red' : ''"
+                 src="assets/icons/white/exhaust-pipe.svg">
+          </div>
+          <div class="switch-label">
+            Maschine
+          </div>
+        </div>
+        <div class="switch  {{ nightModeService.status ? 'night' : '' }}"
+             (click)="switchWindWidget()" [ngClass]="showWindWidget ? 'active' : ''">
+          <div class="switch-icon">
+            <img [ngClass]="nightModeService.status && !showWindWidget ? 'img-red' : ''"
+                 src="assets/icons/white/boat.svg">
+          </div>
+          <div class="switch-label">
+            Segeln
+          </div>
+        </div>
+      </div> -->
+
+      <div (click)="showWindGauge()" class="height-auto" id="wind-overlay">
+        <app-wind-info></app-wind-info>
+      </div>
+
+      <div class="height-auto">
+        <app-motor-info></app-motor-info>
+      </div>
+
+      <div class="height-auto">
+        <app-ship-info></app-ship-info>
+      </div>
+
+      <div class="height-auto">
+        <app-battery-info></app-battery-info>
+      </div>
+
+    </div>
+    <div class="header">
+      <app-header title="Navigation" [editable]="false"></app-header>
+    </div>
+    <div #mapContainer id="mapContainer" class="map" [ngClass]="nightModeService.status ? 'night' : ''"
+         *ngIf="iframeUrl != null">
+      <iframe #avNavFrame id="avNavFrame" [src]="iframeUrl"></iframe>
+    </div>
+  </div>
+
+  <div class="wind-overlay">
+    <app-widget-wind (click)="hideWindGauge()"></app-widget-wind>
+  </div>
+</div>

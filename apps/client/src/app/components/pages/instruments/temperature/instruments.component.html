@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="nav">
+    <app-header title="Temperaturen"></app-header>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="title">
+        Außen-Temperatur
+      </div>
+      <div class="card-row">
+        <div class="value">
+          {{ outside }} °C
+        </div>
+        <div class="icon">
+          <img src="assets/icons/white/park.svg">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title">
+        Salon
+      </div>
+      <div class="card-row">
+        <div class="value">
+          {{ inside }} °C
+        </div>
+        <div class="icon">
+          <img src="assets/icons/white/bed.svg">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title">
+        Motorraum
+      </div>
+      <div class="card-row">
+        <div class="value">
+          {{ motorRoom }} °C
+        </div>
+        <div class="icon">
+          <img src="assets/icons/white/timing-belt.svg">
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="title">
+        Kühlwasser
+      </div>
+      <div class="card-row">
+        <div class="value">
+          {{ motorWater }} °C
+        </div>
+        <div class="icon">
+          <img src="assets/icons/white/exhaust-pipe.svg">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

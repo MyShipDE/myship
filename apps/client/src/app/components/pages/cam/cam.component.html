@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="header">
+      <app-header title="Video" icon="video-camera" [editable]="false"></app-header>
+    </div>
+    <div class="cam">
+      <div class="canvas">
+        <canvas class="canvas border" [ngClass]="nightModeService.status ? 'night' : 'default'"
+                id="video01"></canvas>
+      </div>
+    </div>
+  </div>
+</div>

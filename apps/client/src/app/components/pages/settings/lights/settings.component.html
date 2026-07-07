@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Lichtersteuerung" icon="settings" backUrl="/settings" [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="lightGroups">
+      <div *ngFor="let lightGroup of lightGroupService.list" class="lightGroup">
+        {{ lightGroup.name }}
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<app-header (click)="switchDeleteMode()" [title]="title" icon="folders" [editable]="false"></app-header>
+
+<div class="container">
+  <div class="row">
+    <app-button (click)="dirModal = true" class="col-md-3 ml-auto" title="Neues Verzeichnis"></app-button>
+    <app-button (click)="uploadModal = true" class="col-md-3 mr-auto" title="Upload"></app-button>
+  </div>
+</div>
+
+<div class="container fixed-top blur" style="top: 100px;" *ngIf="dirModal">
+  <div class="card p-5 text-center textColorWhite" style="background: #202020;">
+    <span style="font-size: 20pt;">Neues Verzeichnis</span>
+    <div class="row">
+      <div class="col-md-8 mx-auto mt-3">
+        <input type="text" class="form-control" [(ngModel)]="dirName">
+      </div>
+      <div class="col-md-2 mx-auto mt-3">
+        <button type="button" class="btn btn-primary btn-block" (click)="createDir()">Anlegen</button>
+      </div>
+      <div class="col-md-2 mx-auto mt-3">
+        <button type="button" class="btn btn-secondary btn-block" (click)="dirModal = false">Schließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container fixed-top blur" style="top: 100px;" *ngIf="uploadModal">
+  <div class="card p-2 text-center textColorWhite" style="background: #202020;">
+    <span style="font-size: 20pt;">Neues Dokument</span>
+    <div class="alert alert-dark mt-4" style="background: #303030;">
+      <div class="row">
+        <div class="col-xs-12 col-sm-auto my-auto textColorWhite">
+          <input type="file" id="customFile" (change)="onFileChange($event)">
+        </div>
+        <div class="col-xs-12 my-auto col-sm mt-2">
+          <input type="text" class="form-control" [(ngModel)]="fileName">
+        </div>
+        <div class="col-xs-12 my-auto col-sm mt-2">
+          <button type="button" class="btn btn-primary btn-block" (click)="uploadFile()">Speichern</button>
+        </div>
+        <div class="col-xs-12 my-auto col-sm mt-2">
+          <button type="button" class="btn btn-secondary btn-block" (click)="uploadModal = false">Schließen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container fixed-top blur" style="top: 100px;" *ngIf="fileModel">
+  <div class="card pl-4 pr-4 pt-2 pb-2 text-center textColorWhite" style="background: #202020;">
+    <div class="row">
+      <div class="offset-1"></div>
+      <div class="col-auto my-auto mx-auto">
+        <span class="mb-2" style="font-size: 20pt;">{{ currentFileName }}</span>
+      </div>
+      <div class="col-1" (click)="closeAllFiles()">
+        <img src="../../../../assets/icons/white/close.svg" width="64px">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mx-auto textColorWhite" *ngIf="showPNG">
+        <img class="card-img" src="{{ fileSRC }}">
+      </div>
+      <div class="col-auto mx-auto my-auto textColorWhite">
+        <pdf-viewer [src]="fileSRC" [original-size]="false"></pdf-viewer>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('#customFile').change(function (e) {
+    var files = [];
+    for (var i = 0; i < $(this)[0].files.length; i++) {
+      files.push($(this)[0].files[i].name);
+    }
+    $(this).next('#customFile').html(files.join(', '));
+  });
+</script>
+
+<div class="col-11 mx-auto blur">
+
+  <div class="row">
+    <div class="col-4 col-sm-2 mt-4" (click)="goDirBack()" *ngIf="dirs.length > 0">
+      <div class="row">
+        <div class="col text-center">
+          <img width="64px" src="../../../../assets/icons/previous.svg">
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let file of files" class="col-4 col-sm-2">
+      <div class="card p-2" style="background: transparent; border: 0;">
+        <div class="row">
+          <div class="col text-center" (click)="openDir(file.id, true)" *ngIf="file.isDirectory != null">
+            <img width="64px" src="../../../../assets/icons/folder.svg">
+          </div>
+          <div class="col text-center" (click)="showFile(file)" *ngIf="file.ext != null && file.ext == 'pdf'">
+            <img width="64px" src="../../../../assets/icons/pdf.svg">
+          </div>
+          <div class="col text-center" (click)="showFile(file)"
+               *ngIf="file.ext != null && file.ext == 'jpg' || file.ext == 'jpeg'">
+            <img width="64px" src="../../../../assets/icons/jpg.svg">
+          </div>
+          <div class="col text-center" (click)="showFile(file)" *ngIf="file.ext != null && file.ext == 'png'">
+            <img width="64px" src="../../../../assets/icons/png.svg">
+          </div>
+          <div class="col text-center" *ngIf="file.ext != null && file.ext == 'doc' || file.ext == 'docx'">
+            <img width="64px" src="../../../../assets/icons/docx.svg">
+          </div>
+          <div class="col text-center"
+               *ngIf="file.ext != null && file.ext != 'pdf' && file.ext != 'jpg' && file.ext != 'jpeg' && file.ext != 'png' && file.ext && 'doc'&& file.ext != 'docx'">
+            <img width="64px" src="../../../../assets/icons/doc.svg">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center mt-2 textColorWhite">
+            {{ file.name }}
+          </div>
+        </div>
+        <div class="card-img-overlay text-center pt-0 pr-0" (click)="deleteItem(file.id)" *ngIf="deleteMode">
+          <img width="40px" src="../../../../assets/icons/remove.svg">
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

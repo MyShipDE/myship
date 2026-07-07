@@ -1,0 +1,948 @@
+<app-header title="Maschine" icon="speedometer" [editable]="false"></app-header>
+
+<div class="col-11 mx-auto blur d-none d-sm-block">
+  <div class="row">
+
+    <div class="col-md-3">
+
+      <div class="row mb-3">
+        <app-button routerLink="/instrumens" class="col-12 p-0" title="Segel" icon="boat.svg"></app-button>
+      </div>
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center">
+            <radial-gauge
+
+              [attr.value]="13"
+
+              color-minor-ticks="#FFF"
+              width="170"
+              height="170"
+              title=""
+              units="Voltage"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="16"
+              major-ticks="0, 4, 8, 12, 16"
+              minor-ticks="2"
+              numbers-margin="4"
+              highlights='[
+                {"from": 10.5, "to": 12, "color": "rgba(255, 0, 0, .6)"},
+                {"from": 12, "to": 14.5, "color": "rgba(78, 200, 58, .6)"},
+                {"from": 14.5, "to": 16, "color": "rgba(255, 0, 0, .6)"}
+              ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center">
+            <radial-gauge
+
+              [attr.value]="2350"
+
+              color-minor-ticks="#FFF"
+              width="240"
+              height="240"
+              title=""
+              units="RPM"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="4000"
+              major-ticks="0, 10, 20, 30, 40"
+              minor-ticks="2"
+              numbers-margin="6"
+              highlights='[
+        {"from": 0, "to": 0, "color": "rgba(200, 50, 50, .4)"}
+    ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-size="7"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-3">
+
+      <div class="row mb-3">
+        <app-button routerLink="/battery" class="col-12 p-0" title="Batterie" icon="battery.svg"></app-button>
+      </div>
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center">
+            <radial-gauge
+
+              [attr.value]="110"
+
+              color-minor-ticks="#FFF"
+              width="170"
+              height="170"
+              title=""
+              units="Fuel / L"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="120"
+              major-ticks="0, 30, 60, 90, 120"
+              minor-ticks="2"
+              numbers-margin="6"
+              highlights='[
+                {"from": 0, "to": 18, "color": "rgba(255, 0, 0, .6)"}
+              ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-size="7"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-auto mx-auto">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="85"
+
+          color-minor-ticks="#FFF"
+          width="190"
+          height="190"
+          title=""
+          units="Engine °C"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="120"
+          major-ticks="0, 30, 60, 90, 120"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+            {"from": 80, "to": 100, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="4"
+
+          color-minor-ticks="#FFF"
+          width="190"
+          height="190"
+          title="Engine"
+          units="kp/cm²"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="10"
+          major-ticks="0, 2, 4, 6, 8, 10"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+              {"from": 3, "to": 5, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="2.5"
+
+          color-minor-ticks="#FFF"
+          width="190"
+          height="190"
+          title="Gearbox"
+          units="kp/cm²"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="5"
+          major-ticks="0, 1, 2, 3, 4, 5"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+              {"from": 2, "to": 3, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="4.5"
+
+          color-minor-ticks="#FFF"
+          width="190"
+          height="190"
+          title=""
+          units="SOG"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="10"
+          major-ticks="0, 2, 4, 6, 8, 10"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+            {"from": 0, "to": 0, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mx-auto blur mt-4 d-block d-sm-none">
+
+  <div class="row">
+
+    <div class="col-12 mt-3">
+
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center pt-2">
+            <radial-gauge
+
+              [attr.value]="2350"
+
+              color-minor-ticks="#FFF"
+              width="300"
+              height="300"
+              title=""
+              units="RPM"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="4000"
+              major-ticks="0, 10, 20, 30, 40"
+              minor-ticks="2"
+              numbers-margin="6"
+              highlights='[
+        {"from": 0, "to": 0, "color": "rgba(200, 50, 50, .4)"}
+    ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-size="7"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6 mt-2">
+
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center pt-2">
+            <radial-gauge
+
+              [attr.value]="13"
+
+              color-minor-ticks="#FFF"
+              width="150"
+              height="150"
+              title=""
+              units="Voltage"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="16"
+              major-ticks="0, 4, 8, 12, 16"
+              minor-ticks="2"
+              numbers-margin="4"
+              highlights='[
+                {"from": 10.5, "to": 12, "color": "rgba(255, 0, 0, .6)"},
+                {"from": 12, "to": 14.5, "color": "rgba(78, 200, 58, .6)"},
+                {"from": 14.5, "to": 16, "color": "rgba(255, 0, 0, .6)"}
+              ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-6 mt-2">
+
+      <div class="row">
+        <div class="col-auto mx-auto">
+          <div class="text-center pt-2">
+            <radial-gauge
+
+              [attr.value]="110"
+
+              color-minor-ticks="#FFF"
+              width="150"
+              height="150"
+              title=""
+              units="Fuel / L"
+              min-value="0"
+              start-angle="60"
+              ticks-angle="240"
+              value-box="false"
+              max-value="120"
+              major-ticks="0, 30, 60, 90, 120"
+              minor-ticks="2"
+              numbers-margin="6"
+              highlights='[
+                {"from": 0, "to": 18, "color": "rgba(255, 0, 0, .6)"}
+              ]'
+              color-plate="#000"
+              border-shadow-width="0"
+              borders="true"
+              needle-type="arrow"
+              needle-width="4"
+              needle-circle-size="7"
+              needle-circle-outer="true"
+              needle-circle-inner="false"
+              animation-duration="1500"
+              animation-rule="linear"
+              animate-on-init="true"
+
+              font-numbers-size="32"
+
+              color-numbers="#FFF"
+              color-units="#FFF"
+              color-title="#FFF"
+              color-major-ticks="#FFF"
+              stroke-ticks="false"
+
+              color-needle-circle-outer="#70706f"
+              color-needle-circle-outer-end="#b3b6b5"
+              needle-circle-size="12"
+
+              color-border-outer="#70706f"
+              color-border-middle="#7d7d7a"
+              color-border-middle-end="#a1a2a3"
+              color-border-inner="#b3b6b5"
+
+              needle-width="4"
+              color-needle="#FFF"
+              color-needle-end="#FFF"
+
+              minor-ticks="5"
+
+              class="gauge"
+
+            >
+            </radial-gauge>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="row" style="padding-bottom: 25%;">
+    <div class="col-auto mx-auto mt-4">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="85"
+
+          color-minor-ticks="#FFF"
+          width="150"
+          height="150"
+          title=""
+          units="Engine °C"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="120"
+          major-ticks="0, 30, 60, 90, 120"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+            {"from": 80, "to": 100, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto mt-4">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="4"
+
+          color-minor-ticks="#FFF"
+          width="150"
+          height="150"
+          title="Engine"
+          units="kp/cm²"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="10"
+          major-ticks="0, 2, 4, 6, 8, 10"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+              {"from": 3, "to": 5, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto mt-4">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="2.5"
+
+          color-minor-ticks="#FFF"
+          width="150"
+          height="150"
+          title="Gearbox"
+          units="kp/cm²"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="5"
+          major-ticks="0, 1, 2, 3, 4, 5"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+              {"from": 2, "to": 3, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+    <div class="col-auto mx-auto mt-4">
+      <div class="text-center pt-2">
+        <radial-gauge
+
+          [attr.value]="4.5"
+
+          color-minor-ticks="#FFF"
+          width="150"
+          height="150"
+          title=""
+          units="SOG"
+          min-value="0"
+          start-angle="60"
+          ticks-angle="240"
+          value-box="false"
+          max-value="10"
+          major-ticks="0, 2, 4, 6, 8, 10"
+          minor-ticks="2"
+          numbers-margin="6"
+          highlights='[
+            {"from": 0, "to": 0, "color": "rgba(78, 200, 58, .6)"}
+          ]'
+          color-plate="#000"
+          border-shadow-width="0"
+          borders="true"
+          needle-type="arrow"
+          needle-width="4"
+          needle-circle-size="7"
+          needle-circle-outer="true"
+          needle-circle-inner="false"
+          animation-duration="1500"
+          animation-rule="linear"
+          animate-on-init="true"
+
+          font-numbers-size="32"
+
+          color-numbers="#FFF"
+          color-units="#FFF"
+          color-title="#FFF"
+          color-major-ticks="#FFF"
+          stroke-ticks="false"
+
+          color-needle-circle-outer="#70706f"
+          color-needle-circle-outer-end="#b3b6b5"
+          needle-circle-size="12"
+
+          color-border-outer="#70706f"
+          color-border-middle="#7d7d7a"
+          color-border-middle-end="#a1a2a3"
+          color-border-inner="#b3b6b5"
+
+          needle-width="4"
+          color-needle="#FFF"
+          color-needle-end="#FFF"
+
+          minor-ticks="5"
+
+          class="gauge"
+
+        >
+        </radial-gauge>
+      </div>
+    </div>
+  </div>
+</div>

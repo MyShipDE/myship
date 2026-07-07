@@ -1,0 +1,63 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  padding: 1rem;
+  grid-auto-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "h"
+      "content";
+}
+
+.header {
+  grid-area: h;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.content {
+  grid-area: content;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-content: flex-start;
+  justify-content: center;
+  @media (max-width: 700px) {
+    gap: 0.25rem;
+  }
+}
+
+.item {
+  flex: 0 0 32%;
+  height: auto;
+  padding: 0.5rem;
+  background: #202020;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  @media (max-width: 700px) {
+    flex: 1 0 47%;
+    max-width: 50%;
+  }
+}
+
+.icon {
+  width: 24px;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  width: 24px;
+  height: auto;
+}

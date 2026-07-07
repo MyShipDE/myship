@@ -1,0 +1,39 @@
+.border {
+  &.night {
+    border-color: #C32626 !important;
+  }
+
+  &.default {
+    border-color: #3399FF !important;
+  }
+}
+
+.color {
+  &.night {
+    color: #C32626 !important;
+  }
+
+  &.default {
+    color: #3399FF !important;
+  }
+
+  &.light {
+    color: WHITE !important;
+  }
+}
+
+.mainMenuItem {
+  &.night {
+    border: 2px solid #C32626 !important;
+    color: #C32626 !important;
+  }
+
+  &.default {
+    border: 2px solid #3399FF !important;
+    color: WHITE !important;
+  }
+}
+
+.img-red {
+  filter: brightness(103%) contrast(29%) hue-rotate(156deg) saturate(300%) sepia(100%) invert(63%) url(#svgTint)
+}

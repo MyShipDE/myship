@@ -1,0 +1,10 @@
+<div *ngIf="service.status" class="container">
+  <div class="col height-auto width-auto">
+    <div [ngClass]="nightModeService.status ? 'night' : 'light'" class="text color">
+      Daten werden geladen
+    </div>
+    <div class="height-auto width-auto">
+      <div [ngClass]="nightModeService.status ? 'night' : ''" class="lds-dual-ring"></div>
+    </div>
+  </div>
+</div>

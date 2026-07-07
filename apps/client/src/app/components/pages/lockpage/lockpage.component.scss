@@ -1,0 +1,80 @@
+* {
+  width: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 40%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title {
+  color: WHITE;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.code {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.circle {
+  transition: 0.4s;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  border: 2px solid grey;
+
+  &.error {
+    border: 2px solid #cc1919;
+    background-color: #cc1919;
+  }
+
+  &.success {
+    border: 2px solid #3bd01e;
+    background-color: #3bd01e;
+  }
+
+  &.selected {
+    background-color: grey;
+  }
+}
+
+.numFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.numField-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.numField {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 100%;
+  border: 2px solid grey;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: WHITE;
+}

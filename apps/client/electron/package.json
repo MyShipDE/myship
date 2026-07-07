@@ -1,0 +1,26 @@
+{
+  "name": "MyShip",
+  "scripts": {
+    "start": "electron .",
+    "mac": "electron-builder --macos && node deploy/deploy.js &&  git add . && git commit -m \"Increment Version\" && git push",
+    "pi": "electron-builder --linux"
+  },
+  "version": "1.0.30",
+  "description": "Remote-Management",
+  "main": "main.js",
+  "author": "Malte",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^26.2.1",
+    "electron-builder": "^24.6.4",
+    "electron-packager": "^17.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:MyShipDE/Client.git"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.3",
+    "dotenv": "^16.3.1"
+  }
+}

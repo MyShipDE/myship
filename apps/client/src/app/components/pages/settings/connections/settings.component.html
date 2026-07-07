@@ -1,0 +1,24 @@
+<app-header title="Verbindungen" icon="settings" backUrl="/settings" [editable]="false"></app-header>
+
+<div class="container textColorWhite pt-3">
+  <div class="row">
+    <app-settings-connections-card class="col-md-6 mb-4" title="Zurzeit Verbunden mit" [value]="currentServer"
+                                   [iconName]="isEncrypted()"></app-settings-connections-card>
+    <app-settings-connections-card class="col-md-6 mb-4" title="Ausgewählter SignalK Server"
+                                   [value]="currentSignalK"
+                                   [iconName]="isEncrypted()"></app-settings-connections-card>
+    <app-settings-connections-card class="col-md-6 mb-4" style="color: #727272" *ngIf="backupServer != null"
+                                   title="Backup-Server"
+                                   [value]="backupServer"></app-settings-connections-card>
+    <app-settings-connections-card class="col-md-6 mb-4" style="color: #727272" *ngIf="backupSignalK != null"
+                                   title="Backup-SignalK Host"
+                                   [value]="backupSignalK"></app-settings-connections-card>
+  </div>
+
+  <div class="row" *ngIf="type != 'local'">
+    <app-settings-connections-edit-card class="col-md-6" title="Standard Server" value="defaultSrv">
+    </app-settings-connections-edit-card>
+    <app-settings-connections-edit-card class="col-md-6" title="Standard SignalK Host" value="defaultSk">
+    </app-settings-connections-edit-card>
+  </div>
+</div>

@@ -1,0 +1,166 @@
+<div class="container">
+
+  <div *ngIf="!isEmbedded" class="header">
+    <app-header title="Logbuch"></app-header>
+  </div>
+
+  <div class="mobile-switch">
+    <div (click)="filter = true; resultsArchive = false">
+      <app-custom-button title="Filter"></app-custom-button>
+    </div>
+    <div (click)="filter = false; resultsArchive = true">
+      <app-custom-button title="Ergebnisse"></app-custom-button>
+    </div>
+  </div>
+
+  <div *ngIf="filter" class="filter-wrapper col" style="gap: 1rem">
+    <div class="filter">
+      <div *ngFor="let option of filterOptions" (click)="option.state = true; applyFilter(option)" class="filter-item">
+        <div class="filter-item-state" [ngClass]="option.state ? 'selected' : ''"></div>
+        <div class="filter-item-text">
+          {{ option.description }}
+        </div>
+      </div>
+      <!-- <div *ngIf="selectedFilter != null" class="col textColorWhite"
+           style="text-align: center; display: flex; justify-content: flex-end">
+        <div class="row height-auto" style="align-items: center; display: flex">
+          <div class="scrollButton" *ngIf="page >= 1" (click)="page = page - 1; applyFilter()">
+            <img src="assets/icons/white/arrow.svg" style="width: 32px; height: auto; transform: rotate(90deg)">
+          </div>
+          <div class="height-auto scrollTitle">
+            Seite: {{ page + 1 }} von {{ getPages(pages) }}
+          </div>
+          <div class="scrollButton" *ngIf="page < getPages(pages) - 1" (click)="page = page + 1; applyFilter()">
+            <img src="assets/icons/white/arrow.svg" style="width: 32px; height: auto; transform: rotate(270deg)">
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <!-- <div class="filter" style="height: 15%">
+      <app-custom-button (actionPerform)="vdrService.startTrackOnlyDevelopment()"
+                         title="START - VDR"></app-custom-button>
+    </div> -->
+  </div>
+
+  <div #results class="result-wrapper">
+    <div class="result">
+
+      <div *ngIf="loader" class="loader-wrapper">
+        <div class="lds-dual-ring"></div>
+      </div>
+
+      <div class="load-more" *ngIf="selectedFilter?.description == FilterOptionName.All"
+           (click)="applyFilter(null, true)">
+        mehr laden
+      </div>
+
+      <div class="custom-alert-archive" *ngIf="!IsFilterActive">
+        Um Tracks aus dem Archiv anzuzeigen, bitte einen Filter auswählen.
+      </div>
+
+      <table mat-table matSort *ngIf="IsFilterActive && resultsArchive" [dataSource]="dataSource"
+             (matSortChange)="announceSortChange($event)">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by name"> {{ tableHeading[0].name }} </th>
+          <td mat-cell *matCellDef="let row" (click)="selectTrack(row)">
+            {{ row.name == null ? 'unbenannt' : row.name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th class="sm" mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by date"> {{ tableHeading[1].name }} </th>
+          <td class="sm" mat-cell *matCellDef="let row"
+              (click)="selectTrack(row)"> {{ convert2Date(row.date) }}</td>
+        </ng-container>
+
+        <!-- CreatedAt Column -->
+        <ng-container matColumnDef="start">
+          <th class="sm" mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by start"> {{ tableHeading[2].name }} </th>
+          <td class="sm" mat-cell *matCellDef="let row"
+              (click)="selectTrack(row)">{{ convert2Time(row.start) }}</td>
+        </ng-container>
+
+        <!-- StopAt Column -->
+        <ng-container matColumnDef="stop">
+          <th class="sm" mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by stop"> {{ tableHeading[3].name }} </th>
+          <td class="sm" mat-cell *matCellDef="let row" (click)="selectTrack(row)">{{ convert2Time(row.stop) }}</td>
+        </ng-container>
+
+        <!-- Time Column -->
+        <ng-container matColumnDef="duration">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by duration"> {{ tableHeading[4].name }} </th>
+          <td mat-cell *matCellDef="let row"
+              (click)="selectTrack(row)"> {{ datetimeService.minutesToHoursAndMinutes(row.duration) }}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="resultRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <table mat-table matSort *ngIf="IsFilterActive && resultsVoiceEntries" [dataSource]="dataSourceVoiceEntries"
+             (matSortChange)="announceSortChange($event)">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by message"> {{ tableHeadingVoiceEntries[0].name }} </th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.message == null ? '-/-' : row.message}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th class="xs" mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by date"> {{ tableHeadingVoiceEntries[1].name }} </th>
+          <td class="xs" mat-cell *matCellDef="let row"> {{ convert2Date(row.createdAt) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="time">
+          <th class="xs" mat-header-cell *matHeaderCellDef mat-sort-header
+              sortActionDescription="Sort by time"> {{ tableHeadingVoiceEntries[2].name }} </th>
+          <td class="xs" mat-cell *matCellDef="let row">{{ convert2Time(row.createdAt) }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsVoiceEntries"></tr>
+        <tr class="resultRow" mat-row *matRowDef="let row; columns: displayedColumnsVoiceEntries;"></tr>
+
+      </table>
+
+    </div>
+  </div>
+
+</div>
+
+<app-logbook-view-route *ngIf="previewService.getVisibility()"
+                        [track]="selectedTrack" [coords]="coords"></app-logbook-view-route>
+
+<div class="tracks-overlay" *ngIf="tracksOverlay">
+  <div class="datepicker">
+    <div class="datepickers">
+      <app-datepicker-element-component [details]="days"
+                                        (dateSelected)="startDate = $event; selectDateRange()"></app-datepicker-element-component>
+      <app-datepicker-element-component [details]="days"
+                                        (dateSelected)="endDate = $event; selectDateRange()"></app-datepicker-element-component>
+    </div>
+    <div class="selectedDates">
+      <div>
+        {{startDate | date: 'dd.MM.yyyy'}}
+      </div>
+      <div>
+        {{endDate | date: 'dd.MM.yyyy'}}
+      </div>
+    </div>
+    <div (click)="tracksOverlay = false" class="tracks-overlay-close">
+      Schließen
+    </div>
+  </div>
+</div>

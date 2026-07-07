@@ -1,0 +1,19 @@
+<div routerLink="/settings/system" class="container">
+  <div class="item height-auto width-auto">
+    <div class="row" style="justify-content: center; gap: 0.5rem">
+      <div class="width-auto height-auto color clockText" [ngClass]="nightModeService.status ? 'night' : 'light'">
+        <span *ngIf="currentTime != null">{{ currentTime }}</span>
+        <span *ngIf="currentTime == null">--:--</span>
+      </div>
+      <div class="item utc width-auto height-auto color"
+           style="background: #303030; font-weight: bolder; align-self: flex-end"
+           [ngClass]="nightModeService.status ? 'night' : 'light'">
+        UTC <span class="char" *ngIf="utc > 0">+</span> {{ utc }}
+      </div>
+    </div>
+  </div>
+  <div class="date color"
+       [ngClass]="nightModeService.status ? 'night' : 'light'">
+    {{ currentDate }}
+  </div>
+</div>

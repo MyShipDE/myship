@@ -1,0 +1,35 @@
+<div *ngIf="alarm != null" class="outline-container textColorWhite">
+  <div class="inner-container">
+
+    <div class="col height-auto" style="width: 50%; align-items: center">
+      <img src="assets/icons/warning.svg" style="width: 75%; height: auto">
+    </div>
+    <div class="col height-auto textArea">
+      <div class="title">
+        {{ alarm.title != null ? alarm.title : 'Es wurde ein Alarm ausgelöst!' }}
+      </div>
+      <div class="description">
+        {{ alarm.message != null ? alarm.message : '' }}
+      </div>
+      <div *ngIf="alarm.value != -1" class="value">
+        <div class="desc">
+          Aktueller Wert:
+        </div>
+        <div class="current">
+          <div class="width-auto">
+            {{ getConvertedValue }}
+          </div>
+          <div class="width-auto">
+            {{ getConvertedUnit }}
+          </div>
+        </div>
+      </div>
+      <div (click)="close()" class="close-wrapper">
+        <button type="button" class="close-button">
+          Schließen
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

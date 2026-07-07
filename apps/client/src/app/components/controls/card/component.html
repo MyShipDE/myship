@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="value">
+    <div *ngIf="valueRight == ''">
+      {{ value }}
+    </div>
+    <div *ngIf="valueRight != ''" style="width: auto">
+      {{ value }}
+    </div>
+    <div class="right" *ngIf="valueRight != ''">
+      {{ valueRight }}
+    </div>
+  </div>
+  <div class="title">
+    {{ title }}
+  </div>
+</div>

@@ -1,1 +1,62 @@
-.claude
+# --- Dependencies ---
+node_modules/
+
+# --- Build output ---
+dist/
+out/
+out-tsc/
+tmp/
+bazel-out/
+apps/client/.angular/
+apps/client/electron/dist/
+apps/client/electron/out/
+
+# --- Secrets & environment — NEVER commit ---
+.env
+.env.*
+!.env.example
+!.env.vdr-example
+*.p8
+*.pem
+*.key
+*.keystore
+*.p12
+WeatherKey*
+
+# --- Server runtime storage (contents ignored; folder skeleton kept) ---
+/apps/server/storage/*/*
+!/apps/server/storage/*/.gitkeep
+*.Secret
+*.Fingerprint
+
+# --- Logs ---
+*.log
+npm-debug.log*
+yarn-error.log
+
+# --- iOS / Capacitor (generated) ---
+apps/client/ios/App/App/public/
+apps/client/ios/App/Pods/
+apps/client/ios/App/build/
+DerivedData/
+
+# --- Editors / IDE ---
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+.project
+.classpath
+.settings/
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Tooling / misc ---
+.claude/
+/coverage
+.sass-cache/

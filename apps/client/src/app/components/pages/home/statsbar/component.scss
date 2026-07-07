@@ -1,0 +1,89 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  background: #252525;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.bg-success {
+  background: #00d411;
+}
+
+.bg-danger {
+  background: #cc2727;
+}
+
+.bg-inactive {
+  background: #5a5a5a;
+}
+
+.row-mobile {
+  @media (min-width: 700px) {
+    gap: 0.5rem;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.card-container {
+  @media (max-width: 700px) {
+    padding-top: 0 !important;
+    padding-bottom: 0.5rem !important;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 700px) {
+    height: 50%;
+  }
+}
+
+.dashboard {
+
+}
+
+.states {
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.state-modal {
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  position: fixed;
+  top: 0;
+  align-items: center;
+}
+
+.info-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.info-sub-title {
+  font-weight: bold;
+  color: #888;
+  font-size: 0.75rem;
+  justify-content: center;
+  @media (min-width: 1920px) {
+    font-size: 1.1rem;
+  }
+}
+
+.info-value {
+  @media (min-width: 1920px) {
+    font-weight: bold !important;
+    font-size: 1.4rem !important;
+  }
+}

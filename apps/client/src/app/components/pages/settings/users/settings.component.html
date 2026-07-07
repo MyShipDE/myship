@@ -1,0 +1,206 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Benutzerverwaltung" backUrl="/settings" icon="settings" [editable]="false"></app-header>
+  </div>
+  <div class="content">
+    <div class="alert danger">
+      Die Benutzerverwaltung steht derzeit in der App nicht zur Verfügung!
+    </div>
+  </div>
+</div>
+
+<div style="display: none">
+
+  <div *ngIf="qrScanner" class="row">
+    <div class="card pl-4 pr-4 pt-3 bg-success"
+         style="border: 0;">
+      <p class="font-weight-bold">QR-Code Scanner ist aktiv!</p>
+      <p>Bitte richte die Kamera auf einen QR-Code.</p>
+    </div>
+    <app-button (click)="stopScan()" class="col-12"
+                title="Abbrechen"
+                icon="cancel.svg"></app-button>
+  </div>
+
+  <div *ngIf="!qrScanner" class="row">
+
+    <div *ngFor="let user of users" class="col-md-6 pl-4 pr-4 mb-4">
+      <div class="card" style="border: 0; font-size: 12pt;">
+        <div class="card-body" style="background: #202020;">
+          <div class="row" *ngIf="user.identifier == null && user.ip != null">
+            <div class="col-auto">
+              Bei diesem Zugang handelt sich es um eine IP basierende Freigabe!
+            </div>
+          </div>
+          <div class="row" *ngIf="user.identifier == null && user.ip == null">
+            <div class="col-auto">
+              Dieser Zugang ist noch nicht vollständig eingerichtet!
+            </div>
+          </div>
+          <div class="row" *ngIf="user.identifier == null  && user.ip == null">
+            <div class="col-auto mx-auto mt-4">
+              <qrcode [qrdata]="'MyShip.ExpressSetup;' + server + '#' + user.token" [width]="200"
+                      [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_lang == null && user.identifier != null">
+            <div class="col-auto">
+              Für dieses Gerät können keinen detalierten Systeminformationen angezeigt werden!
+            </div>
+          </div>
+          <div class="row" *ngIf="user.ip != null">
+            <div class="col-auto">
+              IP:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.ip }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_name != null">
+            <div class="col-auto">
+              Name:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_name }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_lang != null">
+            <div class="col-auto">
+              Sprache:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_lang }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_platform != null">
+            <div class="col-auto">
+              Platform:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_platform }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_os != null">
+            <div class="col-auto">
+              Betriebssystem:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_os }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_os_version != null">
+            <div class="col-auto">
+              OS Version:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_os_version }}
+            </div>
+          </div>
+          <div class="row" *ngIf="user.client_model != null">
+            <div class="col-auto">
+              Modell:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.client_model }}
+            </div>
+          </div>
+        </div>
+        <div class="card-footer" style="background: #303030;">
+          <div class="row" style="font-size: 10pt;" *ngIf="user.id != null">
+            <div class="col-auto">
+              ID:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.id }}
+            </div>
+          </div>
+          <div class="row" style="font-size: 10pt;" *ngIf="user.comment != null">
+            <div class="col-auto">
+              Kommentar:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.comment }}
+            </div>
+          </div>
+          <div class="row" style="font-size: 10pt;" *ngIf="user.identifier != null">
+            <div class="col-auto">
+              Prefix UID:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.identifier }}
+            </div>
+          </div>
+          <div class="row" style="font-size: 10pt;" *ngIf="user.identifier == null">
+            <div class="col-auto">
+              AuthService-Code:
+            </div>
+            <div class="col-auto ml-auto">
+              {{ user.token }}
+            </div>
+          </div>
+          <div class="row" style="font-size: 10pt;" *ngIf="user.isAdmin != null">
+            <div class="col-auto">
+              Rolle
+            </div>
+            <div class="col-auto ml-auto">
+              <div *ngIf="user.isAdmin == '1'" class="card pl-2 pr-2" style="background: #b62929">Administrator</div>
+              <div *ngIf="user.isAdmin == '0'" class="card pl-2 pr-2" style="background: #444444">Benutzer</div>
+            </div>
+          </div>
+          <div *ngIf="user.identifier == null && user.ip == null" class="row">
+            <app-button *ngIf="!qrScanFailed"
+                        class="col-md-12 mx-auto mt-3 mb-2"
+                        title="QR-Code Scannen"
+                        icon="qr-code.svg" (click)="grantAccessViaQR(user.token)"></app-button>
+            <div *ngIf="qrScanFailed" class="card pl-4 pr-4 pt-3 mt-4"
+                 style="border: 0; background: #ab3636;">
+              <p class="font-weight-bold textColorWhite">Das Scannen eines QR-Codes wird auf diesem Gerät nicht
+                unterstüzt!</p>
+            </div>
+          </div>
+        </div>
+        <button *ngIf="!isIdentifierSame(user.identifier) && user.ip == null" type="button"
+                class="btn btn-danger p-2 font-weight-bolder font-weight-bolder"
+                style="font-size: 12pt; border-radius: 0; background: #ab3636; border: 0;"
+                (click)="delete(user.id)">
+          Löschen
+        </button>
+        <div *ngIf="isIdentifierSame(user.identifier) && user.ip == null"
+             class="card-footer text-center bg-primary font-weight-bolder">
+          Dieses Gerät
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 pl-4 pr-4 mb-4">
+      <div class="card" style="border: 0; font-size: 12pt;">
+        <div class="card-body" style="background: #202020;">
+          <div class="row mb-3">
+            <div class="col-12 mb-2">
+              Kommentar:
+            </div>
+            <div class="col-12 ml-auto">
+              <input [(ngModel)]="comment" type="text" class="form-control">
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-12 mb-2">
+              Administrator-Rechte:
+            </div>
+            <div class="col-12">
+              <select [(ngModel)]="adminAccess" class="form-control">
+                <option value="0">Nein</option>
+                <option value="1">Ja</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div (click)="create()" class="card-footer text-center text-uppercase passivLink"
+             style="background: #458a45;">
+          Erstellen
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

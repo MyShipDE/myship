@@ -1,0 +1,136 @@
+<div class="row" [ngClass]="nightModeService.status ? 'night' : 'light'" style="gap: 0.5rem">
+
+  <div class="col" style="gap: 0.5rem">
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div *ngIf="!ws.state" class="bg-inactive"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        <div *ngIf="ws.state" class="bg-success"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="height-auto state-title">Bord-Computer</div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div *ngIf="!SignalKState" class="bg-inactive"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        <div *ngIf="SignalKState" class="bg-success"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="row height-auto font-normal" style="align-items: center; justify-content: space-between">
+          <div class="col height-auto width-auto state-title">
+            SignalK
+          </div>
+          <div class="row width-auto"
+               style="align-items: center; padding: 0 1rem; justify-content: flex-end; gap: 1rem">
+            <div (click)="restartSignalK()" class="col icon-container">
+              <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/refresh-page-option.png"
+                   style="width: 100%; height: auto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div class="bg-default"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="height-auto state-title">Batterie-Wächter</div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div *ngIf="gpsSatellites <= 0" class="bg-inactive"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        <div *ngIf="gpsSatellites > 0" class="bg-success"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div routerLink="/plotter" class="col" style="justify-content: center;">
+        <div class="row height-auto font-normal" style="align-items: center; justify-content: space-between">
+          <div class="col height-auto width-auto state-title">
+            GPS
+          </div>
+          <div class="row width-auto"
+               style="align-items: center; padding: 0 1rem; justify-content: flex-end; gap: 1rem">
+            <div class="col height-auto width-auto" style="font-size: 1.2rem;">
+              {{ gpsSatellites }}
+            </div>
+            <div class="col icon-container">
+              <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/satellite.png"
+                   style="width: 100%; height: auto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="col" style="gap: 0.5rem">
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div class="bg-default"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="height-auto state-title">LED Control</div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;" routerLink="/settings/blackbox">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div *ngIf="!vdrState" class="bg-inactive"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        <div *ngIf="vdrState" class="bg-success"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="row height-auto font-normal"
+             style="align-items: center; justify-content: space-between;">
+          <div class="row height-auto" style="gap: 0.5rem; padding-right: 1rem; align-items: center">
+            <div class="width-auto state-title">
+              VDR
+            </div>
+            <div *ngIf="selectedVDRTemplate != null" class="col height-auto" style="text-align: right">
+              ({{ selectedVDRTemplate.name }})
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div class="bg-default"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="height-auto state-title">Internet</div>
+      </div>
+    </div>
+
+    <div class="card" style="font-size: 0.8rem;">
+      <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+        <div *ngIf="!cloudState" class="bg-inactive"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        <div *ngIf="cloudState" class="bg-success"
+             style="border-radius: 100%; width: 16px; height: 16px;"></div>
+      </div>
+      <div class="col" style="justify-content: center;">
+        <div class="height-auto state-title">Cloud</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,175 @@
+<div *ngIf="service.getVisibility() && (track != null || coords.length > 0)" class="custom-grid-main">
+
+  <app-logbook-entries [record]="selectedRecord"></app-logbook-entries>
+
+  <div class="header">
+    <app-header [title]="title" (HomeButtonAction)="dispose(true)" (BackAction)="dispose()"></app-header>
+  </div>
+
+  <div class="content-container">
+
+    <div class="close">
+      <div class="close-inner" (click)="service.setVisibility(false)">
+        <img src="assets/icons/white/close.svg" style="width: 100%; height: auto">
+      </div>
+    </div>
+
+    <div *ngIf="track != null" class="track-details">
+      <app-logbook-stats-card *ngIf="track.stopAt == null" name="Status"
+                              value="Aufzeichnung läuft"></app-logbook-stats-card>
+      <app-logbook-stats-card name="Bezeichnung" [edit]="true" (click)="changeTrackName()"
+                              value="{{ track.name == null ? 'unbenannt' : track.name }}"></app-logbook-stats-card>
+      <app-logbook-stats-card name="Start" unit="Uhr"
+                              value="{{ convert.convert2Time(track.createdAt) }}"></app-logbook-stats-card>
+      <app-logbook-stats-card *ngIf="track.stopAt != null" name="Ankunft" unit="Uhr"
+                              value="{{ convert.convert2Time(track.stopAt) }}"></app-logbook-stats-card>
+      <app-logbook-stats-card *ngIf="track.stopAt != null" name="Dauer"
+                              value="{{ datetimeService.minutesToHoursAndMinutes(track.duration) }}"></app-logbook-stats-card>
+      <app-logbook-stats-card name="Strecke" unit="Meilen"
+                              value="{{ convert.round(getDistance(track), 1).toString().replace('.', ',') }}"></app-logbook-stats-card>
+      <app-logbook-stats-card name="Ø" unit="Knoten"
+                              value="{{ convert.round(convert.getSpeedAverage(track, getDistance(track)), 1) }}"></app-logbook-stats-card>
+    </div>
+
+    <div class="custom-grid-map col" style="gap: 1rem">
+      <div
+        class="map-container">
+        <app-logbook-map *ngIf="shouldMapDisplay()"
+                         [track]="track" [coords]="coords"
+                         (WaypointSelected)="selectWaypoint($event)"></app-logbook-map>
+      </div>
+    </div>
+
+    <div *ngIf="track != null" id="details col" class="waypoint-details">
+
+      <div class="record-selection">
+        <div>
+          {{ detailsTitle }}
+        </div>
+        <select [(ngModel)]="selectedRecord.id" (ngModelChange)="selectWaypoint(selectedRecord)" class="textField">
+          <option *ngFor="let record of track.records" value="{{ record.id }}">
+            {{ convert.convert2Time(record.createdAt) }}
+          </option>
+        </select>
+      </div>
+
+      <hr>
+
+      <div class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value"
+               [innerHTML]="convert.getPositionDescription(extract.getLatitude(selectedRecord?.data), extract.getLongitude(selectedRecord?.data))"></div>
+          <div class="card-text">
+            Position
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/route.svg">
+        </div>
+      </div>
+
+      <div *ngIf="speedOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            {{ speedOfRecord }} kn
+          </div>
+          <div class="card-text">
+            Geschwindigkeit
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/speed-test.svg">
+        </div>
+      </div>
+
+      <div *ngIf="courseOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            {{ courseOfRecord }}°
+          </div>
+          <div class="card-text">
+            GPS-Kurs
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/compass.svg">
+        </div>
+      </div>
+
+      <div *ngIf="motorStateOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            <span *ngIf="motorStateOfRecord == 1">eingeschaltet</span>
+            <span *ngIf="motorStateOfRecord == 0">ausgeschaltet</span>
+          </div>
+          <div class="card-text">
+            Maschine
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/timing-belt.svg">
+        </div>
+      </div>
+
+      <div *ngIf="windSpeedOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            {{ windSpeedOfRecord }} kn
+          </div>
+          <div class="card-text">
+            Wind-Geschwindigkeit
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/wind.svg">
+        </div>
+      </div>
+
+      <div *ngIf="windDirectionOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            {{ windDirectionOfRecord }}°
+          </div>
+          <div class="card-text">
+            Wind-Richtung
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/wind.svg">
+        </div>
+      </div>
+
+      <div *ngIf="outsideTemperatureOfRecord != -1" class="card-info">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            {{ outsideTemperatureOfRecord }}°C
+          </div>
+          <div class="card-text">
+            Außen-Temperatur
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/park.svg">
+        </div>
+      </div>
+
+      <div *ngIf="selectedRecord.voiceEntry != null || selectedRecord.manualEntries.length > 0"
+           (click)="logbookEntriesService.visibility = true" class="card-info border">
+        <div class="col" style="justify-content: space-between">
+          <div class="card-value">
+            Logbuch-Einträge
+          </div>
+          <div class="card-text">
+            Sprachaufnahmen und Notizen
+          </div>
+        </div>
+        <div class="card-img">
+          <img src="assets/icons/white/writing.svg">
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

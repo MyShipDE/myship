@@ -1,0 +1,54 @@
+<div *ngIf="service.getVisibility()" class="outer-container">
+  <div class="voice-inner-container">
+    <div class="row" style="max-height: 10%; align-items: center">
+      <div style="width: 10%"></div>
+      <div class="headline">
+        Sprach-Assistent
+      </div>
+      <div (click)="Dispose()" class="close">
+        <img src="assets/icons/white/close.svg">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col messages">
+        <div *ngFor="let message of service.messages" class="row height-auto">
+          <div class="message-text height-auto">
+            {{ message.message }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row height-auto" style="gap: 1rem">
+      <div *ngIf="service.currentPage > 0" (click)="service.currentPage = service.currentPage - 1; service.setPage()"
+           class="col width-auto height-auto page">
+        <
+      </div>
+      <div class="col width-auto height-auto page">
+        Seite {{ service.currentPage + 1 }} von {{ service.pages.length }}
+      </div>
+      <div *ngIf="service.currentPage < service.pages.length - 1"
+           (click)="service.currentPage = service.currentPage + 1; service.setPage()"
+           class="col width-auto height-auto page">
+        >
+      </div>
+    </div>
+    <div class="row" style="justify-content: center; height: 15%">
+      <div (click)="pressMicrophone()" class="microphone width-auto" [ngClass]="microphoneActive ? 'active' : ''">
+        <img src="assets/icons/white/mikrofon.svg">
+      </div>
+    </div>
+    <div *ngIf="recordCaptured" class="col microphoneInfo" style="max-height: 20%">
+      <div class="height-auto">
+        Eine neue Aufnahme wurde erfasst, soll diese an den Server gesendet werden?
+      </div>
+      <div class="row" style="gap: 1rem; width: 50%; height: 50%">
+        <div>
+          <button (click)="send()" type="button" class="custom-btn">Ja</button>
+        </div>
+        <div>
+          <button (click)="recordCaptured = false;" type="button" class="custom-btn danger">Nein</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

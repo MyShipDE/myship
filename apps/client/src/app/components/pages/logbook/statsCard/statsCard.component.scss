@@ -1,0 +1,72 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  text-align: center;
+  color: WHITE;
+  font-size: 10pt;
+  background: #202020;
+  border-radius: 0.25rem;
+  @media (max-width: 700px) {
+    height: 100%;
+    flex: 0 0 48.5%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  &.active {
+    background: $primary;
+  }
+
+  &.border {
+    border: 2px solid $primary;
+  }
+}
+
+.card-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: bolder;
+  font-size: 0.9rem;
+
+  &.large {
+    font-size: 1.5rem;
+  }
+}
+
+.value {
+  color: $primary;
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+.unit {
+  font-size: 0.75rem;
+  color: #808080;
+}
+
+.title-text {
+  width: auto;
+  height: auto;
+}
+
+.title-edit-icon {
+  width: 20px;
+  height: 20px;
+}

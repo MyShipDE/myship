@@ -1,0 +1,264 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  padding: 1rem;
+  padding-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "header header"
+      "filter result";
+  @media (max-width: 700px) {
+    gap: 1rem;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 10% 80%;
+    grid-template-areas:
+      "header"
+      "mobile-switch"
+      "content";
+  }
+}
+
+.header {
+  grid-area: header;
+}
+
+.filter-wrapper {
+  padding-right: 0.5rem;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  grid-area: filter;
+  background: #202020;
+  border-radius: 0.5rem;
+  overflow-y: scroll;
+}
+
+.filter-item {
+  display: flex;
+  height: auto;
+  background: #303030;
+  border-radius: 0.5rem;
+  align-items: center;
+  padding: 1rem;
+}
+
+.filter-item-state {
+  width: 1rem;
+  height: 1rem;
+  background: WHITE;
+  border-radius: 1rem;
+
+  &.selected {
+    background: $primary;
+  }
+}
+
+.filter-item-text {
+  padding: 0 1rem;
+  width: auto;
+  color: WHITE;
+  font-weight: bolder;
+}
+
+.result-wrapper {
+  padding-left: 0.5rem;
+  overflow-y: auto;
+}
+
+.result {
+  grid-area: result;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  background: #202020;
+  border-radius: 0.5rem;
+  // padding: 1rem;
+  gap: 1rem;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  height: auto;
+}
+
+.table-header-item {
+  background: #303030;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  padding: 0.25rem 1rem;
+  display: flex;
+  align-items: center;
+  color: WHITE;
+  font-weight: bolder;
+  height: auto;
+}
+
+.table-header-item-sort {
+  display: flex;
+  height: auto;
+  width: auto;
+}
+
+.table-row {
+  background: #303030;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  color: WHITE;
+  font-size: 1.1rem;
+  height: auto;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.table-item {
+  height: auto;
+}
+
+.mobile-switch {
+  grid-area: mobile-switch;
+  display: flex;
+  gap: 1rem;
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
+
+td, th {
+  width: 16.66%;
+  height: 32px !important;
+
+  &.sm {
+    width: 10%;
+  }
+
+  &.xs {
+    width: 5%;
+  }
+
+  // color: WHITE;
+  // border: 1px solid WHITE;
+}
+
+table {
+  height: auto;
+  // background: #202020;
+}
+
+.custom-alert-archive {
+  height: auto;
+  width: 75%;
+  padding: 1rem;
+  background: $primary;
+  color: WHITE;
+  border-radius: 0.5rem;
+  margin-top: 2.5%;
+}
+
+.loader-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollButton {
+  height: auto;
+  width: auto;
+  padding: 0.7rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid WHITE;
+}
+
+.scrollTitle {
+  font-weight: bolder;
+  font-size: 1.1rem;
+}
+
+.load-more {
+  background: $primary;
+  border-radius: 0.5rem;
+  color: WHITE;
+  height: auto;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2rem;
+  width: auto;
+}
+
+.tracks-overlay {
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.datepicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  background: #202020;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  height: auto;
+  width: 80%;
+  color: WHITE;
+}
+
+.datepickers {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  height: auto;
+}
+
+.selectedDates {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.selectedDates > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.25rem;
+  height: auto;
+}
+
+.tracks-overlay-close {
+  text-align: center;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 0.9rem;
+}

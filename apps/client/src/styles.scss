@@ -1,0 +1,304 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ControlPanel-Frontend-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$ControlPanel-Frontend-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$ControlPanel-Frontend-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ControlPanel-Frontend-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $ControlPanel-Frontend-primary,
+    accent: $ControlPanel-Frontend-accent,
+    warn: $ControlPanel-Frontend-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($ControlPanel-Frontend-theme);
+
+// Variables
+@import 'scss/variables';
+@import 'scss/nightmode';
+
+// Fonts
+@import "scss/fonts/Roboto";
+
+@import "scss/button";
+@import "scss/button-warning";
+@import "scss/gauge";
+@import "scss/alert";
+@import "scss/loader";
+
+@import "leaflet/dist/leaflet.css";
+
+// Customs
+@import "scss/inputs";
+
+// CheckBoxes
+@import "scss/checkbox";
+
+// TextFields
+@import "scss/formField";
+
+// Responsive Classes
+@import "scss/responsive";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+html, body {
+  background-color: $dark;
+  width: 100%;
+  height: 100%;
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
+  touch-action: pan-y pan-x;
+  overflow: hidden;
+}
+
+/* @media screen and (min-width: 1920px) and (min-height: 1080px) {
+  body {
+    zoom: 160%;
+  }
+} */
+
+.overlay {
+  position: fixed;
+  overflow-y: scroll;
+  inset: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-dynamic {
+  display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.width-auto {
+  width: auto !important;
+}
+
+.height-auto {
+  height: auto !important;
+}
+
+.font-primary {
+  color: $primary !important;
+}
+
+.font-normal {
+  font-weight: normal !important;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+.m-hide {
+  @media (max-width: 700px) {
+    display: none !important;
+  }
+}
+
+.l-hide {
+  @media (min-width: 700px) {
+    display: none !important;
+  }
+}
+
+.blur {
+  transition: 1s;
+  filter: blur(0em);
+}
+
+.container {
+  min-width: 98%;
+}
+
+.passivLink {
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+#windy {
+  width: 100%;
+  height: 356px;
+}
+
+.category {
+  border: 2px solid WHITE;
+  border-radius: 4px;
+  background: #151515;
+  min-width: 100%;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+  transition: 0.5s;
+}
+
+.controlItem {
+  border-radius: 4px;
+  background: transparent;
+  min-width: 100%;
+  transition: 0.5s;
+}
+
+.textColorWhite {
+  color: #FFFFFF; // #C32626
+  fill: #FFF;
+}
+
+.textColor {
+  color: #3399FF; // #C32626
+  fill: #3399FF;
+}
+
+.borderColor {
+  border-color: #3399FF !important;
+}
+
+.borderButton {
+  border: 2px solid WHITE;
+}
+
+.navigationLight {
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(255, 255, 0);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(255, 255, 0);
+  box-shadow: 0px 0px 30px 0px rgba(255, 255, 0);
+  min-height: 16px;
+  min-width: 16px;
+  max-height: 16px;
+  max-width: 16px;
+  background: rgb(255, 255, 0);
+  border-radius: 50%;
+
+  &.anker {
+    margin-top: 92%;
+    margin-left: 4.5%;
+  }
+
+}
+
+.hover :hover {
+  cursor: pointer;
+}
+
+.rotate90 {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.rotate270 {
+  -webkit-transform: rotate(270deg);
+  -moz-transform: rotate(270deg);
+  -o-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.rotate180 {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+::-webkit-scrollbar {
+  height: 4px;
+  width: 4px;
+  background-color: $secondary;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: #444;
+}
+
+.close {
+  display: flex;
+  @media (min-width: 700px) {
+    display: none;
+  }
+  align-items: center;
+  justify-content: center;
+  height: auto !important;
+}
+
+.close-inner {
+  background: #cc2727;
+  border-radius: 50%;
+  padding: 0.5rem;
+  width: 15% !important;
+  height: auto !important;
+  display: flex;
+  align-items: center;
+}
+
+
+// import Components themes
+@import 'app/components/controls/svg-wind/svg-wind.component.scss'; // for most svg Widget components
+
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

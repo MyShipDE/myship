@@ -1,0 +1,66 @@
+.boatBackground {
+  fill: #cecece !important; // mat-color($wind, boat-background) !important; //400
+}
+
+.heading-background {
+  fill: #DDD; // mat-color($wind, heading-background)
+}
+
+.wind-text {
+  fill: #000000; // mat-color($foreground, text);
+}
+
+.laylines {
+  stroke: #808080; // mat-color($foreground, text);
+}
+
+.wind-sector-port {
+  fill: #5fb95f; // mat-color($wind, port);
+}
+
+.wind-sector-stbd {
+  fill: #bd3d3d; // mat-color($wind, starboard);
+}
+
+.compass-outer-ring {
+  stroke: #8c8b8b; // mat-color($wind, compass-dark);
+}
+
+.compass-inner-ring {
+  stroke: #a2a2a2; // mat-color($wind, compass-light);
+}
+
+.wind-rose-background {
+  stroke: #808080; // mat-color($wind, wind-rose-background);
+}
+
+.port {
+  stroke: #e01111; // mat-color($wind, port);
+}
+
+.starboard {
+  stroke: #17da17; // mat-color($wind, starboard);
+}
+
+.rudderPort {
+  fill: #808080; // mat-color($wind, rudder-port);
+}
+
+.rudderStarboard {
+  fill: #808080; // mat-color($wind, rudder-starboard);
+}
+
+.true-wind {
+  fill: #fdd73c; // mat-color($wind, true-wind-background)
+}
+
+.app-wind {
+  fill: #00d9ff; // mat-color($wind, app-wind-background)
+}
+
+// for Autopilot
+.activityIcon {
+  opacity: 40%;
+  color: white;
+  width: 25px;
+}

@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="header">
+    <app-header title="POS - Lichter" icon="gps" [editable]="false"></app-header>
+  </div>
+  <div class="control-container">
+    <div class="controls">
+
+      <div class="control {{ sailingBtnBg }}" (click)="sailing()">
+        <div class="control-icon">
+          <img class="image" src="assets/icons/white/boat.svg">
+        </div>
+        <div class="control-text">
+          Segel
+        </div>
+      </div>
+      <div class="control {{ motorBtnBg }}" (click)="motor()">
+        <div class="control-icon">
+          <img class="image" src="assets/icons/white/timing-belt.svg">
+        </div>
+        <div class="control-text">
+          Maschine
+        </div>
+      </div>
+      <div class="control {{ anchorBtnBg }}" (click)="anchor()">
+        <div class="control-icon">
+          <img class="image" src="assets/icons/white/anker.svg">
+        </div>
+        <div class="control-text">
+          Anker
+        </div>
+      </div>
+      <div class="control {{ offBtnBg }}" (click)="powerOff()">
+        <div class="control-icon">
+          <img class="image" src="assets/icons/white/power.svg">
+        </div>
+        <div class="control-text">
+          AUS
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="ship-container">
+    <div class="ship">
+      <app-ship-image></app-ship-image>
+    </div>
+  </div>
+</div>

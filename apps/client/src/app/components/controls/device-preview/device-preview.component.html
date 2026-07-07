@@ -1,0 +1,103 @@
+<div *ngIf="device != null" class="container textColorWhite">
+  <div class="inner-container">
+
+    <div class="height-auto width-auto title">
+      Geräte-Informationen
+    </div>
+
+    <div class="col" style="width: 95%; gap: 0.5rem">
+      <div class="data-headline height-auto">
+        Name
+      </div>
+      <div class="height-auto">
+        {{ device.name }}
+      </div>
+    </div>
+
+    <div class="col" style="width: 95%; gap: 0.5rem">
+      <div class="data-headline height-auto">
+        Type
+      </div>
+      <div class="height-auto">
+        {{ getType(device.type) }}
+      </div>
+    </div>
+
+    <div class="row" style="width: 95%; gap: 0.5rem">
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Bridge
+        </div>
+        <div class="height-auto">
+          {{ getBridgeName(device.bridgeId) }}
+        </div>
+      </div>
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Port
+        </div>
+        <div class="height-auto">
+          {{ device.bridgePort }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="width: 95%; gap: 0.5rem">
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Sicherungsblock
+        </div>
+        <div class="height-auto">
+          {{ device.SecurityBlock }}
+        </div>
+      </div>
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Port
+        </div>
+        <div class="height-auto">
+          {{ device.SecurityBlockPort }}
+        </div>
+      </div>
+    </div>
+
+    <div class="row" style="width: 95%; gap: 0.5rem">
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Sicherung in A
+        </div>
+        <div class="height-auto">
+          {{ device.SecurityBlockAmpere }}
+        </div>
+      </div>
+      <div class="col" style="gap: 0.5rem">
+        <div class="data-headline height-auto">
+          Betriebsspannung
+        </div>
+        <div class="height-auto">
+          {{ device.Voltage }}
+        </div>
+      </div>
+    </div>
+
+    <div class="col" style="width: 95%; gap: 0.5rem">
+      <div class="data-headline height-auto">
+        Notizen
+      </div>
+      <div class="height-auto">
+        {{ device.notes}}
+      </div>
+    </div>
+
+    <div (click)="dispose()" class="col height-auto width-auto"
+         style="align-items: center; border: 2px solid #d73838; border-radius: 0.5rem; padding: 0.5rem">
+      <div class="width-auto">
+        <img src="assets/icons/red/close.svg" style="width: auto; height: 50px">
+      </div>
+      <div style="color: #d73838">
+        Schließen
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div *ngIf="service.isVisible" class="vdr-wrapper">
+  <div class="vdr-container" [ngClass]="service.viewArchive ? '' : 'gab'">
+    <div class="title">
+      VDR
+    </div>
+    <div *ngIf="!service.viewArchive && !service.viewDatepicker" class="menu-wrapper">
+      <div class="menu">
+        <div (click)="audioRecordActionPerform()"
+             class="menu-item"
+             [ngClass]="audioRecordService.microphoneActive ? 'active-mik' : audioRecordService.audioErrorThrown ? 'disabled' : ''">
+          <div>
+            Sprachaufzeichnung
+          </div>
+          <img src="assets/icons/white/mikrofon.svg">
+        </div>
+        <div (click)="customRecordActionPerform()" class="menu-item">
+          <div>
+            Logbucheintrag
+          </div>
+          <img src="assets/icons/white/pencil.svg">
+        </div>
+      </div>
+      <div class="menu">
+        <div class="col" style="gap: 1rem">
+          <div (click)="service.viewArchive = true" class="menu-item">
+            <div>
+              Archiv
+            </div>
+            <img src="assets/icons/white/search.svg">
+          </div>
+          <div (click)="service.viewDatepicker = true" class="menu-item">
+            <div>
+              Tour-Visualisierung
+            </div>
+            <img src="assets/icons/white/map.svg">
+          </div>
+        </div>
+        <div (click)="service.close()" class="menu-item">
+          <div>
+            Zurück
+          </div>
+          <img src="assets/icons/white/back.svg">
+        </div>
+      </div>
+    </div>
+    <div *ngIf="service.viewArchive" class="archive-wrapper">
+      <app-logbook-archive [isEmbedded]="true" (selectedTrackEvent)="selectTrack($event)"></app-logbook-archive>
+    </div>
+    <div class="datepicker" *ngIf="service.viewDatepicker">
+      <div class="datepickers">
+        <app-datepicker-element-component [details]="days" (dateSelected)="startDate = $event; selectDateRange()"></app-datepicker-element-component>
+        <app-datepicker-element-component [details]="days" (dateSelected)="endDate = $event; selectDateRange()"></app-datepicker-element-component>
+      </div>
+      <div class="selectedDates">
+        <div>
+          {{startDate | date: 'dd.MM.yyyy'}}
+        </div>
+        <div>
+          {{endDate | date: 'dd.MM.yyyy'}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

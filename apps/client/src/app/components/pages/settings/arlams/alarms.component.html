@@ -1,0 +1,237 @@
+<div class="container">
+
+  <div class="header">
+    <app-header title="Warnungen" backUrl="/settings"></app-header>
+  </div>
+
+  <div class="filter-wrapper col" style="gap: 1rem">
+    <div class="filter">
+      <div (click)="selectAlarm(alarm)" *ngFor="let alarm of alarms" class="filter-item">
+        <div class="filter-item-text">
+          {{ alarm.name }}
+        </div>
+        <div class="width-auto">
+          <div *ngIf="alarm.active" class="height-auto width-auto" style="color: #88d758">✔</div>
+          <div *ngIf="!alarm.active" class="height-auto width-auto" style="color: #88d758">❌</div>
+        </div>
+      </div>
+      <div (click)="createBlank()" class="filter-item">
+        <div class="filter-item-text">
+          Neuer Eintrag
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-wrapper">
+
+    <div class="result">
+      <div *ngIf="selectedAlarm != null" class="col" style="gap: 1rem">
+
+        <div class="row-dynamic">
+
+          <div class="col" style="padding: 2rem; gap: 1rem; justify-content: center">
+
+            <div class="row-dynamic height-auto" style="align-items: center">
+              <div class="height-auto" style="color: #606060;">
+                Name
+              </div>
+              <div class="height-auto">
+                <input type="text" class="textField" placeholder="Name" [(ngModel)]="selectedAlarm.name"
+                       (ngModelChange)="isDirty = true">
+              </div>
+            </div>
+
+            <div class="row-dynamic height-auto" style="align-items: center">
+              <div class="height-auto" style="color: #606060;">
+                Daten-Quelle
+              </div>
+              <div class="height-auto">
+                <select class="textField" [(ngModel)]="selectedSensorId"
+                        (ngModelChange)="sensorChanged($event)">
+                  <option *ngFor="let s of sensors" [value]="s.id">
+                    {{ s.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row-dynamic height-auto"
+                 style="align-items: center;">
+              <div class="height-auto" style="color: #606060;">
+                Schwellwerte
+              </div>
+              <div class="row height-auto"
+                   style="gap: 1rem; text-align: center; font-size: 0.8rem; color: #888;">
+                <div class="col" style="gap: 0.5rem">
+                  <div>
+                    <input type="number" class="textField" placeholder="Min"
+                           [(ngModel)]="minValue"
+                           (ngModelChange)="minValueChanged()">
+                  </div>
+                  <div>
+                    Untergrenze
+                  </div>
+                </div>
+                <div class="col" style="gap: 0.5rem">
+                  <div>
+                    <input type="number" class="textField" placeholder="Max"
+                           [(ngModel)]="maxValue"
+                           (ngModelChange)="maxValueChanged()">
+                  </div>
+                  <div>
+                    Obergrenze
+                  </div>
+                </div>
+                <div class="width-auto height-auto" style="font-size: 1.4rem">
+                  {{ unit.convert(selectedAlarm.minValue, selectedAlarm.signalKDatasource.unit).unit }}
+                </div>
+              </div>
+            </div>
+
+            <div class="row-dynamic height-auto" style="align-items: center">
+              <div class="height-auto" style="color: #606060;">
+                Benachrichtigungs-Text
+              </div>
+              <div class="height-auto">
+                <textarea type="text" class="textField" placeholder="Name" rows="4"
+                          [(ngModel)]="selectedAlarm.customMailMessage"
+                          (ngModelChange)="isDirty = true"
+                          style="padding: 0.5rem; height: auto !important; resize: none"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="checkBoxArea" style="justify-content: center; gap: 1rem">
+
+            <div style="min-height: 32px" class="row height-auto">
+              <div class="row height-auto" style="gap: 1rem; align-items: center">
+                <div class="width-auto height-auto">
+                  <div class="toggle-pill-color height-auto">
+                    <input type="checkbox" id="activation_check" [(ngModel)]="selectedAlarm.active"
+                           (ngModelChange)="isDirty = true">
+                    <label for="activation_check"></label>
+                  </div>
+                </div>
+                <div class="width-auto height-auto textColorWhite">
+                  <label for="activation_check">Status</label>
+                </div>
+              </div>
+            </div>
+
+            <div style="min-height: 32px" class="row height-auto">
+              <div class="row-dynamic height-auto" style="gap: 1rem; align-items: center">
+                <div class="row" style="gap: 1rem">
+                  <div class="width-auto height-auto">
+                    <div class="toggle-pill-color height-auto">
+                      <input type="checkbox" id="email_toggle_check" [(ngModel)]="emailField"
+                             (ngModelChange)="$event ? selectedAlarm.email = getCachedMail() : selectedAlarm.email = null; isDirty = true">
+                      <label for="email_toggle_check"></label>
+                    </div>
+                  </div>
+                  <div class="height-auto textColorWhite">
+                    <label for="email_toggle_check">E-Mail Benachrichtigung</label>
+                  </div>
+                </div>
+                <div *ngIf="emailField">
+                  <input type="text" class="textField" placeholder="E-Mail Adresse" [(ngModel)]="selectedAlarm.email"
+                         (ngModelChange)="isDirty = true; cacheMail($event)">
+                </div>
+              </div>
+            </div>
+
+            <div style="min-height: 32px" class="row height-auto">
+              <div class="row-dynamic height-auto" style="gap: 1rem; align-items: center">
+                <div class="row" style="gap: 1rem">
+                  <div class="width-auto height-auto">
+                    <div class="toggle-pill-color height-auto">
+                      <input type="checkbox" id="sms_toggle_check" [(ngModel)]="telField"
+                             (ngModelChange)="$event ? selectedAlarm.phone = getCachedPhone() : selectedAlarm.phone = null; isDirty = true">
+                      <label for="sms_toggle_check"></label>
+                    </div>
+                  </div>
+                  <div class="height-auto textColorWhite">
+                    <label for="sms_toggle_check">SMS Benachrichtigung</label>
+                  </div>
+                </div>
+                <div *ngIf="telField">
+                  <input type="text" class="textField" placeholder="Telefonnummer" [(ngModel)]="selectedAlarm.phone"
+                         (ngModelChange)="isDirty = true;; cachePhone($event)">
+                </div>
+              </div>
+            </div>
+
+            <div style="min-height: 32px" class="row height-auto">
+              <div class="row height-auto" style="gap: 1rem; align-items: center">
+                <div class="width-auto height-auto">
+                  <div class="toggle-pill-color height-auto">
+                    <input type="checkbox" id="popup_toggle_check" [(ngModel)]="selectedAlarm.showInApp"
+                           (ngModelChange)="isDirty = true">
+                    <label for="popup_toggle_check"></label>
+                  </div>
+                </div>
+                <div class="width-auto height-auto textColorWhite">
+                  <label for="popup_toggle_check">PopUp Benachrichtigung</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="row height-auto" style="justify-content: center; align-items: center">
+          <div class="col" style="background: #151515; padding: 1rem; border-radius: 0.5rem; gap: 0.5rem; width: 95%">
+            <div class="height-auto">
+              <input type="range" [(ngModel)]="selectedAlarm.interval" (ngModelChange)="isDirty = true"
+                     class="slider-h" min="1" max="3600">
+            </div>
+
+            <div class="row height-auto" style="align-items: center; color: WHITE">
+              <div style="color: #606060; padding-left: 0.5rem; margin-top: 0.5rem; font-style: italic">
+                Zeit-Interval der Messung:
+              </div>
+              <div class="height-auto width-auto col" style="gap: 0.5rem; white-space: nowrap">
+                <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+                  <div class="row" style="justify-content: space-between; gap: 1rem">
+                    <div
+                      *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).hours != 0">{{ convertSecondsToMinutesAndHours(selectedAlarm.interval).hours }}
+                      <span
+                        *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).hours == 1">Stunde</span>
+                      <span
+                        *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).hours > 1">Stunden</span>
+                    </div>
+                    <div
+                      *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).minutes != 0">{{ convertSecondsToMinutesAndHours(selectedAlarm.interval).minutes }}
+                      <span
+                        *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).minutes == 1">Minute</span>
+                      <span
+                        *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).minutes > 1">Minuten</span>
+                    </div>
+                    <div
+                      *ngIf="convertSecondsToMinutesAndHours(selectedAlarm.interval).minutes == 0 && selectedAlarm.interval != 3600">{{ selectedAlarm.interval }}
+                      <span *ngIf="selectedAlarm.interval == 1">Sekunde</span>
+                      <span *ngIf="selectedAlarm.interval > 1">Sekunden</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-wrapper">
+          <div *ngIf="!isDirty && selectedAlarm.id != null" class="btn-area" (click)="delete()">
+            <button type="button" class="custom-btn danger">Löschen</button>
+          </div>
+          <div *ngIf="isDirty || selectedAlarm.id == null" class="btn-area" (click)="save()">
+            <button type="button" class="custom-btn success">Übernehmen</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

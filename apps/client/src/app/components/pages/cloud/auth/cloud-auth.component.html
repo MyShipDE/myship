@@ -1,0 +1,67 @@
+<div class="wrapper">
+  <div class="container">
+
+    <div class="header">
+      <app-header [homeButton]="connected" [welcome]="!connected" title="Cloud-System"></app-header>
+    </div>
+
+    <div class="content">
+      <div *ngIf="loginFormVisibility" class="card">
+        <div class="col height-auto title">
+          Anmeldung benötigt!
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="username" type="text" class="textField" placeholder="Benutzername oder E-Mail">
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="password" type="password" class="textField" placeholder="Passwort">
+        </div>
+        <div class="col height-auto">
+          <app-custom-button (click)="login()" title="Anmelden"></app-custom-button>
+        </div>
+        <div (click)="openReqPasswordForm()" class="col height-auto">
+          <span class="link">Passwort vergessen?</span>
+        </div>
+      </div>
+
+      <div *ngIf="reqPasswordFormVisibility" class="card">
+        <div class="col height-auto title">
+          Passwort zurücksetzen
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="username" type="text" class="textField" placeholder="E-Mail">
+        </div>
+        <div class="col height-auto">
+          <app-custom-button (click)="requestSecurityCode()" title="Bestätigen"></app-custom-button>
+        </div>
+        <div (click)="openLoginForm()" class="col height-auto">
+          <span class="link">Zurück zum Login</span>
+        </div>
+      </div>
+
+      <div *ngIf="setPasswordFormVisibility" class="card">
+        <div class="col height-auto title">
+          Neues Passwort setzen
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="securityCode" type="number" class="textField" placeholder="Sicherheitscode">
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="pw1" type="password" class="textField" placeholder="Neues Passwort">
+        </div>
+        <div class="col height-auto">
+          <input [(ngModel)]="pw2" type="password" class="textField" placeholder="Passwort wiederholen">
+        </div>
+        <div class="col height-auto">
+          <app-custom-button (click)="setPassword()" title="Bestätigen"></app-custom-button>
+        </div>
+        <div (click)="openLoginForm()" class="col height-auto">
+          <span class="link">Zurück zum Login</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

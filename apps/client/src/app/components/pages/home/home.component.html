@@ -1,0 +1,80 @@
+<div class="home-main-grid">
+  <div class="header-space">
+    <div class="clock m-hide">
+      <app-utc-clock></app-utc-clock>
+    </div>
+    <div class="l-hide col" style="align-items: center; width: 75%">
+      <div class="icon" (click)="setNightMode()">
+        <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/moon.svg">
+      </div>
+    </div>
+    <div class="header-logo height-auto">
+      <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/logo.svg">
+    </div>
+    <div class="l-hide col" style="align-items: center; width: 75%">
+      <div class="icon" (click)="ToggleMainControlModal()">
+        <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/power.svg">
+      </div>
+    </div>
+    <div class="header-icons m-hide" style="align-items: center">
+      <div class="header-icons-wrapper">
+        <div class="icon height-auto" (click)="setNightMode()" style="align-content: center">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/moon.svg">
+          <span>Nachtmodus</span>
+        </div>
+        <div class="icon height-auto" (click)="OpenLogbookReminder()" style="align-content: center">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''"
+               src="assets/icons/white/pen-filled-writing-tool.png">
+          <span>Logbucheintrag</span>
+        </div>
+        <div class="icon" (click)="ToggleMainControlModal()">
+          <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/walk.svg">
+          <span>CheckOut</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="nav-container">
+    <div class="nav-space">
+      <div class="nav-item" *ngFor="let item of nav">
+        <button type="button" (click)="NavActionPerform(item)"
+                [ngClass]="nightModeService.status ? 'night' : 'default'"
+                class="mainMenuItem">
+          {{ item.name }}
+        </button>
+      </div>
+    </div>
+    <div class="nav-space-mobile">
+      <div class="nav-item-mobile border color" [ngClass]="nightModeService.status ? 'night' : 'light'"
+           *ngFor="let item of nav">
+        <div class="col" (click)="NavActionPerform(item)"
+             style="gap: 0.5rem; align-items: center">
+          <div style="width: 25%">
+            <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/{{ item.icon }}">
+          </div>
+          <div class="height-auto" style="font-size: 0.75rem">
+            {{ item.name }}
+          </div>
+        </div>
+      </div>
+      <div class="nav-item-mobile border color" [ngClass]="nightModeService.status ? 'night' : 'light'">
+        <div class="col" style="gap: 0.5rem; align-items: center" (click)="ToggleStateModal()">
+          <div style="width: 25%">
+            <img [ngClass]="nightModeService.status ? 'img-red' : ''" src="assets/icons/white/market-analysis.png">
+          </div>
+          <div class="height-auto" style="font-size: 0.75rem">
+            Status
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-space">
+    <div class="footer-bg">
+      <app-statusbar [ShowStateModal]="ShowStateModal" (closeStateModalEvent)="ToggleStateModal()"></app-statusbar>
+    </div>
+  </div>
+</div>
+
+<app-monitoring [Visibility]="ShowMainControlModal" [OpenSubject]="MainControlOpenSubject"
+                (CloseEvent)="ToggleMainControlModal()"></app-monitoring>

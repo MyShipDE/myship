@@ -1,0 +1,32 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="title">
+      {{ title }}
+    </div>
+    <div class="code">
+      <div class="circle {{ getClassOfNumber(0) }}"></div>
+      <div class="circle {{ getClassOfNumber(1) }}"></div>
+      <div class="circle {{ getClassOfNumber(2) }}"></div>
+      <div class="circle {{ getClassOfNumber(3) }}"></div>
+    </div>
+    <div class="numFields">
+      <div class="numField-row">
+        <div (click)="enterNumber('1')" class="numField">1</div>
+        <div (click)="enterNumber('2')" class="numField">2</div>
+        <div (click)="enterNumber('3')" class="numField">3</div>
+      </div>
+      <div class="numField-row">
+        <div (click)="enterNumber('4')" class="numField">4</div>
+        <div (click)="enterNumber('5')" class="numField">5</div>
+        <div (click)="enterNumber('6')" class="numField">6</div>
+    </div>
+      <div class="numField-row">
+        <div (click)="enterNumber('7')" class="numField">7</div>
+        <div (click)="enterNumber('8')" class="numField">8</div>
+        <div (click)="enterNumber('9')" class="numField">9</div>
+      </div>
+      <div class="numField-row">
+        <div (click)="enterNumber('0')" class="numField">0</div>
+      </div>
+  </div>
+</div>

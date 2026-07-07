@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.battery {
+  transition: 0.4s;
+  background: #404040;
+  width: 50px;
+  height: 26px;
+  border-radius: 4px 3px 3px 4px;
+}
+
+.battery-inner {
+  transition: 0.4s;
+  border-radius: 6px;
+  width: 50px;
+  height: 26px;
+}
+
+.battery-pin {
+  background: #505050;
+  width: 5px;
+  height: 20px;
+  margin-top: 3px;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+}

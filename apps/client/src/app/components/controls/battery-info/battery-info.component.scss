@@ -1,0 +1,81 @@
+.info-container {
+  background: #252525;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  color: WHITE;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.title {
+  display: flex;
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: bold;
+  height: auto;
+  justify-content: space-between;
+}
+
+.capacity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.capacity-desc {
+  font-size: 0.7rem;
+  color: #AAA;
+  font-weight: normal;
+  height: auto;
+}
+
+.consumption {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.consumption-title {
+  color: #AAA;
+  font-size: 0.8rem;
+  text-align: right;
+  height: auto;
+}
+
+.details {
+  width: auto;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  color: #AAA;
+  font-size: 0.75rem;
+}
+
+hr {
+  border-color: #555;
+}
+
+.timeRemaining {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+.timeRemaining-title {
+  color: #AAA;
+  font-size: 0.8rem;
+  height: auto;
+}
+
+.timeRemaining-value {
+  font-weight: bold;
+  font-size: 1.1rem;
+  height: auto;
+}

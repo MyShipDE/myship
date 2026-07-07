@@ -1,0 +1,139 @@
+<div class="container">
+  <div class="header">
+
+    <app-header title="Wetter" icon="sun" [editable]="false" [border]="false"></app-header>
+
+  </div>
+
+  <div class="today-cont">
+    <div class="today">
+      <div class="today-item compass-max-width" style="align-items: center; justify-content: center">
+        <div class="val-headline width-auto height-auto">
+          <div class="compass">
+            <div class="direction">
+              <p>{{ convert.getCompassDescription(currentWindDegree) }}<span>{{ currentWindDegree }}°</span></p>
+            </div>
+            <div class="arrow" style="transform: rotate({{ currentWindDegree }}deg)"></div>
+          </div>
+        </div>
+        <div class="val-desc selfData height-auto">
+          Wind
+        </div>
+        <div *ngIf="windSensorActive != null && !windSensorActive" class="inactive-card">
+          Offline
+        </div>
+      </div>
+      <div class="today-item height-auto">
+        <div class="val-headline">
+          {{ currentWindBft }} Bft
+        </div>
+        <div class="val-desc selfData">
+          {{ currentWindBft == 1 ? 'Windstärke': 'Windstärken' }}
+        </div>
+      </div>
+      <div class="today-item height-auto">
+        <div class="val-headline">
+          {{ currentTemp }} °C
+        </div>
+        <div class="val-desc selfData">
+          Temperatur
+        </div>
+      </div>
+      <div *ngIf="currentForecast != null" class="today-item height-auto">
+        <div class="val-headline">
+          {{ round(currentForecast.currentWeather.temperatureApparent) }} °C
+        </div>
+        <div class="val-desc">
+          Gefühlte-Temperatur
+        </div>
+      </div>
+      <div *ngIf="currentForecast != null" class="today-item height-auto">
+        <div class="val-headline row" style="gap: 0.5rem; justify-content: center">
+          <div class="width-auto">
+            {{ roundInt(currentForecast.currentWeather.pressure) }} hPa
+          </div>
+          <div *ngIf="convertPressure(currentPressureTrend) == -1 || convertPressure(currentPressureTrend) == 1" class="width-auto">
+            <img *ngIf="convertPressure(currentPressureTrend) == -1" src="assets/icons/blue/right-arrow.svg" style="width: 20px; height: auto; transform: rotate(90deg)">
+            <img *ngIf="convertPressure(currentPressureTrend) == 1" src="assets/icons/blue/right-arrow.svg" style="width: 20px; height: auto; transform: rotate(270deg)">
+          </div>
+        </div>
+        <div class="val-desc">
+          Luftdruck
+        </div>
+      </div>
+      <div *ngIf="currentForecast != null" class="today-item height-auto">
+        <div *ngIf="roundInt(currentForecast.currentWeather.visibility * 0.621371) > 1000" class="val-headline">
+          {{ roundInt((currentForecast.currentWeather.visibility * 0.621371) / 1000) }} NM
+        </div>
+        <div *ngIf="roundInt(currentForecast.currentWeather.visibility * 0.621371) <= 1000" class="val-headline">
+          {{ roundInt(currentForecast.currentWeather.visibility * 0.621371) }} NM
+        </div>
+        <div class="val-desc">
+          Sichtweite
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="switch">
+    <div class="switch-item" [ngClass]="mobileSwitch ? '' : 'active'" (click)="mobileSwitch = !mobileSwitch; changeMap()">
+      Karte
+    </div>
+    <div class="switch-item" [ngClass]="mobileSwitch ? 'active' : ''" (click)="mobileSwitch = !mobileSwitch">
+      Vorhersage
+    </div>
+  </div>
+
+  <div *ngIf="mobileSwitch" class="days-container">
+    <div class="day" style="justify-content: flex-start; gap: 10%" *ngFor="let day of days; let i = index">
+      <div class="width-auto height-auto" style="font-weight: bold; font-size: 0.8rem; text-transform: uppercase; color: #999">
+        {{ dayNames[getDate(day.forecastStart)] }}
+      </div>
+      <!--<div class="day-icon-container">
+        <div class="day-icon">
+          <img src="assets/img/wetter/{{ day.weather[0].icon }}.svg">
+        </div>
+      </div>-->
+      <div class="today-item height-auto">
+        <div class="val-headline">
+          {{ round(day.temperatureMin) }} °C
+        </div>
+        <div class="val-desc">
+          Mindestens
+        </div>
+      </div>
+      <div class="today-item height-auto">
+        <div class="val-headline">
+          {{ round(day.temperatureMax) }} °C
+        </div>
+        <div class="val-desc">
+          Maximal
+        </div>
+      </div>
+      <div class="today-item height-auto">
+        <div class="val-headline">
+          {{ kmhToBeaufort(round(day.daytimeForecast.windSpeed)) }} Bft
+        </div>
+        <div class="val-desc">
+          {{ kmhToBeaufort(day.daytimeForecast.windSpeed) > 1 ? 'Windstärken': 'Windstärke' }}
+        </div>
+      </div>
+      <div class="col height-auto" style="gap: 1rem">
+        <div class="row height-auto" style="align-items: center; justify-content: center">
+          <div class="compass" style="width: auto">
+            <div class="direction">
+              <p>{{ convert.getCompassDescription(day.daytimeForecast.windDirection) }}<span>{{ day.daytimeForecast.windDirection }}°</span></p>
+            </div>
+            <div class="arrow" style="transform: rotate({{ day.daytimeForecast.windDirection }}deg)"></div>
+          </div>
+        </div>
+        <div class="val-desc height-auto">
+          Wind
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!mobileSwitch" class="windy">
+    <div id="windy"></div>
+  </div>
+</div>

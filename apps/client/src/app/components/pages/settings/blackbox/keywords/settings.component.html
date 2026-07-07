@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Logbuch - Keywords" icon="settings" backUrl="/settings"
+                [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="row" style="height: 10%; align-items: center">
+      <div class="height-auto">
+        Manuelle Eintragstypen
+      </div>
+      <div class="col" style="height: 75%">
+        <select class="selectField" style="font-size: 1rem" [(ngModel)]="selectedTypeID" (change)="filter()">
+          <option value="0" selected disabled>Kategorie</option>
+          <option *ngFor="let type of types" value="{{ type.id }}">{{ type.name }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="selectedTypeID == 0" class="col alert" style="padding: 1rem">
+      Zuerst eine Kategorie auswählen!
+    </div>
+
+    <div *ngIf="selectedTypeID != 0" class="row"
+         style="justify-content: flex-end; align-content: flex-start; gap: 1rem; flex-wrap: wrap">
+      <div class="row"
+           style="align-items: center; background: #202020; max-height: 10%; border-radius: 0.5rem; flex: 1 1 49%"
+           *ngFor="let manualInput of visibleManualInputs">
+        <div class="height-auto" style="padding-left: 1rem">
+          {{ manualInput.name }}
+        </div>
+        <div style="width: 25%">
+          <button (click)="deleteManualInput(manualInput.id)" type="button" class="custom-btn danger">
+            Löschen
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="selectedTypeID != 0" class="row" style="height: 10%; gap: 1rem">
+      <div class="col">
+        <input type="text" class="textField" [(ngModel)]="newTypeName" placeholder="Name / Beschreibung">
+      </div>
+      <div class="col-auto" style="width: 25%">
+        <button (click)="addManualInput()" type="button" class="custom-btn">Speichern</button>
+      </div>
+    </div>
+
+  </div>
+</div>

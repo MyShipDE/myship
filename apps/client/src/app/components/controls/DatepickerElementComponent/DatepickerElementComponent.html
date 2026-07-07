@@ -1,0 +1,77 @@
+<div class="datepicker-modal">
+  <div class="datepicker-grid">
+
+    <div class="monthYearSwitcher-wrapper">
+      <div class="monthYearSwitcher">
+        <div class="year-section">
+          <div (click)="prevYear()">
+            <img src="assets/icons/right-arrow.svg" style="transform: rotate(180deg)">
+          </div>
+          <div class="height-auto width-auto" style="align-self: center; justify-self: center">
+            {{ year }}
+          </div>
+          <div (click)="nextYear()">
+            <img src="assets/icons/right-arrow.svg">
+          </div>
+        </div>
+
+        <div class="month-section">
+          <div (click)="prevMonth()">
+            <img src="assets/icons/right-arrow.svg" style="transform: rotate(180deg)">
+          </div>
+          <div class="height-auto width-auto" style="align-self: center; justify-self: center">
+            {{ months[month] }}
+          </div>
+          <div (click)="nextMonth()">
+            <img src="assets/icons/right-arrow.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-section">
+      <div class="datepicker-calendar-container">
+        <div *ngIf="days.length > 0" class="datepicker-row">
+          <div class="datepicker-item" *ngFor="let name of dayNames">
+            <div class="datepicker-card">
+              <div class="datepicker-card-val" style="text-transform: uppercase; color: #888;">
+                {{ name }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="days.length == 0"
+             class="datepicker-row" style="align-self: center; justify-self: center">
+          <div class="spinner"></div>
+        </div>
+        <div class="datepicker-row" *ngFor="let week of days">
+          <div class="datepicker-item" *ngFor="let day of week">
+            <div *ngIf="day.value == '00'" class="datepicker-card"
+                 style="border: 1px solid #151515; background: #151515; color: #151515; border-radius: 75%;">
+              <div class="datepicker-card-val">{{ day.value }}</div>
+            </div>
+            <div *ngIf="day.value != '00' && day.today && !day.enabled" class="datepicker-card"
+                 style="border: 1px solid RED; background: #303030; border-radius: 75%;">
+              <div class="datepicker-card-val">{{ day.value }}</div>
+            </div>
+            <div *ngIf="day.value != '00' && day.today && day.enabled" class="datepicker-card"
+                 style="border: 1px solid RED; background: #3399FF; border-radius: 75%;"
+                 (click)="selectDate(day.date)">
+              <div class="datepicker-card-val">{{ day.value }}</div>
+            </div>
+            <div *ngIf="day.value != '00' && !day.today && !day.enabled" class="datepicker-card"
+                 style="border: 1px solid #151515; background: #303030; border-radius: 75%;">
+              <div class="datepicker-card-val">{{ day.value }}</div>
+            </div>
+            <div *ngIf="day.value != '00' && !day.today && day.enabled" class="datepicker-card"
+                 style="border: 1px solid #3399FF; background: #3399FF; border-radius: 75%;"
+                 (click)="selectDate(day.date)">
+              <div class="datepicker-card-val">{{ day.value }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

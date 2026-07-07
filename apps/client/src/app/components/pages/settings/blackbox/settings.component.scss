@@ -1,0 +1,83 @@
+@import "../../../../../scss/slider";
+@import "../../../../../scss/variables";
+
+* {
+  // height: 100%;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+  display: grid;
+  padding: 1rem;
+  color: WHITE;
+  grid-auto-columns: 100%;
+  grid-template-rows: 15% 85%;
+  grid-template-areas:
+      "h"
+      "content";
+  @media (max-width: 700px) {
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+      "h"
+      "content";
+  }
+}
+
+.header {
+  grid-area: h;
+}
+
+.content {
+  grid-area: content;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    overflow-y: auto;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  @media (min-width: 1920px) {
+    font-size: 1.4rem;
+    font-weight: bolder;
+  }
+}
+
+.card {
+  background: #202020;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  text-align: center;
+
+  &.active {
+    border: 2px solid $primary;
+  }
+}
+
+.templateCol {
+  display: flex;
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
+}
+
+.gab {
+  gap: 1rem;
+  @media (min-width: 1920px) {
+    gap: 1.5rem;
+  }
+}

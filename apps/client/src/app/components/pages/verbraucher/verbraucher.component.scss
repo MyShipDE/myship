@@ -1,0 +1,108 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  padding: 1rem;
+  grid-auto-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+      "h"
+      "content";
+}
+
+.header {
+  grid-area: h;
+}
+
+.viewSwitch {
+  width: 95%;
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
+
+.items {
+  width: 100%;
+  height: auto;
+  @media (max-width: 700px) {
+    width: 95%;
+    height: 100%;
+    overflow-y: auto;
+  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  gap: 1rem;
+}
+
+.item {
+  width: 32%;
+  height: 64px;
+  background-color: #202020;
+  display: flex;
+  border-radius: 0.5rem;
+  border: 2px solid $primary;
+  align-items: center;
+  padding-left: 1rem;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    padding: 1rem 1rem 0 1rem;
+    width: 47%;
+    height: 20%;
+  }
+}
+
+.text {
+  color: WHITE;
+  height: auto;
+  font-size: 1.2rem;
+  text-align: left;
+  @media (max-width: 700px) {
+    text-align: center;
+    font-size: 1rem;
+  }
+}
+
+.icon {
+  justify-self: flex-end;
+  width: 15%;
+  @media (max-width: 700px) {
+    width: 64px;
+  }
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.creation-form-modal {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.creation-form-modal-card {
+  height: 80%;
+  width: 80%;
+  background: #202020;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}

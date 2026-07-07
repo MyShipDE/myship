@@ -1,0 +1,14 @@
+<div *ngIf="service.visibility" class="datepicker-filter-wrapper">
+  <div class="datepicker-filter-container">
+    <div class="title">
+      Datumsauswahl
+    </div>
+    <div class="datepicker-wrapper">
+      <app-datepicker-element-component [details]="days" (dateSelected)="service.dateSelection.next($event)"
+                                        class="datepicker"></app-datepicker-element-component>
+    </div>
+    <div class="button">
+      <button class="custom-btn btn-ext" (click)="service.dateSelection.next(null)">Schließen</button>
+    </div>
+  </div>
+</div>

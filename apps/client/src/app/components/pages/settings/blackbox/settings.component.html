@@ -1,0 +1,262 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Voyage Data Recorder" icon="settings" backUrl="/settings"
+                [editable]="false"></app-header>
+  </div>
+  <div class="content">
+
+    <div class="col gab" style="width: 50%">
+
+      <div class="templateCol" style="gap: 1rem">
+        <div *ngFor="let template of templates" class="col">
+          <div (click)="selectTemplate(template)" [ngClass]="template.active ? 'card active' : 'card'">
+            {{ template.name }}
+          </div>
+        </div>
+      </div>
+
+      <div class="col" style="gap: 0.5rem">
+        <div class="row" style="align-items: center">
+          <div class="height-auto">
+            Logging Interval: ({{selectedTemplate.loggingInterval}})
+          </div>
+          <div class="height-auto width-auto col" style="gap: 0.5rem; white-space: nowrap">
+            <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+              <div class="row" style="justify-content: space-between; gap: 1rem">
+                <div
+                  *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).hours != 0">{{ convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).hours }}
+                  <span
+                    *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).hours == 1">Stunde</span>
+                  <span
+                    *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).hours > 1">Stunden</span>
+                </div>
+                <div
+                  *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).minutes != 0">{{ convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).minutes }}
+                  <span
+                    *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).minutes == 1">Minute</span>
+                  <span
+                    *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).minutes > 1">Minuten</span>
+                </div>
+                <div
+                  *ngIf="convertSecondsToMinutesAndHours(selectedTemplate.loggingInterval).minutes == 0 && selectedTemplate.loggingInterval != 7200">{{ selectedTemplate.loggingInterval }}
+                  <span *ngIf="selectedTemplate.loggingInterval == 1">Sekunde</span>
+                  <span *ngIf="selectedTemplate.loggingInterval > 1">Sekunden</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem;">
+          Zeit-Interval der Einträge
+        </div>
+        <div *ngIf="!selectedTemplate.central" class="height-auto">
+          <input type="range" [(ngModel)]="selectedTemplate.loggingInterval" (ngModelChange)="isDirty = true"
+                 class="slider-h" min="1" max="7200">
+        </div>
+      </div>
+
+      <div class="col" style="gap: 0.5rem">
+        <div class="row" style="align-items: center">
+          <div class="height-auto">
+            Idle-Time
+          </div>
+          <div class="height-auto width-auto col" style="gap: 0.5rem">
+            <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+              <div class="row" style="justify-content: space-between">
+                <div style="margin-right: 0.5rem">
+                  {{ selectedTemplate.idleTime }}
+                </div>
+                <div class="width-auto">
+                  <span *ngIf="selectedTemplate.idleTime == 1">Minute</span>
+                  <span *ngIf="selectedTemplate.idleTime != 1">Minuten</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem;">
+          Ende der Aufzeichnung, wenn das Schiff seine Position nicht mehr verändert.
+        </div>
+        <div class="height-auto">
+          <input *ngIf="!selectedTemplate.central" type="range" [(ngModel)]="selectedTemplate.idleTime"
+                 (ngModelChange)="isDirty = true"
+                 class="slider-h" min="5" max="120">
+        </div>
+      </div>
+
+      <div class="col" style="gap: 0.5rem">
+        <div class="row" style="align-items: center">
+          <div class="height-auto">
+            Bewegungsradius
+          </div>
+          <div class="height-auto width-auto col" style="gap: 0.5rem">
+            <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+              <div class="row" style="justify-content: space-between">
+                <div style="margin-right: 0.5rem">
+                  {{ selectedTemplate.radiusOfMovement }}
+                </div>
+                <div class="width-auto">
+                  Meter
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem;">
+          Erlaubte Abweichung der Schiffs Position, bis zum Start des VDR.
+        </div>
+        <div class="height-auto">
+          <input *ngIf="!selectedTemplate.central" type="range" [(ngModel)]="selectedTemplate.radiusOfMovement"
+                 (ngModelChange)="isDirty = true"
+                 class="slider-h" min="10" max="50">
+        </div>
+      </div>
+
+      <div class="col" style="gap: 0.5rem">
+        <div class="row" style="align-items: center">
+          <div class="height-auto">
+            Logbuch-Erinnerung
+          </div>
+          <div class="height-auto width-auto col" style="gap: 0.5rem">
+            <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+              <div class="row" style="justify-content: space-between">
+                <div style="margin-right: 0.5rem">
+                  {{ selectedTemplate.reminderInterval }}
+                </div>
+                <div class="width-auto">
+                  <span *ngIf="selectedTemplate.reminderInterval == 1">Minute</span>
+                  <span *ngIf="selectedTemplate.reminderInterval != 1">Minuten</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem;">
+          Zeit-Interval, bis zur nächsten Logbuch Erinnerung
+        </div>
+        <div class="height-auto">
+          <input *ngIf="!selectedTemplate.central" type="range" [(ngModel)]="selectedTemplate.reminderInterval"
+                 (ngModelChange)="isDirty = true"
+                 class="slider-h" min="30" max="240">
+        </div>
+      </div>
+
+      <div class="col" style="gap: 0.5rem">
+        <div class="row" style="align-items: center">
+          <div class="height-auto">
+            Update bei Kurs-Änderung
+          </div>
+          <div class="height-auto width-auto col" style="gap: 0.5rem">
+            <div style="background: #303030; border-radius: 0.5rem; padding: 0.5rem">
+              <div class="row" style="justify-content: space-between">
+                <div style="margin-right: 0.5rem">
+                  {{ selectedTemplate.allowedCourseChange }}
+                </div>
+                <div class="width-auto">
+                  °
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="font-size: 0.75rem;">
+          Kurs in Grad, bei dem ein Update des VDRs erfolgt.
+        </div>
+        <div class="height-auto">
+          <input *ngIf="!selectedTemplate.central" type="range" [(ngModel)]="selectedTemplate.allowedCourseChange"
+                 (ngModelChange)="isDirty = true"
+                 class="slider-h" min="2" max="300">
+        </div>
+      </div>
+
+      <div *ngIf="isDirty" class="row" style="justify-content: space-between">
+        <div class="width-auto">
+          <button (click)="withdraw()" type="button" class="custom-btn width-auto"
+                  style="padding: 1rem">
+            Abbrechen
+          </button>
+        </div>
+        <div class="width-auto">
+          <button (click)="save(selectedTemplate)" type="button" class="custom-btn width-auto"
+                  style="padding: 1rem">
+            Übernehmen
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div style="display: none" class="modal fade" id="customRecordTypes" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl" style="min-width: 98%;">
+    <div class="modal-content textColorWhite" style="background: #151515; min-height: 90vh;">
+      <div class="modal-header">
+        <div class="col">
+          <div class="row">
+            <div class="col my-auto">
+              Manuelle Eintragstypen
+            </div>
+            <div class="col-auto my-auto">
+              <button type="button" class="btn btn-primary"
+                      data-dismiss="modal">
+                Schließen
+              </button>
+            </div>
+            <div class="col-6">
+              <select class="form-control" [(ngModel)]="selectedTypeID" (ngModelChange)="filter()">
+                <option value="0" selected disabled>Kategorie</option>
+                <option *ngFor="let type of types" value="{{ type.id }}">{{ type.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="selectedTypeID != 0" class="col">
+          <div class="row" *ngFor="let manualInput of visibleManualInputs">
+            <div class="col mb-2">
+              <div class="card p-2" style="border: 0; background: #252525;">
+                <div class="row">
+                  <div class="col my-auto">
+                    {{ manualInput.name }}
+                  </div>
+                  <div class="col-auto">
+                    <button (click)="deleteManualInput(manualInput.id)" type="button" class="btn btn-danger">
+                      Löschen
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mb-2">
+              <div class="card p-2" style="border: 0; background: #252525;">
+                <div class="row">
+                  <div class="col">
+                    <input type="text" class="form-control" [(ngModel)]="newTypeName" placeholder="Name / Beschreibung">
+                  </div>
+                  <div class="col-auto">
+                    <button (click)="addManualInput()" type="button" class="btn btn-primary">Speichern</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTypeID == 0" class="col">
+          <div class="row">
+            <div class="col">
+              <div class="alert alert-primary">
+                Zuerst eine Kategorie auswählen!
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="header">
+    <app-header title="Einstellungen" [editable]="false"></app-header>
+  </div>
+  <div class="settings-nav">
+
+    <div class="width">
+      <div class="item" *ngFor="let item of menuItems" routerLink="{{ item[1] }}">
+        <div class="height-auto">
+          {{ item[0] }}
+        </div>
+        <div class="icon">
+          <img src="assets/icons/white/right-arrow.svg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

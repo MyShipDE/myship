@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html lang="DE">
+<head>
+  <meta charset="UTF-8">
+
+  <title>MyShip</title>
+
+  <base href="/">
+  <!-- Normal: '/' Electron: '' -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="icon" type="image/x-icon" href="assets/icon.png">
+
+</head>
+<body id="body">
+<app-root></app-root>
+
+<!-- Power on / off Switch -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="line">
+    <line x1="75" y1="34" x2="75" y2="80"/>
+  </symbol>
+  <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" id="circle">
+    <circle cx="65" cy="80" r="35"/>
+  </symbol>
+</svg>
+
+<svg xmlns="http://www.w3.org/2000/svg">
+  <filter id="svgTint">
+    <feColorMatrix type="matrix"
+                   values="0.9490196078431372 0.9490196078431372 0.9490196078431372  0 0 0.050980392156862744 0.050980392156862744 0.050980392156862744  0 0 0.050980392156862744 0.050980392156862744 0.050980392156862744  0 0  0 0 0 1 0"></feColorMatrix>
+  </filter>
+</svg>
+
+<!--<audio id="ping">
+  <source src="{{ asset('mp3/ping.mp3') }}" type="audio/mp3">
+</audio>
+
+<audio id="errorSound">
+  <source src="{{ asset('mp3/errorSound2.mp3') }}" type="audio/mp3">
+</audio>-->
+
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+<script src="https://api.windy.com/assets/map-forecast/libBoot.js"></script>
+
+</body>
+</html>

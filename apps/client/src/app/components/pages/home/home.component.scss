@@ -1,0 +1,157 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.home-main-grid {
+  display: grid;
+  grid-template-rows: 1fr auto 30%;
+  grid-template-columns: 100%;
+  grid-template-areas:
+    "header"
+    "nav"
+    "footer";
+
+  @media (max-width: 700px) {
+    // Small
+    grid-template-rows: 10% 45% 45%;
+  }
+}
+
+.header-space {
+  grid-area: header;
+  display: flex;
+  align-content: center;
+  @media (max-width: 700px) {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.header-logo {
+  max-width: 500px;
+  text-align: center;
+  width: 100%;
+  @media (max-width: 700px) {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.clock {
+  display: flex;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.header-icons-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  height: auto;
+  padding: 2rem;
+  max-width: 180px;
+
+  & > img {
+    width: 100%;
+    max-width: 45px;
+    height: auto;
+  }
+
+  & > span {
+    height: auto;
+    text-align: center;
+    color: white;
+  }
+}
+
+.nav-container {
+  grid-area: nav;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-space {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+  @media (max-width: 700px) {
+    display: none;
+  }
+}
+
+.nav-space-mobile {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  @media (min-width: 700px) {
+    display: none;
+  }
+}
+
+.nav-item {
+  flex-basis: calc(33.33% - 0.7rem);
+  height: calc(10vh - 0.7rem);
+  @media screen and (max-width: 1024px) and (max-height: 600px) {
+    height: calc(35% - 0.7rem);
+  }
+}
+
+.nav-item-mobile {
+  flex: 0 0 30%;
+  background: #202020;
+  border: 2px solid $primary;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  height: auto;
+}
+
+.mainMenuItem {
+  border-radius: 0.5rem;
+  background-color: #202020;
+  font-weight: 500;
+  font-size: 150%;
+  @media (max-width: 700px) {
+    font-size: 1rem;
+  }
+  @media screen and (min-width: 1920px) {
+    font-weight: bolder;
+    font-size: 2rem;
+  }
+}
+
+.footer-space {
+  grid-area: footer;
+}
+
+.footer-bg {
+  //
+}

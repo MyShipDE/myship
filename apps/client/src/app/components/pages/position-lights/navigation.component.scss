@@ -1,0 +1,103 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: grid;
+  color: WHITE;
+  padding: 1rem;
+  grid-auto-columns: 50% 50%;
+  grid-template-rows: 15% 85%;
+  grid-template-areas:
+      "h h"
+      "c s";
+  @media (max-width: 700px) {
+    grid-auto-columns: 100%;
+    grid-template-rows: 10% 40% 50%;
+    grid-template-areas:
+      "h"
+      "c"
+      "s";
+  }
+}
+
+.bg-primary {
+  background-color: $primary !important;
+}
+
+.header {
+  grid-area: h;
+}
+
+.control-container {
+  grid-area: c;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.controls {
+  align-self: center;
+  display: flex;
+  width: 75%;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-end;
+  gap: 1rem;
+}
+
+.control {
+  display: flex;
+  align-items: flex-start;
+  background-color: #202020;
+  border-radius: 0.5rem;
+  border: 2px solid $primary;
+  gap: 1rem;
+  padding: 1rem;
+  height: 64px;
+  @media (min-width: 700px) {
+    width: 75%;
+  }
+}
+
+.control-icon {
+  align-self: center;
+  width: 10%;
+  @media (max-width: 700px) {
+    width: 10%;
+  }
+}
+
+.control-text {
+  align-self: center;
+  height: auto;
+  width: auto;
+  font-weight: bold;
+  @media (max-width: 700px) {
+    font-size: 1rem;
+  }
+  font-size: 1.5rem;
+}
+
+.ship-container {
+  grid-area: s;
+  display: flex;
+  justify-content: center;
+}
+
+.ship {
+  border-radius: 1rem;
+  height: 100%;
+  width: 75%;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+  // border-radius: 0.5rem;
+  // border: 2px solid $primary;
+}

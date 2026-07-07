@@ -1,0 +1,11 @@
+/node_modules
+.env
+/.idea
+WeatherKey.p8
+/dist
+
+# storage: runtime data ignored, folder skeleton kept via .gitkeep
+/storage/*/*
+!/storage/*/.gitkeep
+*.Secret
+*.Fingerprint

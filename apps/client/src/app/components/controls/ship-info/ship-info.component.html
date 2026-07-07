@@ -1,0 +1,66 @@
+<div class="info-container color" [ngClass]="nightModeService.status ? 'night' : 'light'">
+
+  <div class="title">
+    Schiff
+  </div>
+
+  <hr>
+
+  <div class="row" style="justify-content: space-between; align-items: center">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Breitengrad
+      </div>
+      <div class="width-auto">
+        {{ lat }}
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Längengrad
+      </div>
+      <div class="width-auto">
+        {{ lon }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content: space-between; align-items: center">
+    <div class="capacity">
+      <div class="capacity-desc">
+        SOG
+      </div>
+      <div class="width-auto">
+        {{ sog }} KN
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        COG
+      </div>
+      <div class="width-auto">
+        {{ cog }}°
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content: space-between; align-items: center;">
+    <div class="capacity">
+      <div class="capacity-desc">
+        Tiefe
+      </div>
+      <div class="width-auto">
+        --,- M
+      </div>
+    </div>
+    <div class="capacity" style="text-align: right">
+      <div class="capacity-desc">
+        Tagesstrecke
+      </div>
+      <div class="width-auto">
+        0 NM
+      </div>
+    </div>
+  </div>
+
+</div>

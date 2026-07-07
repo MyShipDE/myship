@@ -1,0 +1,29 @@
+<div class="container textColorWhite">
+  <div class="inner-container">
+
+    <div class="height-auto width-auto title">
+      QR-Code Scanner
+    </div>
+
+    <div class="col height-auto"
+         style="align-items: center; width: 60%; gap: 0.5rem">
+      <div class="width-auto">
+        <img src="assets/icons/white/qr.png" style="width: 100%; height: auto">
+      </div>
+      <div style="color: #777">
+        Richte das Gerät auf einen QR-Code, eine Kamera-Vorschau ist noch nicht möglich.
+      </div>
+    </div>
+
+    <div (click)="dispose()" class="col height-auto width-auto"
+         style="align-items: center; border: 2px solid #d73838; border-radius: 0.5rem; padding: 1rem">
+      <div class="width-auto">
+        <img src="assets/icons/red/close.svg" style="width: auto; height: 64px">
+      </div>
+      <div style="color: #d73838">
+        Abbrechen
+      </div>
+    </div>
+
+  </div>
+</div>

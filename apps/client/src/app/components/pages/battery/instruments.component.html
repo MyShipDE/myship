@@ -1,0 +1,178 @@
+<div class="container">
+
+  <div class="switch">
+    <div id="lp_btn" class="sw-item selected">
+      <img src="assets/icons/white/plug-silhouette.svg">
+    </div>
+    <div id="b1_btn" class="sw-item">
+      <img src="assets/icons/white/timing-belt.svg">
+    </div>
+    <div id="b2_btn" class="sw-item">
+      <img src="assets/icons/white/symbol-fur-elektrischen-strom.svg">
+    </div>
+  </div>
+
+  <div class="nav">
+    <app-header title="Energie-Management" icon="battery" [editable]="false"></app-header>
+  </div>
+
+  <div class="landPower">
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      <div style="width: 10%; height: auto">
+        <img src="assets/icons/white/plug-silhouette.svg">
+      </div>
+      <div (click)="electricityConsumptionService.save()" class="lp-title-cont">
+        Landstrom
+      </div>
+    </div>
+    <div class="col" style="gap: 1rem; align-items: center">
+      <div (click)="controlBatteryCharger()" class="card height-auto" style="font-size: 0.8rem; padding: 1rem;">
+        <div class="col width-auto" style="padding: 0 1rem; justify-content: center">
+          <div *ngIf="!batteryCharger?.isActive" class="bg-inactive"
+               style="border-radius: 100%; width: 16px; height: 16px;"></div>
+          <div *ngIf="batteryCharger?.isActive" class="bg-success"
+               style="border-radius: 100%; width: 16px; height: 16px;"></div>
+        </div>
+        <div class="row" style="justify-content: center; gap: 1rem; align-items: center">
+          <div class="height-auto font-normal">{{ batteryCharger?.name }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="flex-row" style="gap: 1rem">
+      <div class="lp-voltage-cont" style="background: #202020">
+        <div class="lp-voltage-cont-val sm">
+          <span *ngIf="batteryChargerMetadata?.voltage != null">{{ round(batteryChargerMetadata?.voltage, true) }}
+            V</span>
+          <span *ngIf="batteryChargerMetadata?.voltage == null">-,-- V</span>
+        </div>
+        <div class="lp-voltage-cont-desc">
+          Netz-Spannung
+        </div>
+      </div>
+      <div class="lp-voltage-cont" style="background: #202020; flex-direction: row; align-items: center">
+        <div class="height-auto width-auto">
+          <div class="lp-voltage-cont-val sm">
+            <span>{{ round(CurrentConsumption, true) }}
+              W</span>
+          </div>
+          <div class="lp-voltage-cont-desc">
+            Leistung
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lp-stats-cont">
+      <div *ngIf="lastDayConsumption != null" class="lp-stats-card">
+        <div class="height-auto lp-stats-card-val">
+          {{ lastDayConsumption }} kWh
+        </div>
+        <div class="height-auto lp-stats-card-desc">
+          Verbrauch (24 Stunden)
+        </div>
+      </div>
+      <div *ngIf="lastWeekConsumption != null" class="lp-stats-card">
+        <div class="height-auto lp-stats-card-val">
+          {{ lastWeekConsumption }} kWh
+        </div>
+        <div class="height-auto lp-stats-card-desc">
+          Verbrauch (7 Tage)
+        </div>
+      </div>
+      <div *ngIf="lastYearConsumption != null" class="lp-stats-card">
+        <div class="height-auto lp-stats-card-val">
+          {{ lastYearConsumption }} kWh
+        </div>
+        <div class="height-auto lp-stats-card-desc">
+          Jahresverbrauch
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="b1-c">
+
+    <div style="display: flex; justify-content: center; align-items: center; gap: 1rem">
+      <img src="assets/icons/white/battery3.png" style="width: 10%; height: auto">
+      <div class="lp-title-cont">
+        Verbraucher
+      </div>
+    </div>
+    <div>
+      <app-element-battery-large [value]="state"></app-element-battery-large>
+    </div>
+    <div class="flex-row" style="gap: 1rem">
+      <div class="lp-voltage-cont" style="background: #202020">
+        <div class="lp-voltage-cont-val sm">
+          <span>{{ round(state, true) }} %</span>
+        </div>
+        <div class="lp-voltage-cont-desc">
+          Kapazität
+        </div>
+      </div>
+      <div class="lp-voltage-cont" style="background: #202020; flex-direction: row; align-items: center">
+        <div class="height-auto width-auto">
+          <div class="lp-voltage-cont-val sm">
+            <span>{{ round(power < 0 ? (power * (-1)) : power, true) }} W</span>
+          </div>
+          <div class="lp-voltage-cont-desc">
+            Leistung
+          </div>
+        </div>
+        <div class="height-auto width-auto">
+          <img *ngIf="power < 0" src="assets/icons/red_arrow.png"
+               style="width: 32px; height: auto; transform: rotate(90deg)">
+          <img *ngIf="power > 0" src="assets/icons/green_arrow.png"
+               style="width: 32px; height: auto; transform: rotate(270deg)">
+        </div>
+      </div>
+    </div>
+    <div class="flex-row" style="gap: 1rem">
+      <div class="lp-voltage-cont" style="background: #202020">
+        <div class="lp-voltage-cont-val sm">
+          <span>{{ round(voltage) }} V</span>
+        </div>
+        <div class="lp-voltage-cont-desc">
+          Spannung
+        </div>
+      </div>
+      <div class="lp-voltage-cont" style="background: #202020">
+        <div class="lp-voltage-cont-val sm">
+          <span>{{ round(current) }} A</span>
+        </div>
+        <div class="lp-voltage-cont-desc">
+          Stromstärke
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="b2-c">
+
+    <div style="display: flex; justify-content: center; gap: 1rem;">
+      <div style="width: 10%; height: auto">
+        <img src="assets/icons/white/symbol-fur-elektrischen-strom.svg">
+      </div>
+      <div class="lp-title-cont">
+        Starter
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <app-element-battery-large [value]="0"></app-element-battery-large>
+      </div>
+    </div>
+    <div class="flex-row" style="gap: 1rem">
+      <div class="lp-voltage-cont" style="background: #202020">
+        <div class="lp-voltage-cont-val sm">
+          <span>{{ starterVoltage }} V</span>
+        </div>
+        <div class="lp-voltage-cont-desc">
+          Spannung
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

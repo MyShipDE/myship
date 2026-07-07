@@ -1,0 +1,44 @@
+appId: 'com.myship.client'
+artifactName: ${name}-latest-${os}-${arch}.${ext}
+productName: 'MyShip'
+
+forceCodeSigning: false
+
+npmRebuild: true
+
+directories:
+  output: ./out
+
+compression: normal
+
+mac:
+  identity: "Apple Development: Malte Werkhausen (63V96W7RTV)"
+  icon: ./assets/icon.icns
+  category: public.app-category.utilities
+  entitlements: ./entitlements.mac.plist
+  entitlementsInherit: ./entitlements.mac.plist
+  extendInfo:
+    NSMicrophoneUsageDescription: "We need access to your microphone so they can create logbook entries via voice input."
+    NSCameraUsageDescription: "We need access to your camera so they can create logbook entries via QR code scanning."
+  target:
+    - { target: dmg, arch: x64 }
+    - { target: dmg, arch: arm64 }
+
+dmg:
+  icon: ./assets/icon.icns
+  backgroundColor: '#222222'
+  window:
+    width: 512
+    height: 256
+  contents:
+    - x: 410
+      y: 100
+      type: link
+      path: /Applications
+    - x: 130
+      y: 100
+      type: file
+
+linux:
+  target:
+    - { target: AppImage, arch: arm64 }

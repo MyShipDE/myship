@@ -1,0 +1,72 @@
+@import "../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  top: 0;
+  pointer-events: none;
+}
+
+.col {
+  background: #151515;
+  border-radius: 1rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 2rem;
+}
+
+.text {
+  background: #202020;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  height: auto !important;
+  color: WHITE;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 10px solid $primary;
+  border-color: $primary transparent $primary transparent;
+
+  &.night {
+    border: 6px solid #F00;
+    border-color: #F00 transparent #F00 transparent;
+  }
+
+  animation: lds-dual-ring 1.5s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

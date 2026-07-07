@@ -1,0 +1,94 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.outer-container {
+  background: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-inner-container {
+  height: 75%;
+  width: 60%;
+  background: #101010;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  color: WHITE;
+  gap: 1rem;
+  @media (max-width: 700px) {
+    padding-top: 2rem;
+  }
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.close {
+  width: 10%;
+}
+
+.headline {
+  text-align: center;
+  height: auto;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  @media (max-width: 700px) {
+    font-size: 1.5rem;
+  }
+}
+
+.messages {
+  background: #303030;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.message-text {
+  border: 2px solid #202020;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.page {
+  background: #202020;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+
+.microphone {
+  background: $primary;
+  padding: 1rem;
+  border-radius: 100%;
+
+  &.active {
+    background: #cc2727;
+  }
+}
+
+.microphoneInfo {
+  background: #202020;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.25rem;
+  gap: 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+}

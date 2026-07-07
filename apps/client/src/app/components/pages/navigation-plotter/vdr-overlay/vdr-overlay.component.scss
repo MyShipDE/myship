@@ -1,0 +1,121 @@
+@import "../../../../../scss/variables";
+
+* {
+  height: 100%;
+  width: 100%;
+}
+
+.vdr-wrapper {
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 5%;
+}
+
+.vdr-container {
+  background: #000;
+  border: 3px solid $primary;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "title"
+    "content";
+  color: WHITE;
+
+  &.gab {
+    gap: 1rem;
+  }
+}
+
+.title {
+  font-weight: bolder;
+  font-size: 4rem;
+  text-align: center;
+  grid-area: title;
+}
+
+.menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  grid-area: content;
+}
+
+.menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.menu-item {
+  transition: 0.2s;
+  background: #222;
+  border: 2px solid #444;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: flex-end;
+
+  &.active-mik {
+    background: #c33030;
+    border: 2px solid #9e2828;
+  }
+
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+
+.menu-item > div {
+  height: auto;
+  font-weight: bolder;
+  font-size: 2rem;
+}
+
+.menu-item > img {
+  width: 5vw;
+  height: auto;
+}
+
+.archive-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-area: content;
+  overflow-y: auto;
+}
+
+.datepicker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  gap: 1rem;
+}
+
+.datepickers {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.selectedDates {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.selectedDates > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.25rem;
+  height: auto;
+}

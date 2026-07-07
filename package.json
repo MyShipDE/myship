@@ -1,0 +1,18 @@
+{
+  "name": "myship-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "MyShip – The All-in-One System for Your Boat. Monorepo containing the gateway server and the client app.",
+  "license": "GPL-3.0-or-later",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "server:start": "npm run start --workspace apps/server",
+    "server:build-docker": "npm run build-docker --workspace apps/server",
+    "client:start": "npm run start --workspace apps/client",
+    "client:build": "npm run build --workspace apps/client",
+    "client:test": "npm run test --workspace apps/client",
+    "client:lint": "npm run lint --workspace apps/client"
+  }
+}

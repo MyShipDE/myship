@@ -1,4 +1,3 @@
-import bleno from '@abandonware/bleno';
 import {Log} from "./helpers/Log";
 import {BluetoothResources} from "../resources/BluetoothResources";
 import {App} from "../app";
@@ -7,8 +6,6 @@ import {BluetoothCharacteristic} from "./BluetoothCharacteristic";
 export class BluetoothService {
 
     private static _Instance: BluetoothService;
-
-    private readonly BlenoPrimaryService = bleno.PrimaryService;
 
     private deviceName = 'VDR';
 
@@ -19,7 +16,13 @@ export class BluetoothService {
     }
 
     private defineEvents() {
-        bleno.on('stateChange', (state) => {
+        // Load the native bleno binding lazily — only on a real RPi where it's
+        // built. Importing this service must never pull the native module.
+        // tslint:disable-next-line:no-var-requires
+        const bleno = require('@abandonware/bleno');
+        const BlenoPrimaryService = bleno.PrimaryService;
+
+        bleno.on('stateChange', (state: string) => {
             if (state === 'poweredOn') {
                 Log.info('Bluetooth ist eingeschaltet, Starte Werbung...');
                 bleno.startAdvertising(this.deviceName, [BluetoothResources.UUIDs.service]);
@@ -29,16 +32,13 @@ export class BluetoothService {
             }
         });
 
-        bleno.on('advertisingStart', (error) => {
+        bleno.on('advertisingStart', (error: any) => {
             if (!error) {
                 Log.info('Werbung erfolgreich gestartet');
                 bleno.setServices([
-                    new this.BlenoPrimaryService({
+                    new BlenoPrimaryService({
                         uuid: BluetoothResources.UUIDs.service,
-                        characteristics: [
-                            BluetoothCharacteristic.authCharacteristic,
-                            BluetoothCharacteristic.requestCharacteristic
-                        ],
+                        characteristics: BluetoothCharacteristic.build(),
                     }),
                 ]);
             } else {

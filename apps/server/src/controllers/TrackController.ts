@@ -36,7 +36,7 @@ export class TrackController {
                 return res.status(400).end();
             }
 
-            const trackData = await TrackService.Instance.getTrackDataByKey(+req.params.recordId, req.params.key);
+            const trackData = await TrackService.Instance.getTrackDataByKey(+req.params.recordId, String(req.params.key));
 
             if (trackData == null) {
                 return res.status(404).end();

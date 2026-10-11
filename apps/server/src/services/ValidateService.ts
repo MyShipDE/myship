@@ -26,7 +26,12 @@ export class ValidateService {
         if (!App.vdrOnly) {
             if (String.isNullOrEmpty(process.env.MQTT_PORT)) {
                 return this.error("Der Eintrag (MQTT_PORT) in der Konfiguration ist nicht vorhanden!");
-            } else if (String.isNullOrEmpty(process.env.SMTP_HOST)) {
+            }
+        }
+
+        // SMTP is only needed for real alarm notifications — skipped in demo.
+        if (!App.vdrOnly && !App.demoMode) {
+            if (String.isNullOrEmpty(process.env.SMTP_HOST)) {
                 return this.error("Der Eintrag (SMTP_HOST) in der Konfiguration ist nicht vorhanden!");
             } else if (String.isNullOrEmpty(process.env.SMTP_USER)) {
                 return this.error("Der Eintrag (SMTP_USER) in der Konfiguration ist nicht vorhanden!");

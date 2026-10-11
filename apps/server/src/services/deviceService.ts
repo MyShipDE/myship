@@ -2,8 +2,8 @@ import {SocketIO} from "./socket.io/SocketIO";
 import {Storage} from "../DatabaseProvider";
 import {SocketChannel} from "../resources/SocketChannel";
 import {BridgeIdentifier} from "./BridgeService";
-import {ShellyService} from "./ShellyService";
 import {TasmotaService, TasmotaState} from "./TasmotaService";
+import {Actuators} from "./DemoMode/actuators/Actuators";
 import {Log} from "./helpers/Log";
 
 export class DeviceService {
@@ -44,7 +44,7 @@ export class DeviceService {
         if (device != null) {
             if (device.bridge.type.identifier === BridgeIdentifier.bridge220v1cSon || device.bridge.type.identifier === BridgeIdentifier.bridge12v4cSon) {
                 try {
-                    await TasmotaService.control(device.bridge, device.bridgePort, !device.isActive);
+                    await Actuators.relay.tasmotaControl(device.bridge, device.bridgePort, !device.isActive);
 
                     device.isActive = !device.isActive;
                     SocketIO.emit(SocketChannel.DeviceManagedObject, device);
@@ -57,7 +57,7 @@ export class DeviceService {
                 }
             } else if (device.bridge.type.identifier === BridgeIdentifier.bridge220v1cShelly) {
                 try {
-                    await ShellyService.control(device.bridge, !device.isActive);
+                    await Actuators.relay.shellyControl(device.bridge, !device.isActive);
 
                     device.isActive = !device.isActive;
                     SocketIO.emit(SocketChannel.DeviceManagedObject, device);

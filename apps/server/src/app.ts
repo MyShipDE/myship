@@ -39,6 +39,7 @@ export class App {
 
     public static vdrOnly = process.env.VDR_ONLY != null && process.env.VDR_ONLY.toLowerCase() === 'true';
     public static shouldConnectWithModem = process.env.MODEM != null && process.env.MODEM.toLowerCase() === 'true';
+    public static demoMode = process.env.DEMO_MODE != null && process.env.DEMO_MODE.toLowerCase() === 'true';
 
     private app = express();
     private server = http.createServer(this.app);
@@ -98,7 +99,7 @@ export class App {
 
     startProxy(): App {
         try {
-            if (!App.vdrOnly) {
+            if (!App.vdrOnly && !App.demoMode) {
                 ProxyService.run('127.0.0.1', 8080, 8002, true, false);
             }
         } catch (e) {
@@ -133,7 +134,7 @@ export class App {
 
     setupNodeMediaServer(): App {
         try {
-            if (!App.vdrOnly) {
+            if (!App.vdrOnly && !App.demoMode) {
                 const app = express();
                 const {proxy} = require('rtsp-relay')(app);
 

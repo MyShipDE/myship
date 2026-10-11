@@ -3,6 +3,7 @@ import nodemailer, {SentMessageInfo} from 'nodemailer';
 import fs from 'fs';
 import path from "path";
 import {Log} from "../helpers/Log";
+import {DemoMode} from "../DemoMode/DemoMode";
 
 dotenv.config();
 
@@ -21,6 +22,10 @@ export class Mail {
     }
 
     send(to: string, subject: string, text: string, useHtml: boolean = true): Promise<boolean> {
+        if (DemoMode.active) {
+            Log.info(`[DEMO] Mail suppressed -> ${to}: ${subject}`);
+            return Promise.resolve(true);
+        }
         try {
             let html = fs.readFileSync(path.join(__dirname, 'mail_template.html')).toString();
             html = html.replace('{{subject}}', subject);

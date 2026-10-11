@@ -26,6 +26,8 @@ import {App} from "./app";
 import {ModemBaseService} from "./services/modem/ModemBaseService";
 import {VeDirectService} from "./services/VeDirectService";
 import {BluetoothService} from "./services/BluetoothService";
+import {DemoMode} from "./services/DemoMode/DemoMode";
+import {DemoModeService} from "./services/DemoMode/DemoModeService";
 
 dotenv.config();
 
@@ -37,38 +39,47 @@ export default async () => {
 
     await AppDataSource.initialize();
 
+    if (DemoMode.active) {
+        await DemoModeService.Instance.initialize();
+    }
+
     SMS.Instance.initialize();
 
     await SettingsService.Instance.boot();
     await AlarmService.Instance.Boot();
 
-    CloudService.Instance.helloRequest().then(() => {
-        TrackService.Instance.ensureTrackDataKeysSynced().then();
-        TrackService.Instance.updateTrackDataKeys().then();
-    });
+    /* if (!DemoMode.active) {
+        CloudService.Instance.helloRequest().then(() => {
+            TrackService.Instance.ensureTrackDataKeysSynced().then();
+            TrackService.Instance.updateTrackDataKeys().then();
+        });
+    } */
 
-    await LogbookService.createTypesIfNotExists();
+    // await LogbookService.createTypesIfNotExists();
 
-    if (!App.vdrOnly) {
+    if (!App.vdrOnly && !DemoMode.active) {
         await lightService.resetLightStateIfRelayOff();
     }
 
-    if (process.env.RESTART_SIGNALK.toLowerCase() === 'true') {
+    if (!DemoMode.active && process.env.RESTART_SIGNALK.toLowerCase() === 'true') {
         await SignalKHelper.getInstance().restart();
     }
 
     await TemplateService.getInstance().EnsureTemplatesExists();
 
-    if (!App.vdrOnly) {
+    if (!App.vdrOnly && !DemoMode.active) {
         await BridgeService.getInstance().boot();
         WirelessButtonService.Instance.listen();
     }
 
+    // In demo mode this consumes the local DemoSignalKServer started above.
     SignalKHelper.getInstance().handleAndCacheData();
 
-    UpdateService.Instance.setGPSPerms();
+    if (!DemoMode.active) {
+        UpdateService.Instance.setGPSPerms();
+    }
 
-    if (!App.vdrOnly) {
+    if (!App.vdrOnly && !DemoMode.active) {
         // Register Events
         CustomEvent.getInstance().ensureBatteryChargerActive();
         CustomEvent.getInstance().ensureLightPowerSupplyState();
@@ -79,12 +90,14 @@ export default async () => {
 
     SignalKHelper.getInstance().fixPathNames().then();
 
-    if (App.shouldConnectWithModem) {
+    if (App.shouldConnectWithModem && !DemoMode.active) {
         const modem = new ModemBaseService();
         modem.init();
     }
 
-    BluetoothService.getInstance().setup();
+    if (!DemoMode.active) {
+        BluetoothService.getInstance().setup();
+    }
 
     setTimeout(() => {
         JobSchedule.Instance.run();

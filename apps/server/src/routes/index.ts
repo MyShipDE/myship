@@ -134,9 +134,16 @@ router.delete("/alarm/:id", AuthMiddleware, AlarmController.Delete);
 // Signal K / DataSources
 router.get("/data", AuthMiddleware, DataController.getData);
 
+// Cameras (RTSP stream URLs from CAMERA_STREAMS env)
+router.get("/cameras", AuthMiddleware, HomeController.getCameras);
+
+// Map provider config (MapTiler key + style from env)
+router.get("/map/config", AuthMiddleware, HomeController.getMapConfig);
+
 // Default
 router.get("/test", HomeController.test);
 router.get("/licence", LocalMiddleware, HomeController.getLicence);
-router.get("/*", HomeController.send);
+// Express 5 (path-to-regexp 8) requires a named wildcard instead of "/*".
+router.get("/*splat", HomeController.send);
 
 export default router;

@@ -23,6 +23,25 @@ export class HomeController {
         res.status(200).end();
     };
 
+    // Camera RTSP streams are configured server-side via the CAMERA_STREAMS
+    // env var (comma-separated URLs) — never on the client.
+    getCameras(req: express.Request, res: express.Response) {
+        const raw = process.env.CAMERA_STREAMS || '';
+        const streams = raw
+            .split(',')
+            .map((s) => s.trim())
+            .filter((s) => s.length > 0);
+        res.status(200).send(streams);
+    };
+
+    // Map provider config (MapTiler key + style) is kept server-side in .env.
+    getMapConfig(req: express.Request, res: express.Response) {
+        res.status(200).send({
+            key: process.env.MAPTILER_KEY || '',
+            style: process.env.MAPTILER_STYLE || 'streets-v2',
+        });
+    };
+
     getLicence(req: express.Request, res: express.Response) {
         if (process.env.LICENCE_KEY != null) {
             res.status(200).send({

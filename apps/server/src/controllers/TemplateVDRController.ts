@@ -9,7 +9,7 @@ export class TemplateVDRController {
 
     async GetOneByName(req: express.Request, res: express.Response) {
         if (req.params.name != null) {
-            const item = await Storage.getInstance().TemplateVDR.findOneBy({name: req.params.name});
+            const item = await Storage.getInstance().TemplateVDR.findOneBy({name: String(req.params.name)});
             if (item != null) {
                 return res.status(200).send(item);
             }

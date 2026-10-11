@@ -1,5 +1,6 @@
 import {Light} from '../modals/Light';
-import controlLightService from './controlLightService'
+import {Actuators} from "./DemoMode/actuators/Actuators";
+import {DemoMode} from "./DemoMode/DemoMode";
 import {SocketIO} from "./socket.io/SocketIO";
 import {Storage} from "../DatabaseProvider";
 import {SocketChannel} from "../resources/SocketChannel";
@@ -61,7 +62,7 @@ const control = async (id: number, r: number, g: number, b: number, brightness: 
     const light = await Storage.getInstance().Light.findOneBy({id});
     if (light != null) {
         if (
-            await controlLightService(
+            await Actuators.light.control(
                 light.host,
                 r,
                 g,
@@ -121,6 +122,9 @@ const resetLightStateIfRelayOff = async () => {
 };
 
 const disablePowerSupplyIfPossible = async () => {
+    if (DemoMode.active) {
+        return;
+    }
     const bridges = await Storage.getInstance().Bridge.find();
     const bridge = bridges.find(x => x.name.toLowerCase().includes('battery'));
     if (bridge != null && !(await ShellyService.getState(bridge))) {
@@ -144,6 +148,9 @@ const disablePowerSupplyIfPossible = async () => {
 }
 
 const enablePowerSupplyIfPossible = async () => {
+    if (DemoMode.active) {
+        return;
+    }
     const bridges = await Storage.getInstance().Bridge.find();
     const bridge = bridges.find(x => x.name.toLowerCase().includes('battery'));
     if (bridge != null && (await ShellyService.getState(bridge))) {

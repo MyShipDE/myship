@@ -2,6 +2,7 @@ import userService from '../services/userService';
 import express from "express";
 import {SocketIO} from "../services/socket.io/SocketIO";
 import {SocketChannel} from "../resources/SocketChannel";
+import {DemoMode} from "../services/DemoMode/DemoMode";
 
 export class UserController {
 
@@ -29,6 +30,12 @@ export class UserController {
     }
 
     async login(req: express.Request, res: express.Response) {
+        // Demo: accept any pairing PIN with zero friction.
+        if (DemoMode.active) {
+            SocketIO.emit(SocketChannel.ClientManagedNotification, null);
+            res.status(200).end();
+            return;
+        }
         if (req.header("Authorization") != null && req.body.token != null) {
             if (await userService.login(req.body.token, req.header("Authorization"), req.ip, req.body.clientInfo ?? null)) {
                 SocketIO.emit(SocketChannel.ClientManagedNotification, null);

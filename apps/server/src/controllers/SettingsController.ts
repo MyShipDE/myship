@@ -9,7 +9,7 @@ import {SocketChannel} from "../resources/SocketChannel";
 export class SettingsController {
     async Get(req: express.Request, res: express.Response) {
         if (req.params.token != null) {
-            const item = await Storage.getInstance().Setup.findOneBy({name: req.params.token});
+            const item = await Storage.getInstance().Setup.findOneBy({name: String(req.params.token)});
             if (item != null) {
                 res.status(200).send(item);
                 return;
@@ -20,7 +20,7 @@ export class SettingsController {
 
     async PostNumber(req: express.Request, res: express.Response) {
         if (req.body.token != null && req.body.value != null) {
-            const item = await Storage.getInstance().Setup.findOneBy({name: req.params.token});
+            const item = await Storage.getInstance().Setup.findOneBy({name: String(req.params.token)});
             if (item != null) {
                 item.numericValue = +req.body.value;
                 await item.save();
@@ -33,7 +33,7 @@ export class SettingsController {
 
     async PostString(req: express.Request, res: express.Response) {
         if (req.body.token != null && req.body.value != null) {
-            const item = await Storage.getInstance().Setup.findOneBy({name: req.params.token});
+            const item = await Storage.getInstance().Setup.findOneBy({name: String(req.params.token)});
             if (item != null) {
                 item.stringValue = req.body.value;
                 await item.save();

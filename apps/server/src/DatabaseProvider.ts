@@ -138,7 +138,7 @@ const mysqlOptions: any = {
 }
 
 const sqliteOptions: any = {
-    type: 'sqlite',
+    type: 'better-sqlite3',
     database: Storage.SQLITE_PATH,
     synchronize: true,
     logging: false,

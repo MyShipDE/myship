@@ -2,23 +2,20 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "module": "commonjs",
+    "module": "node16",
+    "moduleResolution": "node16",
+    "target": "es2022",
     "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "strict": false,
+    "useDefineForClassFields": false,
+    "skipLibCheck": true,
     "sourceMap": true,
     "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    }
+    "rootDir": "src"
   },
   "include": [
     "src/app.ts",
-    "storage",
     "src/scripts/*.ts"
   ]
 }

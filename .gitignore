@@ -16,6 +16,7 @@ apps/client/electron/out/
 .env.*
 !.env.example
 !.env.vdr-example
+!.env.demo.example
 *.p8
 *.pem
 *.key
@@ -26,6 +27,9 @@ WeatherKey*
 # --- Server runtime storage (contents ignored; folder skeleton kept) ---
 /apps/server/storage/*/*
 !/apps/server/storage/*/.gitkeep
+/apps/server/storage/*.sqlite
+/apps/server/storage/*.txt
+*.sqlite
 *.Secret
 *.Fingerprint
 

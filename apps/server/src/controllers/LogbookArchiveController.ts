@@ -60,7 +60,7 @@ export class LogbookArchiveController {
             return res.status(400).end();
         }
 
-        const searchDate: Date = new Date(req.params.date);
+        const searchDate: Date = new Date(String(req.params.date));
 
         try {
             const tracks = await Storage.getInstance().Track.find({
@@ -119,8 +119,8 @@ export class LogbookArchiveController {
             return res.status(400).end();
         }
 
-        const startDate: Date = new Date(req.params.start);
-        const endDate: Date = new Date(req.params.end);
+        const startDate: Date = new Date(String(req.params.start));
+        const endDate: Date = new Date(String(req.params.end));
 
         try {
             const coords: number[][] = [];

@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import {SocketIO} from "./socket.io/SocketIO";
 import {AudioService} from "./VDR/AudioService";
 import {SocketChannel} from "../resources/SocketChannel";
+import {DemoMode} from "./DemoMode/DemoMode";
 
 dotenv.config();
 
@@ -13,6 +14,10 @@ export class WhisperAI {
     static inProcess = false;
 
     static translate(filename: string): boolean {
+
+        if (DemoMode.active) {
+            return false;
+        }
 
         const fileArr = filename.split('.');
         if (fileArr == null || fileArr.length < 2) {

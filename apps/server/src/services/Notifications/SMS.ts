@@ -2,6 +2,7 @@ import request from 'superagent';
 import dotenv from 'dotenv';
 import {String} from "../helpers/String";
 import {Log} from "../helpers/Log";
+import {DemoMode} from "../DemoMode/DemoMode";
 
 dotenv.config();
 
@@ -24,6 +25,10 @@ export class SMS {
     }
 
     async send(message: string, phone: string): Promise<boolean> {
+        if (DemoMode.active) {
+            Log.info(`[DEMO] SMS suppressed -> ${phone}`);
+            return true;
+        }
         try {
 
             const response = await request

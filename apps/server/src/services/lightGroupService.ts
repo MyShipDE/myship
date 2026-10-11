@@ -1,5 +1,5 @@
 import {LightGroup} from '../modals/LightGroup';
-import controlLightService from './controlLightService';
+import {Actuators} from "./DemoMode/actuators/Actuators";
 import {SocketIO} from "./socket.io/SocketIO";
 import {Storage} from "../DatabaseProvider";
 import {SocketChannel} from "../resources/SocketChannel";
@@ -103,9 +103,9 @@ const control = async (id: number, r: number, g: number, b: number, brightness: 
     for (const light of lightGroup.lights) {
 
         if (nightMode.value && r !== 0 && g !== 0 && b !== 0) {
-            await controlLightService(light.host, 255, 0, 0, 120);
+            await Actuators.light.control(light.host, 255, 0, 0, 120);
         } else {
-            await controlLightService(light.host, r, g, b, brightness);
+            await Actuators.light.control(light.host, r, g, b, brightness);
         }
 
         if (r === 0 && g === 0 && b === 0) {
@@ -141,7 +141,7 @@ const selectScene = async (groupId: number, sceneId: number) => {
     if (lightGroup != null && lightGroup.lights != null && scene != null) {
         lightGroup.lastSceneId = scene.id;
         for (const light of lightGroup.lights) {
-            await controlLightService(light.host, scene.R, scene.G, scene.B, scene.BRI);
+            await Actuators.light.control(light.host, scene.R, scene.G, scene.B, scene.BRI);
             light.isActive = true;
             light.R = scene.R;
             light.G = scene.G;

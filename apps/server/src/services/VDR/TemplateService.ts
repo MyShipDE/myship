@@ -19,14 +19,14 @@ export class TemplateService {
 
         // Ensure if all Central-Templates exists
         for (const template of this.centralTemplates) {
-            if (!(await Storage.getInstance().TemplateVDR.exist({where: {name: template.name}}))) {
+            if (!(await Storage.getInstance().TemplateVDR.exists({where: {name: template.name}}))) {
                 await template.save();
             }
         }
 
         // Ensure if all Custom-Templates exists
         for (const template of this.customTemplates) {
-            if (!(await Storage.getInstance().TemplateVDR.exist({where: {name: template.name}}))) {
+            if (!(await Storage.getInstance().TemplateVDR.exists({where: {name: template.name}}))) {
                 await template.save();
             }
         }

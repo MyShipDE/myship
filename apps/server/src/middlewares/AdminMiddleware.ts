@@ -5,12 +5,24 @@ import {Client} from "../modals/Client";
 import {IMiddleware} from "./IMiddleware";
 import {Storage} from "../DatabaseProvider";
 import {CloudService} from "../services/CloudService";
+import {DemoMode} from "../services/DemoMode/DemoMode";
+import {isLocalRequest} from "../services/helpers/Network";
 
 dotenv.config();
 
 export class AdminMiddleware implements IMiddleware {
 
     async handle(req: express.Request, res: express.Response, next: express.NextFunction) {
+        // Demo gateway holds no real systems — authorise every device.
+        if (DemoMode.active) {
+            next();
+            return;
+        }
+        // Local / boat-network connections are trusted unconditionally.
+        if (isLocalRequest(req)) {
+            next();
+            return;
+        }
         const ip = req.ip.replace('::ffff:', '');
         let client = await Storage.getInstance().Client.findOneBy({ip});
 

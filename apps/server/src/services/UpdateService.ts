@@ -3,6 +3,7 @@ import {Log} from "./helpers/Log";
 import {Message} from "../resources/Message";
 import {SocketIO} from "./socket.io/SocketIO";
 import {SocketChannel} from "../resources/SocketChannel";
+import {DemoMode} from "./DemoMode/DemoMode";
 
 export class UpdateService {
 
@@ -18,6 +19,10 @@ export class UpdateService {
     }
 
     updatePackages(): Promise<boolean> {
+        if (DemoMode.active) {
+            Log.info('[DEMO] System update suppressed.');
+            return Promise.resolve(false);
+        }
         return new Promise<boolean>(resolve => {
             exec("apt-get update && apt-get upgrade -y",
                 (error, stdout, stderr) => {
@@ -60,6 +65,10 @@ export class UpdateService {
     }
 
     updateServer(): Promise<boolean> {
+        if (DemoMode.active) {
+            Log.info('[DEMO] Server update suppressed.');
+            return Promise.resolve(false);
+        }
         return new Promise<boolean>(resolve => {
             exec("git pull",
                 async (error, stdout, stderr) => {
@@ -102,6 +111,9 @@ export class UpdateService {
     }
 
     setGPSPerms(): void {
+        if (DemoMode.active) {
+            return;
+        }
         exec("chmod 777 /dev/ttyACM0",
             async (error, stdout, stderr) => {
                 Log.info('[GPS] Setup GPS-Adapter Permissions');

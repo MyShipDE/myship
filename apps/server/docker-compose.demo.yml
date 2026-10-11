@@ -1,0 +1,14 @@
+# Self-contained MyShip demo gateway (virtual vessel, no real hardware).
+#   docker compose -f docker-compose.demo.yml up --build
+# Then point the app's onboarding / "Demo ausprobieren" button at this host.
+services:
+  myship-demo:
+    build: .
+    env_file:
+      - .env.demo.example
+    ports:
+      - "80:80"      # REST + Socket.IO
+      - "1883:1883"  # MQTT (TCP)
+      - "8883:8883"  # MQTT (WebSocket, used by the app)
+      - "3000:3000"  # simulated SignalK stream
+    restart: unless-stopped

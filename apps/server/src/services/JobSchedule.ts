@@ -14,6 +14,7 @@ import {BridgeIdentifier} from "./BridgeService";
 import {App} from "../app";
 import fs from "fs";
 import {WebSocketBroadcast} from "./socket.io/WebSocketBroadcast";
+import {DemoMode} from "./DemoMode/DemoMode";
 
 export class JobSchedule {
 
@@ -21,12 +22,13 @@ export class JobSchedule {
 
     run() {
         Log.info('JobSchedule started');
-        this.backupTracks();
-        this.vdr();
+        // this.backupTracks();
+        // this.vdr();
         this.saveNmeaSentences();
         this.cleanUpTrackArchive();
         this.signalKBroadcast();
-        if (!App.vdrOnly) {
+        // Hardware pollers poll real Shelly/Tasmota/VE.Direct — never in demo.
+        if (!App.vdrOnly && !DemoMode.active) {
             this.electricityConsumption();
             this.checkPowerState();
             this.listenOnDevicePortChanges();
